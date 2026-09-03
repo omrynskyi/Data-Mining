@@ -1,0 +1,13 @@
+# Environment used for this analysis (Python 3.9.6, macOS arm64 with MPS acceleration).
+# Install with: pip install -r requirements.txt
+pandas==2.3.3
+numpy==1.26.4
+scikit-learn==1.6.1
+scipy==1.13.1
+catboost==1.2.10
+lightgbm==4.6.0
+torch==2.8.0
+torchvision==0.23.0
+open_clip_torch==3.3.0
+matplotlib==3.9.4
+Pillow==11.3.0

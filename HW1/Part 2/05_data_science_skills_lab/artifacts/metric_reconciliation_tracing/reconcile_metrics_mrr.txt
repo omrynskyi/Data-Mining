@@ -1,0 +1,16 @@
+============================================================
+METRIC RECONCILIATION REPORT
+============================================================
+  MRR — ALL customers: 316,985.75
+  MRR — EXCL. tenure==0: 316,530.15
+  Absolute difference: +455.60
+  Percentage difference: +0.1437%
+
+  STATUS: INVESTIGATE
+
+  NEXT STEPS:
+  1. Compare query/pipeline definition for each source side-by-side.
+  2. Check: filter conditions, join types, null handling, date truncation.
+  3. Pull row-level data to find the first divergence point.
+  4. Document the root cause in assets/reconciliation_report_template.md.
+============================================================

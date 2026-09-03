@@ -1,0 +1,46 @@
+{
+  "chart_churn_by_contract": {
+    "chart": "churn_by_contract",
+    "type": "bar",
+    "rates_pct": {
+      "Month-to-month": 42.71,
+      "One year": 11.27,
+      "Two year": 2.83
+    }
+  },
+  "chart_funnel": {
+    "chart": "funnel_dropoff",
+    "type": "horizontal_bar_funnel",
+    "max_dropoff_step": "+ >=3 add-ons",
+    "max_dropoff_pct": 41.05
+  },
+  "chart_segment_bubble": {
+    "chart": "segment_value_risk_bubble",
+    "type": "bubble_scatter"
+  },
+  "chart_tenure_survival": {
+    "chart": "tenure_survival",
+    "type": "line",
+    "final_survival_pct": 58.92
+  },
+  "chart_before_after": {
+    "before": {
+      "chart": "internet_service_pie_dualaxis",
+      "problems": [
+        "3D/shadow + explode distorts wedge-size perception (chart_selection_guide.md: '3D bar/pie: depth distorts relative sizes')",
+        "dual/inset axis for MonthlyCharges invites a false correlation read (chart_selection_guide.md: 'Dual y-axis: creates false correlation impression')",
+        "title 'Internet Service' describes the variable, not a finding",
+        "no direct data labels for the secondary metric; legend-only wedge labels force back-and-forth lookup"
+      ]
+    },
+    "after": {
+      "chart": "internet_service_sorted_bar",
+      "fixes": [
+        "single sorted horizontal bar (categories=3, <=7 -> bar per chart_selection_guide.md)",
+        "churn rate and avg charges folded in as one direct label per bar instead of a second axis",
+        "finding-based title states the takeaway",
+        "highlight colour (vermillion) isolates the one segment that matters (fiber)"
+      ]
+    }
+  }
+}

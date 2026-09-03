@@ -1,0 +1,20 @@
+=== Grouped 5-fold CV search: CatBoost ===
+  [catboost candidate 0] {'depth': 6, 'l2_leaf_reg': 3, 'learning_rate': 0.05} -> grouped_qwk=0.3387 (95s)
+  [catboost candidate 1] {'depth': 6, 'l2_leaf_reg': 10, 'learning_rate': 0.05} -> grouped_qwk=0.3386 (82s)
+  [catboost candidate 2] {'depth': 4, 'l2_leaf_reg': 5, 'learning_rate': 0.05} -> grouped_qwk=0.3387 (68s)
+  [catboost candidate 3] {'depth': 8, 'l2_leaf_reg': 10, 'learning_rate': 0.03} -> grouped_qwk=0.3282 (151s)
+  [catboost candidate 4] {'depth': 6, 'l2_leaf_reg': 5, 'learning_rate': 0.1} -> grouped_qwk=0.3318 (79s)
+  [catboost candidate 5] {'depth': 4, 'l2_leaf_reg': 10, 'learning_rate': 0.03} -> grouped_qwk=0.3348 (86s)
+Best CatBoost candidate: {'depth': 6, 'l2_leaf_reg': 3, 'learning_rate': 0.05} grouped_qwk=0.3387
+=== Grouped 5-fold CV search: LightGBM ===
+  [lightgbm candidate 0] {'num_leaves': 31, 'feature_fraction': 1.0, 'bagging_fraction': 1.0, 'min_child_samples': 20, 'reg_lambda': 0.0} -> grouped_qwk=0.3313 (56s)
+  [lightgbm candidate 1] {'num_leaves': 15, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'min_child_samples': 30, 'reg_lambda': 1.0} -> grouped_qwk=0.3361 (45s)
+  [lightgbm candidate 2] {'num_leaves': 15, 'feature_fraction': 0.7, 'bagging_fraction': 0.7, 'min_child_samples': 50, 'reg_lambda': 5.0} -> grouped_qwk=0.3329 (38s)
+  [lightgbm candidate 3] {'num_leaves': 20, 'feature_fraction': 0.7, 'bagging_fraction': 0.8, 'min_child_samples': 40, 'reg_lambda': 2.0} -> grouped_qwk=0.3304 (41s)
+  [lightgbm candidate 4] {'num_leaves': 10, 'feature_fraction': 0.6, 'bagging_fraction': 0.7, 'min_child_samples': 50, 'reg_lambda': 5.0} -> grouped_qwk=0.3402 (36s)
+  [lightgbm candidate 5] {'num_leaves': 7, 'feature_fraction': 0.6, 'bagging_fraction': 0.6, 'min_child_samples': 60, 'reg_lambda': 10.0} -> grouped_qwk=0.3398 (31s)
+Best LightGBM candidate: {'num_leaves': 10, 'feature_fraction': 0.6, 'bagging_fraction': 0.7, 'min_child_samples': 50, 'reg_lambda': 5.0} grouped_qwk=0.3402
+=== Stratified 5-fold CV, winning configurations only (secondary reference) ===
+  catboost winner stratified: {'qwk': 0.36337813244628125, 'mae': 0.9134262655906089, 'accuracy': 0.41939571800173414, 'macro_f1': 0.31140434046583054, 'best_iterations': [231, 287, 363, 160, 186]}
+  lightgbm winner stratified: {'qwk': 0.37284253077154983, 'mae': 0.9093577002601214, 'accuracy': 0.41859534449409724, 'macro_f1': 0.32980736341399797, 'best_iterations': [204, 88, 194, 135, 159]}
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/tuning_results.json

@@ -1,0 +1,20 @@
+{
+  "churn_rate": {
+    "metric": "churn_rate",
+    "source_A_value_ALL": 0.2653698707936959,
+    "adjustment_removed_rows": 11,
+    "adjustment_removed_churned": 0,
+    "adjustment_removed_active": 11,
+    "source_A_value_EXCL_tenure0": 0.26578498293515357,
+    "delta": 0.00041511214145767417,
+    "delta_pct_points": 0.04151121414576742
+  },
+  "mrr": {
+    "metric": "mrr",
+    "source_A_value_ALL": 316985.75,
+    "adjustment_removed_active_customers": 11,
+    "adjustment_removed_monthly_charges_sum": 455.6,
+    "source_A_value_EXCL_tenure0": 316530.15,
+    "delta": -455.6
+  }
+}

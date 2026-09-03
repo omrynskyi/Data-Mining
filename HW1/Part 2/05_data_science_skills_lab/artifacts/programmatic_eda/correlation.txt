@@ -1,0 +1,13 @@
+=== Correlation Matrix (pearson) ===
+                SeniorCitizen  tenure  MonthlyCharges  TotalCharges
+SeniorCitizen           1.000   0.017           0.220         0.102
+tenure                  0.017   1.000           0.248         0.826
+MonthlyCharges          0.220   0.248           1.000         0.651
+TotalCharges            0.102   0.826           0.651         1.000
+
+=== Strong Pairs (|r| ≥ 0.5) ===
+         col_a        col_b  correlation
+        tenure TotalCharges       0.8259
+MonthlyCharges TotalCharges       0.6511
+
+Matrix saved to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/programmatic_eda/correlation_strong_pairs.csv

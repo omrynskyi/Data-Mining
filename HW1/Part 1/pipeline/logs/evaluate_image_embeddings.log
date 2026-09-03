@@ -1,0 +1,10 @@
+=== no_image_embeddings (variant=None) ===
+  grouped: {'qwk': 0.3387131564843977, 'mae': 0.9609817915027012, 'accuracy': 0.39691856199559794, 'macro_f1': 0.28009078997880604, 'best_iterations': [95, 159, 125, 205, 177], 'n_features': 155} (93s)
+  stratified: {'qwk': 0.36337813244628125, 'mae': 0.9134262655906089, 'accuracy': 0.41939571800173414, 'macro_f1': 0.31140434046583054, 'best_iterations': [231, 287, 363, 160, 186], 'n_features': 155} (115s)
+=== primary_image_embedding (variant=primary) ===
+  grouped: {'qwk': 0.3435769657719221, 'mae': 0.9544454078569999, 'accuracy': 0.3943840458880811, 'macro_f1': 0.27583591777944133, 'best_iterations': [93, 227, 176, 197, 131], 'n_features': 206} (107s)
+  stratified: {'qwk': 0.3665163489280735, 'mae': 0.9135596611752151, 'accuracy': 0.4189288334556126, 'macro_f1': 0.31287809009133677, 'best_iterations': [188, 317, 176, 447, 362], 'n_features': 206} (168s)
+=== capped3_mean_embedding (variant=capped3_mean) ===
+  grouped: {'qwk': 0.3520860907262251, 'mae': 0.9505102381111186, 'accuracy': 0.3975855399186287, 'macro_f1': 0.28274040688200097, 'best_iterations': [197, 160, 153, 182, 310], 'n_features': 206} (118s)
+  stratified: {'qwk': 0.3764212270248585, 'mae': 0.9010871740145401, 'accuracy': 0.4244647502167678, 'macro_f1': 0.31534156873178276, 'best_iterations': [246, 189, 235, 339, 211], 'n_features': 206} (134s)
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/image_embedding_results.json

@@ -1,0 +1,34 @@
+{
+  "logreg": {
+    "n_trials": 30,
+    "elapsed_sec": 51.399303913116455,
+    "best_value_pr_auc": 0.6621818024323076,
+    "best_params": {
+      "C": 0.27308349581482794,
+      "penalty": "l1"
+    },
+    "sampler": "TPESampler(seed=42)"
+  },
+  "xgboost": {
+    "n_trials": 40,
+    "n_complete": 21,
+    "n_pruned": 19,
+    "elapsed_sec": 32.75292897224426,
+    "best_value_pr_auc": 0.6645684329246746,
+    "best_params": {
+      "max_depth": 3,
+      "learning_rate": 0.01815329173798323,
+      "n_estimators": 365,
+      "subsample": 0.564090587779067,
+      "colsample_bytree": 0.7971797491546088,
+      "min_child_weight": 6,
+      "reg_alpha": 0.4968300060344751,
+      "reg_lambda": 0.1281597389339006,
+      "scale_pos_weight": 1.878922068365007
+    },
+    "sampler": "TPESampler(seed=42)",
+    "pruner": "MedianPruner(n_warmup_steps=1, n_startup_trials=5)"
+  },
+  "budget_discussion": "LogisticRegression: 2-param search space, cheap fit (<1s/fold) -> 30 trials, no pruning needed, 51s total. XGBoost: 9-param search space, ~5x more expensive per fit -> capped at 40 trials / 900s timeout with MedianPruner reporting per-fold PR-AUC so trials clearly worse than the running median after fold 1 are killed early (19/40 trials pruned), reallocating budget to promising regions instead of finishing every trial to completion.",
+  "winner": "xgboost"
+}

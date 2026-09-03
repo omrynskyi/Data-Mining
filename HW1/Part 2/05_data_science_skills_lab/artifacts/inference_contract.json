@@ -1,0 +1,184 @@
+{
+  "model_artifact": "artifacts/model.joblib",
+  "load_requirement": "sys.path must include the project's src/ directory before joblib.load(), because the pickled Pipeline references the FeatureEngineer class defined in src/p3_pipeline.py by module name.",
+  "input": {
+    "format": "pandas.DataFrame, one row per customer, or an equivalent list-of-records JSON payload",
+    "required_columns": [
+      "gender",
+      "SeniorCitizen",
+      "Partner",
+      "Dependents",
+      "tenure",
+      "PhoneService",
+      "MultipleLines",
+      "InternetService",
+      "OnlineSecurity",
+      "OnlineBackup",
+      "DeviceProtection",
+      "TechSupport",
+      "StreamingTV",
+      "StreamingMovies",
+      "Contract",
+      "PaperlessBilling",
+      "PaymentMethod",
+      "MonthlyCharges",
+      "TotalCharges"
+    ],
+    "optional_columns": [
+      "customerID (passthrough identifier, not used by the model)"
+    ],
+    "column_schema": {
+      "gender": {
+        "dtype": "string",
+        "allowed_values": [
+          "Female",
+          "Male"
+        ]
+      },
+      "SeniorCitizen": {
+        "dtype": "int64",
+        "min": 0.0,
+        "max": 1.0
+      },
+      "Partner": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "Yes"
+        ]
+      },
+      "Dependents": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "Yes"
+        ]
+      },
+      "tenure": {
+        "dtype": "int64",
+        "min": 0.0,
+        "max": 72.0
+      },
+      "PhoneService": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "Yes"
+        ]
+      },
+      "MultipleLines": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No phone service",
+          "Yes"
+        ]
+      },
+      "InternetService": {
+        "dtype": "string",
+        "allowed_values": [
+          "DSL",
+          "Fiber optic",
+          "No"
+        ]
+      },
+      "OnlineSecurity": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "OnlineBackup": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "DeviceProtection": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "TechSupport": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "StreamingTV": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "StreamingMovies": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "No internet service",
+          "Yes"
+        ]
+      },
+      "Contract": {
+        "dtype": "string",
+        "allowed_values": [
+          "Month-to-month",
+          "One year",
+          "Two year"
+        ]
+      },
+      "PaperlessBilling": {
+        "dtype": "string",
+        "allowed_values": [
+          "No",
+          "Yes"
+        ]
+      },
+      "PaymentMethod": {
+        "dtype": "string",
+        "allowed_values": [
+          "Bank transfer (automatic)",
+          "Credit card (automatic)",
+          "Electronic check",
+          "Mailed check"
+        ]
+      },
+      "MonthlyCharges": {
+        "dtype": "float64",
+        "min": 18.25,
+        "max": 118.75
+      },
+      "TotalCharges": {
+        "dtype": "string (numeric, may be blank/whitespace for tenure==0 new customers -> coerced to null then imputed)",
+        "min": 18.8,
+        "max": 8684.8
+      }
+    },
+    "notes": [
+      "SeniorCitizen is 0/1 integer, not Yes/No.",
+      "TotalCharges MUST be pre-coerced to numeric float (NaN for blanks) by the CALLER before scoring -- the pipeline's FeatureEngineer checks TotalCharges.isna() to detect the 11 tenure==0 blank-string rows, and .isna() is a no-op on a string column, so passing the true raw (string, blank-for-new-customers) CSV column unmodified will raise a TypeError at the avg_monthly_spend division step. Confirmed by direct test: `pd.to_numeric(df['TotalCharges'].astype(str).str.strip(), errors='coerce')` must run first. This corrects an earlier draft of this contract that assumed the pipeline did this coercion internally -- it does not.",
+      "All OTHER cleaning and feature construction (sentinel collapsing, engineered features) happens inside the pipeline once TotalCharges is numeric. Feed raw-schema columns otherwise -- do not pre-engineer features."
+    ]
+  },
+  "output": {
+    "predict_proba": "float in [0,1], calibrated probability of churn (class 1)",
+    "chosen_threshold": 0.28554028272628784,
+    "decision_rule": "flag as at-risk if predict_proba >= chosen_threshold (calibrated for ~50% retention-team contact capacity, see model_card.md)",
+    "risk_bands": {
+      "low": "[0, 0.15)",
+      "medium": "[0.15, chosen_threshold)",
+      "high": "[chosen_threshold, 1.0]"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "n_total_raw": 7043,
+  "n_exact_duplicates_dropped": 41,
+  "n_deduped": 7002,
+  "n_train": 6302,
+  "n_val": 700,
+  "tokenizer": "gpt2 (offline cached; stand-in for the target base model's tokenizer -- swap for the real one before training)",
+  "token_len_min": 227,
+  "token_len_max": 273,
+  "token_len_mean": 252.1,
+  "token_len_p50": 252,
+  "token_len_p95": 267
+}

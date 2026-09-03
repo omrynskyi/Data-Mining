@@ -1,0 +1,490 @@
+{
+  "expected_value": 2.5165529488915928,
+  "top_features": [
+    {
+      "feature": "Age",
+      "mean_abs_shap": 0.20101507795653653,
+      "prediction_values_change": 9.775581341534206,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.5672768803573314,
+        "mean_shap_by_quartile": [
+          -0.22257686766191012,
+          -0.06987838226782728,
+          0.19156986716147353,
+          0.26175304464374016
+        ]
+      }
+    },
+    {
+      "feature": "Breed1",
+      "mean_abs_shap": 0.1341672981389611,
+      "prediction_values_change": 6.963935028732913,
+      "by_category": [
+        {
+          "value": "Breed1=307,Type=1",
+          "label": "Mixed Breed",
+          "mean_shap": 0.13802521791199626,
+          "count": 5923
+        },
+        {
+          "value": "Breed1=307,Type=2",
+          "label": "unknown breed id 307",
+          "mean_shap": 0.13436486720144297,
+          "count": 4
+        },
+        {
+          "value": "Breed1=266,Type=2",
+          "label": "Domestic Short Hair",
+          "mean_shap": 0.04934810595696955,
+          "count": 3634
+        },
+        {
+          "value": "Breed1=15,Type=2",
+          "label": "unknown breed id 15",
+          "mean_shap": -0.06758151555839148,
+          "count": 1
+        },
+        {
+          "value": "Breed1=265,Type=2",
+          "label": "Domestic Medium Hair",
+          "mean_shap": -0.07613874272300457,
+          "count": 1258
+        },
+        {
+          "value": "Breed1=88,Type=1",
+          "label": "English Springer Spaniel",
+          "mean_shap": -0.07741298888156534,
+          "count": 2
+        },
+        {
+          "value": "Breed1=71,Type=1",
+          "label": "Coonhound",
+          "mean_shap": -0.0776968530918867,
+          "count": 2
+        },
+        {
+          "value": "Breed1=21,Type=2",
+          "label": "unknown breed id 21",
+          "mean_shap": -0.08139156780874224,
+          "count": 1
+        },
+        {
+          "value": "Breed1=240,Type=1",
+          "label": "Yorkshire Terrier Yorkie",
+          "mean_shap": -0.33319471918747373,
+          "count": 5
+        },
+        {
+          "value": "Breed1=182,Type=1",
+          "label": "Pug",
+          "mean_shap": -0.33865802613653645,
+          "count": 21
+        },
+        {
+          "value": "Breed1=167,Type=1",
+          "label": "Papillon",
+          "mean_shap": -0.3397914337049621,
+          "count": 2
+        },
+        {
+          "value": "Breed1=145,Type=1",
+          "label": "Lhasa Apso",
+          "mean_shap": -0.342688689201491,
+          "count": 2
+        },
+        {
+          "value": "Breed1=83,Type=1",
+          "label": "English Cocker Spaniel",
+          "mean_shap": -0.3430924361993008,
+          "count": 9
+        },
+        {
+          "value": "Breed1=108,Type=1",
+          "label": "Glen of Imaal Terrier",
+          "mean_shap": -0.34831736226933446,
+          "count": 2
+        },
+        {
+          "value": "Breed1=65,Type=1",
+          "label": "Chow Chow",
+          "mean_shap": -0.3491704489552749,
+          "count": 3
+        },
+        {
+          "value": "Breed1=197,Type=1",
+          "label": "Scottish Terrier Scottie",
+          "mean_shap": -0.35539775654287187,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "feature": "Sterilized",
+      "mean_abs_shap": 0.09294619102812159,
+      "prediction_values_change": 3.206386054648238,
+      "by_category": [
+        {
+          "value": 1,
+          "label": "Yes",
+          "mean_shap": 0.14934302100018998,
+          "count": 3101
+        },
+        {
+          "value": 3,
+          "label": "Not Sure",
+          "mean_shap": 0.12578870060332947,
+          "count": 1815
+        },
+        {
+          "value": 2,
+          "label": "No",
+          "mean_shap": -0.06967580057239256,
+          "count": 10077
+        }
+      ]
+    },
+    {
+      "feature": "img_emb_pca_2",
+      "mean_abs_shap": 0.06851414876835467,
+      "prediction_values_change": 3.3371070609347915,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.9484106944370136,
+        "mean_shap_by_quartile": [
+          -0.1266902647111014,
+          0.006510255612969342,
+          0.04092284413757007,
+          0.08148408988816322
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "img_emb_pca_4",
+      "mean_abs_shap": 0.05587720419277275,
+      "prediction_values_change": 2.6122658199451156,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.8457980415095477,
+        "mean_shap_by_quartile": [
+          -0.11027765401209906,
+          0.007436993283857343,
+          0.0442678655975596,
+          0.05720927495977969
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "image_height_max",
+      "mean_abs_shap": 0.0521082854360888,
+      "prediction_values_change": 1.7585912148674043,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          -0.0005733157407056583
+        ]
+      }
+    },
+    {
+      "feature": "vision_label_score_mean",
+      "mean_abs_shap": 0.05029167435462184,
+      "prediction_values_change": 2.1875966799724704,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          -0.0008123286110440229
+        ]
+      }
+    },
+    {
+      "feature": "vision_label_score_max",
+      "mean_abs_shap": 0.048297316816559216,
+      "prediction_values_change": 2.9710642414427526,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          0.0017092274322059286
+        ]
+      }
+    },
+    {
+      "feature": "Quantity",
+      "mean_abs_shap": 0.045496265349550785,
+      "prediction_values_change": 2.205949774922021,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.8864020822723659,
+        "mean_shap_by_quartile": [
+          -0.029496425758627896,
+          null,
+          null,
+          0.0994747206789038
+        ]
+      }
+    },
+    {
+      "feature": "State",
+      "mean_abs_shap": 0.04006464568326025,
+      "prediction_values_change": 2.020681128308323,
+      "by_category": [
+        {
+          "value": 41342,
+          "label": "Sarawak",
+          "mean_shap": 0.19393708517987973,
+          "count": 13
+        },
+        {
+          "value": 41324,
+          "label": "Melaka",
+          "mean_shap": 0.1769124131321941,
+          "count": 137
+        },
+        {
+          "value": 41330,
+          "label": "Perak",
+          "mean_shap": 0.1640779078883988,
+          "count": 420
+        },
+        {
+          "value": 41332,
+          "label": "Negeri Sembilan",
+          "mean_shap": 0.15300579231611497,
+          "count": 253
+        },
+        {
+          "value": 41327,
+          "label": "Pulau Pinang",
+          "mean_shap": 0.14996022774061676,
+          "count": 843
+        },
+        {
+          "value": 41361,
+          "label": "Terengganu",
+          "mean_shap": 0.14384502977187427,
+          "count": 26
+        },
+        {
+          "value": 41415,
+          "label": "Labuan",
+          "mean_shap": 0.1181552672487557,
+          "count": 3
+        },
+        {
+          "value": 41345,
+          "label": "Sabah",
+          "mean_shap": 0.11766788216545422,
+          "count": 22
+        },
+        {
+          "value": 41325,
+          "label": "Kedah",
+          "mean_shap": 0.10242862246206294,
+          "count": 110
+        },
+        {
+          "value": 41367,
+          "label": "Kelantan",
+          "mean_shap": 0.0018565898226291543,
+          "count": 15
+        },
+        {
+          "value": 41336,
+          "label": "Johor",
+          "mean_shap": 0.0008381817263566247,
+          "count": 507
+        },
+        {
+          "value": 41335,
+          "label": "Pahang",
+          "mean_shap": -0.00015345673405642204,
+          "count": 85
+        },
+        {
+          "value": 41401,
+          "label": "Kuala Lumpur",
+          "mean_shap": -0.002226284234998911,
+          "count": 3845
+        },
+        {
+          "value": 41326,
+          "label": "Selangor",
+          "mean_shap": -0.03334498974156789,
+          "count": 8714
+        }
+      ]
+    },
+    {
+      "feature": "Gender",
+      "mean_abs_shap": 0.03045309851078452,
+      "prediction_values_change": 0.9265369578598234,
+      "by_category": [
+        {
+          "value": 3,
+          "label": "Mixed (group)",
+          "mean_shap": 0.030607442304120568,
+          "count": 2180
+        },
+        {
+          "value": 2,
+          "label": "Female",
+          "mean_shap": 0.0221416977543118,
+          "count": 7277
+        },
+        {
+          "value": 1,
+          "label": "Male",
+          "mean_shap": -0.041303616445208344,
+          "count": 5536
+        }
+      ]
+    },
+    {
+      "feature": "text_svd_3",
+      "mean_abs_shap": 0.026479327016421465,
+      "prediction_values_change": 1.0098539095899182,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.7655246716159332,
+        "mean_shap_by_quartile": [
+          -0.02053904369996681,
+          -0.02088512643639676,
+          -0.004596738768552828,
+          0.045648966230533564
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "Fee",
+      "mean_abs_shap": 0.025930089624919613,
+      "prediction_values_change": 1.2090256392680778,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.6995981367366032,
+        "mean_shap_by_quartile": [
+          -0.01593338355268214,
+          null,
+          null,
+          0.07890923494058233
+        ]
+      }
+    },
+    {
+      "feature": "image_resolution_pixels_max",
+      "mean_abs_shap": 0.024788212087109244,
+      "prediction_values_change": 0.9878447750960969,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          -0.00026108688018514927
+        ]
+      }
+    },
+    {
+      "feature": "text_svd_14",
+      "mean_abs_shap": 0.0237352318551817,
+      "prediction_values_change": 1.2172635791968782,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.8468410264350107,
+        "mean_shap_by_quartile": [
+          -0.03471342826679262,
+          -0.009573933165674437,
+          0.017148776152796575,
+          0.027322387094043315
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "image_height_mean",
+      "mean_abs_shap": 0.023325138025116186,
+      "prediction_values_change": 1.0039962804549405,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          7.596841329418646e-05
+        ]
+      }
+    },
+    {
+      "feature": "img_emb_pca_3",
+      "mean_abs_shap": 0.0221528250424035,
+      "prediction_values_change": 1.0530270138204523,
+      "direction": {
+        "pearson_corr_value_vs_shap": -0.9075597094079492,
+        "mean_shap_by_quartile": [
+          0.02882632647584857,
+          0.015279107905579972,
+          -0.012335053298758433,
+          -0.031064204881351365
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "Vaccinated",
+      "mean_abs_shap": 0.018299398539953524,
+      "prediction_values_change": 0.7752470372613094,
+      "by_category": [
+        {
+          "value": 1,
+          "label": "Yes",
+          "mean_shap": 0.01384482282664913,
+          "count": 5898
+        },
+        {
+          "value": 3,
+          "label": "Not Sure",
+          "mean_shap": 0.012973352708293704,
+          "count": 1868
+        },
+        {
+          "value": 2,
+          "label": "No",
+          "mean_shap": -0.022358837586862596,
+          "count": 7227
+        }
+      ]
+    },
+    {
+      "feature": "img_emb_pca_13",
+      "mean_abs_shap": 0.017658248547377936,
+      "prediction_values_change": 0.7289785050476421,
+      "direction": {
+        "pearson_corr_value_vs_shap": -0.7704789685993634,
+        "mean_shap_by_quartile": [
+          0.013742657536288453,
+          0.0133138643569829,
+          0.008496770649467524,
+          -0.03374305754710972
+        ]
+      },
+      "note": "abstract PCA/SVD component; direction is w.r.t. the component's own scale, not an original raw feature"
+    },
+    {
+      "feature": "vision_labels_per_image_mean",
+      "mean_abs_shap": 0.01749818397527771,
+      "prediction_values_change": 0.6200123607958199,
+      "direction": {
+        "pearson_corr_value_vs_shap": 0.0,
+        "mean_shap_by_quartile": [
+          null,
+          null,
+          null,
+          0.00017939191988691064
+        ]
+      }
+    }
+  ]
+}

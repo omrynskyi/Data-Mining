@@ -1,0 +1,10 @@
+         column                                                                                                      rule status issues
+         tenure                                                                                     {"min": 0, "max": 72}   PASS   None
+ MonthlyCharges                                                                                                {"min": 0}   PASS   None
+   TotalCharges                                                                                                {"min": 0}   PASS   None
+  SeniorCitizen                                                                                       {"allowed": [0, 1]}   PASS   None
+         gender                                                                           {"allowed": ["Male", "Female"]}   PASS   None
+          Churn                                                                                {"allowed": ["Yes", "No"]}   PASS   None
+       Contract                                                   {"allowed": ["Month-to-month", "One year", "Two year"]}   PASS   None
+InternetService                                                                 {"allowed": ["DSL", "Fiber optic", "No"]}   PASS   None
+  PaymentMethod {"allowed": ["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"]}   PASS   None

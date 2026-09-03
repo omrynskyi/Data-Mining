@@ -1,0 +1,16 @@
+{
+  "stratified": {
+    "qwk": 0.21213789087156587,
+    "mae": 1.0502234376042152,
+    "accuracy": 0.3697058627359434,
+    "macro_f1": 0.28823695917638975,
+    "convergence_warning_folds": 0
+  },
+  "grouped": {
+    "qwk": 0.1475084953714223,
+    "mae": 1.16420996465017,
+    "accuracy": 0.31081171213232844,
+    "macro_f1": 0.23063943572985193,
+    "convergence_warning_folds": 0
+  }
+}

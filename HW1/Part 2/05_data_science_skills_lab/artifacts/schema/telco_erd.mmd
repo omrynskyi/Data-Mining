@@ -1,0 +1,41 @@
+erDiagram
+    CUSTOMER {
+        string customer_id PK
+        string gender
+        boolean senior_citizen
+        boolean partner
+        boolean dependents
+    }
+    SUBSCRIPTION {
+        string subscription_id PK
+        string customer_id FK
+        string contract_type
+        int tenure_months
+        boolean phone_service
+        string internet_service_type
+        boolean churn_flag
+    }
+    SERVICE_ADDON {
+        string addon_id PK
+        string subscription_id FK
+        string addon_type
+        string addon_status
+    }
+    BILLING_ACCOUNT {
+        string billing_account_id PK
+        string subscription_id FK
+        string payment_method_id FK
+        decimal monthly_charges
+        decimal total_charges
+        boolean paperless_billing
+    }
+    PAYMENT_METHOD {
+        string payment_method_id PK
+        string method_name
+        boolean is_automatic
+    }
+
+    CUSTOMER ||--o{ SUBSCRIPTION : "has (1:1 in current extract, modeled 1:* for resubscription history)"
+    SUBSCRIPTION ||--o{ SERVICE_ADDON : "has 0..7 addon rows (EAV: one per MultipleLines/OnlineSecurity/OnlineBackup/DeviceProtection/TechSupport/StreamingTV/StreamingMovies)"
+    SUBSCRIPTION ||--|| BILLING_ACCOUNT : "has exactly one"
+    PAYMENT_METHOD ||--o{ BILLING_ACCOUNT : "is used by"

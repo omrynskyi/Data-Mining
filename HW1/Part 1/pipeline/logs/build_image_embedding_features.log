@@ -1,0 +1,20 @@
+device=mps
+images_to_embed=35288 across 14993 listings
+processed_files=5000/35288
+processed_files=10000/35288
+processed_files=15000/35288
+processed_files=20000/35288
+processed_files=25000/35288
+processed_files=30000/35288
+processed_files=35000/35288
+unreadable_image_files=0
+covered_listings=14652
+npz_saved_to=/Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/data/image_embeddings_resnet18.npz
+npz_size_mb=54.1
+coverage=
+image_embedding_available
+0      341
+1    14652
+primary_available_among_covered=
+image_embedding_primary_available
+1    14652

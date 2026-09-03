@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Associative Pattern Mining Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/dist/vis-network.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.0/plotly.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="26" height="26">
+        <circle cx="7" cy="9" r="3.4" class="mk-a"/>
+        <circle cx="7" cy="23" r="3.4" class="mk-a"/>
+        <circle cx="25" cy="16" r="4.2" class="mk-b"/>
+        <path d="M10 10.5 L21 15 M10 21.5 L21 17" class="mk-line"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <h1>Associative Pattern Mining Studio</h1>
+      <p>CRISP-DM pipeline &middot; rule discovery &middot; automated research matching</p>
+    </div>
+  </div>
+
+  <div class="topbar-actions">
+    <div class="status-pill" id="health-pill" title="Server health">
+      <span class="dot" id="health-dot"></span>
+      <span id="health-text">connecting</span>
+    </div>
+    <button class="ghost-btn" id="refresh-btn" title="Reload all artifacts">Refresh</button>
+    <button class="ghost-btn" id="theme-btn" title="Toggle light / dark">Light</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab is-active" role="tab" data-tab="overview">Overview</button>
+  <button class="tab" role="tab" data-tab="crispdm">CRISP-DM Workflow</button>
+  <button class="tab" role="tab" data-tab="rules">Rule Visualizer</button>
+  <button class="tab" role="tab" data-tab="optimization">Hill Climbing</button>
+  <button class="tab" role="tab" data-tab="sandbox">Live Sandbox</button>
+</nav>
+
+<main>
+
+  <!-- ============================ OVERVIEW ============================ -->
+  <section class="panel is-active" id="tab-overview" role="tabpanel">
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Pipeline configuration</h2>
+          <span class="card-sub" id="overview-dataset">&mdash;</span>
+        </div>
+        <div class="card-body" id="overview-config"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Rule categories</h2>
+          <span class="card-sub">Actionable segmentation of the mined rule set</span>
+        </div>
+        <div class="card-body"><div id="chart-categories" class="plot plot-sm"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Strongest associations</h2>
+        <span class="card-sub">Top rules by lift from the last pipeline run</span>
+      </div>
+      <div class="card-body table-wrap" id="overview-top-rules"></div>
+    </div>
+  </section>
+
+  <!-- ============================ CRISP-DM ============================ -->
+  <section class="panel" id="tab-crispdm" role="tabpanel">
+    <div class="card">
+      <div class="card-head">
+        <h2>Six-phase workflow</h2>
+        <span class="card-sub">Click a phase to inspect what the pipeline recorded</span>
+      </div>
+      <div class="card-body">
+        <ol class="stepper" id="crispdm-stepper"></ol>
+        <div class="phase-detail" id="crispdm-detail"></div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Basket size distribution</h2>
+          <span class="card-sub">How many items customers buy per transaction</span>
+        </div>
+        <div class="card-body"><div id="chart-baskets" class="plot"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Item frequency</h2>
+          <span class="card-sub">The head of the long tail</span>
+        </div>
+        <div class="card-body"><div id="chart-items" class="plot"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Data preparation ledger</h2>
+        <span class="card-sub">Every cleaning rule applied before encoding</span>
+      </div>
+      <div class="card-body" id="crispdm-cleaning"></div>
+    </div>
+  </section>
+
+  <!-- ============================ RULES ============================ -->
+  <section class="panel" id="tab-rules" role="tabpanel">
+    <div class="card">
+      <div class="card-head">
+        <h2>Filters</h2>
+        <span class="card-sub" id="rules-count-label">&mdash;</span>
+      </div>
+      <div class="card-body">
+        <div class="filter-row">
+          <label class="field">
+            <span>Min support <b id="val-support">0.000</b></span>
+            <input type="range" id="f-support" min="0" max="0.2" step="0.001" value="0">
+          </label>
+          <label class="field">
+            <span>Min confidence <b id="val-confidence">0.00</b></span>
+            <input type="range" id="f-confidence" min="0" max="1" step="0.01" value="0">
+          </label>
+          <label class="field">
+            <span>Min lift <b id="val-lift">0.0</b></span>
+            <input type="range" id="f-lift" min="0" max="10" step="0.1" value="0">
+          </label>
+          <label class="field">
+            <span>Search items</span>
+            <input type="search" id="f-search" placeholder="e.g. COFFEE">
+          </label>
+          <label class="field">
+            <span>Category</span>
+            <select id="f-category"><option value="">All categories</option></select>
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button class="ghost-btn" id="rules-reset">Reset</button>
+          <a class="ghost-btn" id="export-csv" href="#">Export CSV</a>
+          <a class="ghost-btn" id="export-json" href="#">Export JSON</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Association network</h2>
+          <span class="card-sub">Force-directed item graph &mdash; edge weight is lift</span>
+        </div>
+        <div class="card-body"><div id="rule-network" class="graph"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Support &times; confidence &times; lift</h2>
+          <span class="card-sub">Each point is one rule in metric space</span>
+        </div>
+        <div class="card-body"><div id="rule-scatter" class="plot plot-tall"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Rule table</h2>
+        <span class="card-sub">Click a column header to sort</span>
+      </div>
+      <div class="card-body table-wrap" id="rules-table"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Basket recommender</h2>
+        <span class="card-sub">Which items the rule set suggests next</span>
+      </div>
+      <div class="card-body">
+        <div class="filter-row">
+          <label class="field field-wide">
+            <span>Cart contents (comma separated)</span>
+            <input type="text" id="cart-input" placeholder="COLOMBIAN ROAST COFFEE, PURE CANE SUGAR" list="item-catalog">
+            <datalist id="item-catalog"></datalist>
+          </label>
+          <button class="primary-btn" id="recommend-btn">Recommend</button>
+        </div>
+        <div id="recommend-output"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== OPTIMIZATION ========================== -->
+  <section class="panel" id="tab-optimization" role="tabpanel">
+    <div class="card paper-card" id="paper-card"></div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Convergence</h2>
+          <span class="card-sub">Per-iteration fitness against the running champion</span>
+        </div>
+        <div class="card-body"><div id="chart-convergence" class="plot"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Target vs achieved</h2>
+          <span class="card-sub">Percentage error per metric dimension</span>
+        </div>
+        <div class="card-body"><div id="chart-target" class="plot"></div></div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Hyperparameter trajectory</h2>
+          <span class="card-sub">How the search moved through the 5D space</span>
+        </div>
+        <div class="card-body"><div id="chart-trajectory" class="plot"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Champion configuration</h2>
+          <span class="card-sub">Best hyperparameters found</span>
+        </div>
+        <div class="card-body" id="best-params"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Iteration log</h2>
+        <span class="card-sub">Every step the optimizer took</span>
+      </div>
+      <div class="card-body table-wrap" id="optimization-table"></div>
+    </div>
+  </section>
+
+  <!-- ============================ SANDBOX ============================ -->
+  <section class="panel" id="tab-sandbox" role="tabpanel">
+    <div class="card">
+      <div class="card-head">
+        <h2>Live mining sandbox</h2>
+        <span class="card-sub" id="sandbox-corpus">Interactive re-mining against the production engine</span>
+      </div>
+      <div class="card-body">
+        <div class="filter-row">
+          <label class="field">
+            <span>Algorithm</span>
+            <select id="s-algorithm">
+              <option value="fpgrowth">FP-Growth</option>
+              <option value="apriori">Apriori</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Min support <b id="s-val-support">0.020</b></span>
+            <input type="range" id="s-support" min="0.002" max="0.15" step="0.001" value="0.02">
+          </label>
+          <label class="field">
+            <span>Min confidence <b id="s-val-confidence">0.50</b></span>
+            <input type="range" id="s-confidence" min="0.05" max="0.95" step="0.01" value="0.5">
+          </label>
+          <label class="field">
+            <span>Min lift <b id="s-val-lift">1.5</b></span>
+            <input type="range" id="s-lift" min="1" max="10" step="0.1" value="1.5">
+          </label>
+          <label class="field">
+            <span>Max itemset length <b id="s-val-maxlen">4</b></span>
+            <input type="range" id="s-maxlen" min="2" max="6" step="1" value="4">
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button class="primary-btn" id="sandbox-run">Run mining</button>
+          <button class="ghost-btn" id="sandbox-push" disabled>Send to visualizer</button>
+          <span class="hint" id="sandbox-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-grid kpi-grid-sm" id="sandbox-kpis"></div>
+
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Itemsets by length</h2>
+          <span class="card-sub">Where the search space expanded</span>
+        </div>
+        <div class="card-body"><div id="chart-sandbox-itemsets" class="plot plot-sm"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Parameter sweep history</h2>
+          <span class="card-sub">Rules discovered across your sandbox runs</span>
+        </div>
+        <div class="card-body"><div id="chart-sandbox-history" class="plot plot-sm"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Discovered rules</h2>
+        <span class="card-sub" id="sandbox-rule-count">Run a search to populate</span>
+      </div>
+      <div class="card-body table-wrap" id="sandbox-table"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Associative Pattern Mining Studio v{{ version }}</span>
+  <span class="sep">&middot;</span>
+  <span>Flask API over <code>artifacts/</code></span>
+  <span class="sep">&middot;</span>
+  <span id="footer-timestamp">&mdash;</span>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="{{ url_for('static', filename='js/visualizers.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sandbox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

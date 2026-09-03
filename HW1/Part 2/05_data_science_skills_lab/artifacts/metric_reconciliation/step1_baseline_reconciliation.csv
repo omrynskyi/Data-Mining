@@ -1,0 +1,4 @@
+source,n_customers,n_churned,churn_rate,n_active,mrr
+"A: raw CSV (pandas), ALL customers",7043,1869,0.2653698707936959,5174,316985.75
+"B: SQLite DB (SQL), ALL customers",7043,1869,0.2653698707936959,5174,316985.75
+"C: train+test recombined (pandas), ALL customers",7043,1869,0.2653698707936959,5174,316985.75

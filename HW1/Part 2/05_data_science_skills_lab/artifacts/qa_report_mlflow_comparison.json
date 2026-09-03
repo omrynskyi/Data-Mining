@@ -1,0 +1,22 @@
+[
+  {
+    "check": "row_count",
+    "status": "PASS",
+    "detail": "7 rows"
+  },
+  {
+    "check": "fully_null_columns",
+    "status": "PASS",
+    "detail": ""
+  },
+  {
+    "check": "duplicate_rows",
+    "status": "PASS",
+    "detail": ""
+  },
+  {
+    "check": "column_names",
+    "status": "WARN",
+    "detail": "Non-standard column names: ['metrics.lift_at_10pct', 'metrics.precision', 'metrics.lift_at_20pct', 'metrics.brier', 'metrics.f1', 'metrics.recall', 'metrics.accuracy', 'metrics.roc_auc', 'metrics.pr_auc', 'metrics.best_val_loss', 'metrics.n_epochs_trained', 'metrics.val_pr_auc', 'metrics.test_accuracy', 'metrics.test_recall', 'metrics.train_loss', 'metrics.test_brier', 'metrics.val_loss', 'metrics.test_roc_auc', 'metrics.test_pr_auc', 'metrics.cv_pr_auc_mean_optuna', 'metrics.cv_pr_auc_std', 'metrics.leaky_pr_auc_mean_DO_NOT_TRUST', 'metrics.cv_roc_auc_mean', 'metrics.leakage_inflation_pr_auc', 'metrics.cv_pr_auc_mean', 'metrics.cv_recall_mean', 'metrics.cv_accuracy_mean', 'params.model', 'params.seed']"
+  }
+]

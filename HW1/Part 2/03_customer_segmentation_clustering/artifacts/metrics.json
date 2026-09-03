@@ -1,0 +1,110 @@
+{
+  "timestamp": "2026-09-03T05:45:38.343409+00:00",
+  "optimal_k": 5,
+  "best_algorithm": "KMeans",
+  "silhouette_score": 0.5547,
+  "davies_bouldin_index": 0.5722,
+  "calinski_harabasz_score": 248.65,
+  "inertia": 65.57,
+  "primary_metrics": {
+    "silhouette_score": 0.5547,
+    "davies_bouldin_index": 0.5722,
+    "calinski_harabasz_score": 248.65,
+    "inertia": 65.57,
+    "n_clusters": 5,
+    "noise_count": 0,
+    "noise_ratio": 0.0,
+    "is_valid": true
+  },
+  "models": {
+    "kmeans_k5": {
+      "algorithm": "KMeans",
+      "k": 5,
+      "silhouette_score": 0.5547,
+      "davies_bouldin_index": 0.5722,
+      "calinski_harabasz_score": 248.65,
+      "inertia": 65.57
+    },
+    "agglomerative_k5": {
+      "algorithm": "AgglomerativeClustering",
+      "k": 5,
+      "silhouette_score": 0.5538,
+      "davies_bouldin_index": 0.5779,
+      "calinski_harabasz_score": 244.41,
+      "inertia": null
+    },
+    "dbscan": {
+      "algorithm": "DBSCAN",
+      "silhouette_score": 0.5577,
+      "davies_bouldin_index": 0.5106,
+      "calinski_harabasz_score": 245.36,
+      "n_clusters": 6,
+      "noise_points": 23
+    }
+  },
+  "k_sweep": [
+    {
+      "k": 2,
+      "silhouette": 0.3213,
+      "davies_bouldin": 1.267,
+      "calinski_harabasz": 95.67,
+      "inertia": 269.69
+    },
+    {
+      "k": 3,
+      "silhouette": 0.4666,
+      "davies_bouldin": 0.7165,
+      "calinski_harabasz": 151.34,
+      "inertia": 157.7
+    },
+    {
+      "k": 4,
+      "silhouette": 0.4939,
+      "davies_bouldin": 0.7096,
+      "calinski_harabasz": 174.6,
+      "inertia": 108.92
+    },
+    {
+      "k": 5,
+      "silhouette": 0.5547,
+      "davies_bouldin": 0.5722,
+      "calinski_harabasz": 248.65,
+      "inertia": 65.57
+    },
+    {
+      "k": 6,
+      "silhouette": 0.5399,
+      "davies_bouldin": 0.6546,
+      "calinski_harabasz": 243.09,
+      "inertia": 55.06
+    },
+    {
+      "k": 7,
+      "silhouette": 0.5281,
+      "davies_bouldin": 0.7148,
+      "calinski_harabasz": 254.62,
+      "inertia": 44.86
+    },
+    {
+      "k": 8,
+      "silhouette": 0.4552,
+      "davies_bouldin": 0.7602,
+      "calinski_harabasz": 267.28,
+      "inertia": 37.23
+    },
+    {
+      "k": 9,
+      "silhouette": 0.4571,
+      "davies_bouldin": 0.7632,
+      "calinski_harabasz": 270.95,
+      "inertia": 32.39
+    },
+    {
+      "k": 10,
+      "silhouette": 0.4432,
+      "davies_bouldin": 0.7935,
+      "calinski_harabasz": 260.54,
+      "inertia": 29.98
+    }
+  ]
+}

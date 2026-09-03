@@ -1,0 +1,10 @@
+{
+  "fiber_churn_rate": 0.4209,
+  "non_fiber_churn_rate": 0.1428,
+  "z_stat": 23.468,
+  "p_value": 8.664e-122,
+  "gap_pp": 27.805,
+  "mix_effect_pp": 6.11,
+  "rate_effect_pp": 21.695,
+  "primary_driver": "within-segment rate effect (Fiber is worse even controlling for contract mix)"
+}

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999/f09ad70a54b44a5ba5c8b54e7319d1f8/artifacts
+end_time: 1788410474513
+entry_point_name: ''
+experiment_id: '882523434356890999'
+lifecycle_stage: active
+run_id: f09ad70a54b44a5ba5c8b54e7319d1f8
+run_name: mlp_torch
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1788410474272
+status: 3
+tags: []
+user_id: oleg

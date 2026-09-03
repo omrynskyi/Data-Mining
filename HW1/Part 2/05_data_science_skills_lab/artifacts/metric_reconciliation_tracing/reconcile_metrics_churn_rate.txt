@@ -1,0 +1,16 @@
+============================================================
+METRIC RECONCILIATION REPORT
+============================================================
+  Churn rate — ALL customers (n=7043): 0.27
+  Churn rate — EXCL. tenure==0 (n=7032): 0.27
+  Absolute difference: -0.00
+  Percentage difference: -0.1564%
+
+  STATUS: INVESTIGATE
+
+  NEXT STEPS:
+  1. Compare query/pipeline definition for each source side-by-side.
+  2. Check: filter conditions, join types, null handling, date truncation.
+  3. Pull row-level data to find the first divergence point.
+  4. Document the root cause in assets/reconciliation_report_template.md.
+============================================================

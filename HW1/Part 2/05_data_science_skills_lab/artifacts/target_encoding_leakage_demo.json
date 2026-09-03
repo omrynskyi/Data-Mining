@@ -1,0 +1,8 @@
+{
+  "naive_auc_real_target": 0.7866,
+  "oof_auc_real_target": 0.7791,
+  "inflation_auc_points": 0.0075,
+  "naive_auc_shuffled_target": 0.5216,
+  "oof_auc_shuffled_target": 0.4917,
+  "n_levels": 12
+}

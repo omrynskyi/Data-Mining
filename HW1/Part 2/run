@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Wrapper helper script for running Makefile targets with -- flags or project numbers
+
+if [ -z "$1" ]; then
+    make help
+    exit 0
+fi
+
+ARG="$1"
+# Strip leading dashes if present
+TARGET=$(echo "$ARG" | sed 's/^--//')
+
+# Check if target is valid 2-digit number (00, 01, 02, etc.)
+if [[ "$ARG" =~ ^--[0-9]{2}$ ]]; then
+    make -- "$ARG"
+else
+    make "$TARGET"
+fi

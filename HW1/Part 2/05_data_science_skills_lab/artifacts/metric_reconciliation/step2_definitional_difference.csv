@@ -1,0 +1,3 @@
+source,n_customers,n_churned,churn_rate,n_active,mrr
+"A: raw CSV (pandas), ALL customers",7043,1869,0.2653698707936959,5174,316985.75
+"A: raw CSV, EXCLUDING tenure==0 (11 rows)",7032,1869,0.26578498293515357,5163,316530.15

@@ -1,0 +1,147 @@
+{
+  "summary": {
+    "sparse": {
+      "n_questions": 12,
+      "mrr": 0.7361,
+      "hit_rate_at_1": 0.6667,
+      "recall_at_3": 0.8333,
+      "recall_at_5": 0.8333
+    },
+    "dense": {
+      "n_questions": 12,
+      "mrr": 0.6694,
+      "hit_rate_at_1": 0.5833,
+      "recall_at_3": 0.75,
+      "recall_at_5": 0.8333
+    },
+    "hybrid": {
+      "n_questions": 12,
+      "mrr": 0.7111,
+      "hit_rate_at_1": 0.6667,
+      "recall_at_3": 0.75,
+      "recall_at_5": 0.8333
+    }
+  },
+  "detail": [
+    {
+      "question": "What silhouette score did the k=3 customer segmentation achieve, and why was it chosen over k=2 which scored higher?",
+      "expected_doc": "crisp_dm/03_data_preparation/segmentation-analysis.md",
+      "sparse_rank": null,
+      "sparse_top1_source": "crisp_dm/06_deployment/dashboard-specification.md",
+      "dense_rank": null,
+      "dense_top1_source": "crisp_dm/06_deployment/analysis-documentation.md",
+      "hybrid_rank": null,
+      "hybrid_top1_source": "crisp_dm/06_deployment/insight-synthesis.md"
+    },
+    {
+      "question": "Which step of the service-adoption funnel has the biggest absolute drop-off in customers?",
+      "expected_doc": "crisp_dm/03_data_preparation/funnel-analysis.md",
+      "sparse_rank": 2,
+      "sparse_top1_source": "crisp_dm/06_deployment/visualization-builder.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/03_data_preparation/funnel-analysis.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/03_data_preparation/funnel-analysis.md"
+    },
+    {
+      "question": "What SHA-256 hash is the raw Telco CSV pinned to for reproducibility checks?",
+      "expected_doc": "crisp_dm/04_modeling/reproducible-ml.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/04_modeling/reproducible-ml.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/04_modeling/reproducible-ml.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/04_modeling/reproducible-ml.md"
+    },
+    {
+      "question": "Which class-imbalance strategy was the cheapest leak-free first move and how did its recall compare to the baseline?",
+      "expected_doc": "crisp_dm/04_modeling/imbalanced-data.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/04_modeling/imbalanced-data.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/04_modeling/imbalanced-data.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/04_modeling/imbalanced-data.md"
+    },
+    {
+      "question": "What business rule links TotalCharges being null to the tenure column in the data quality audit?",
+      "expected_doc": "crisp_dm/02_data_understanding/data-quality-audit.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/02_data_understanding/data-quality-audit.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/02_data_understanding/data-quality-audit.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/02_data_understanding/data-quality-audit.md"
+    },
+    {
+      "question": "How many tables does the reverse-engineered normalized schema for the Telco data have, and was it inferred or given by a real database?",
+      "expected_doc": "crisp_dm/02_data_understanding/schema-mapper.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/02_data_understanding/schema-mapper.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/02_data_understanding/schema-mapper.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/02_data_understanding/schema-mapper.md"
+    },
+    {
+      "question": "What Optuna sampler was used for hyperparameter tuning and what metric did it optimize across which cross-validation folds?",
+      "expected_doc": "crisp_dm/04_modeling/hyperparameter-tuning.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/04_modeling/hyperparameter-tuning.md",
+      "dense_rank": 2,
+      "dense_top1_source": "crisp_dm/06_deployment/analysis-documentation.md",
+      "hybrid_rank": 3,
+      "hybrid_top1_source": "crisp_dm/04_modeling/imbalanced-data.md"
+    },
+    {
+      "question": "Who is the primary audience for the retention risk dashboard and what one-sentence question must it answer?",
+      "expected_doc": "crisp_dm/06_deployment/dashboard-specification.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/06_deployment/dashboard-specification.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/06_deployment/dashboard-specification.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/06_deployment/dashboard-specification.md"
+    },
+    {
+      "question": "How is the ltv metric defined in the semantic model, and why can't LTV:CAC be computed for this dataset?",
+      "expected_doc": "artifacts/semantic_model_telco.yml",
+      "sparse_rank": 3,
+      "sparse_top1_source": "crisp_dm/01_business_understanding/business-metrics-calculator.md",
+      "dense_rank": 3,
+      "dense_top1_source": "crisp_dm/01_business_understanding/semantic-model-builder.md",
+      "hybrid_rank": 5,
+      "hybrid_top1_source": "crisp_dm/01_business_understanding/business-metrics-calculator.md"
+    },
+    {
+      "question": "What was the root business question the VP of Customer Retention actually needed, surfaced via the five-whys technique?",
+      "expected_doc": "crisp_dm/01_business_understanding/stakeholder-requirements-gathering.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/01_business_understanding/stakeholder-requirements-gathering.md",
+      "dense_rank": 5,
+      "dense_top1_source": "artifacts/data_catalog_telco.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/01_business_understanding/stakeholder-requirements-gathering.md"
+    },
+    {
+      "question": "What two problems does the chart selection guidance say a 3D pie chart and a dual y-axis chart create?",
+      "expected_doc": "crisp_dm/06_deployment/visualization-builder.md",
+      "sparse_rank": 1,
+      "sparse_top1_source": "crisp_dm/06_deployment/visualization-builder.md",
+      "dense_rank": 1,
+      "dense_top1_source": "crisp_dm/06_deployment/visualization-builder.md",
+      "hybrid_rank": 1,
+      "hybrid_top1_source": "crisp_dm/06_deployment/visualization-builder.md"
+    },
+    {
+      "question": "What is the grain of the Telco-Customer-Churn dataset and how many rows and columns does it have?",
+      "expected_doc": "artifacts/data_catalog_telco.md",
+      "sparse_rank": null,
+      "sparse_top1_source": "crisp_dm/README.md",
+      "dense_rank": null,
+      "dense_top1_source": "crisp_dm/06_deployment/analysis-documentation.md",
+      "hybrid_rank": null,
+      "hybrid_top1_source": "crisp_dm/README.md"
+    }
+  ]
+}

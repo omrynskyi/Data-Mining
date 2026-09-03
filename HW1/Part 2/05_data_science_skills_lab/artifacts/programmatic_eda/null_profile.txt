@@ -1,0 +1,24 @@
+                  null_count  null_pct status
+TotalCharges              11      0.16     OK
+customerID                 0      0.00     OK
+DeviceProtection           0      0.00     OK
+MonthlyCharges             0      0.00     OK
+PaymentMethod              0      0.00     OK
+PaperlessBilling           0      0.00     OK
+Contract                   0      0.00     OK
+StreamingMovies            0      0.00     OK
+StreamingTV                0      0.00     OK
+TechSupport                0      0.00     OK
+OnlineBackup               0      0.00     OK
+gender                     0      0.00     OK
+OnlineSecurity             0      0.00     OK
+InternetService            0      0.00     OK
+MultipleLines              0      0.00     OK
+PhoneService               0      0.00     OK
+tenure                     0      0.00     OK
+Dependents                 0      0.00     OK
+Partner                    0      0.00     OK
+SeniorCitizen              0      0.00     OK
+Churn                      0      0.00     OK
+
+Saved to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/programmatic_eda/null_profile.csv

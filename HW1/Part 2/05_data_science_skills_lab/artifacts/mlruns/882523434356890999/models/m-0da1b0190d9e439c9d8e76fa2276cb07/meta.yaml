@@ -1,0 +1,10 @@
+artifact_location: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999/models/m-0da1b0190d9e439c9d8e76fa2276cb07/artifacts
+creation_timestamp: 1788410467015
+experiment_id: '882523434356890999'
+last_updated_timestamp: 1788410469138
+model_id: m-0da1b0190d9e439c9d8e76fa2276cb07
+model_type: null
+name: model
+source_run_id: 55ef3531f1f947ff9cf3acdd210d3397
+status: 2
+status_message: null

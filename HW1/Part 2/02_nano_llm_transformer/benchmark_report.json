@@ -1,0 +1,15 @@
+{
+  "timestamp": 1788373727.710767,
+  "device": "mps",
+  "mps_available": true,
+  "prompt_tokens_count": 90,
+  "generated_tokens_count": 19,
+  "elapsed_seconds": 0.376,
+  "tokens_per_second": 50.53,
+  "ms_per_token": 19.79,
+  "peak_rss_mb": 265.52,
+  "peak_rss_gb": 0.2593,
+  "memory_limit_gb": 4.0,
+  "within_memory_budget": true,
+  "generated_sample": "Apple Silicon unified memory architecture enables ultra-low latency transformer inference.\ufffdu\ufffd\u001e\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdsts\ufffd\ufffd"
+}

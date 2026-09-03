@@ -1,0 +1,35 @@
+{
+  "baseline_churn_rate_m2m_fiber": 0.5507,
+  "baseline_n_m2m_fiber": 1707,
+  "sample_size_per_group_by_mde": {
+    "0.03": 4311,
+    "0.05": 1552,
+    "0.08": 607,
+    "0.1": 388
+  },
+  "observational_contract_comparison": {
+    "srm": {
+      "n_control": 3102,
+      "n_treatment": 1359,
+      "expected_control": 2230.5,
+      "expected_treatment": 2230.5,
+      "chi2": 681.0242,
+      "p_value": 0.0,
+      "srm_detected": true
+    },
+    "significance_result": {
+      "rate_control": 0.427466,
+      "rate_treatment": 0.028698,
+      "absolute_diff": -0.398769,
+      "relative_lift_pct": -93.29,
+      "z_score": -26.6012,
+      "p_value": 0.0,
+      "ci_lower": -0.41831,
+      "ci_upper": -0.379227,
+      "alpha": 0.05,
+      "significant": true
+    }
+  },
+  "unadjusted_diff_pp": 39.877,
+  "tenure_adjusted_diff_pp": 36.094
+}

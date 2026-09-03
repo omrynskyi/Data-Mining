@@ -1,0 +1,24 @@
+wrote=/Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/data/listing_features_stage1.csv
+shape=(14993, 43)
+PetID_unique=14993
+availability=
+sentiment_available  metadata_available
+0                    0                        10
+                     1                       541
+1                    0                       331
+                     1                     14111
+missing_derived_features=
+Name                                1265
+Description                           13
+sentiment_score                      551
+sentiment_magnitude                  551
+sentiment_sentence_count             551
+sentiment_token_count                551
+sentiment_entity_count               551
+metadata_image_count                 341
+vision_labels_per_image_mean         341
+vision_label_score_mean              341
+vision_label_score_max               341
+vision_unique_label_count            341
+vision_colors_per_image_mean         341
+vision_crop_hints_per_image_mean     341

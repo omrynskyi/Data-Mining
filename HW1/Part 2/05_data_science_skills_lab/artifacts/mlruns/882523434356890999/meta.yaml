@@ -1,0 +1,6 @@
+artifact_location: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999
+creation_time: 1788410462659
+experiment_id: '882523434356890999'
+last_update_time: 1788410462659
+lifecycle_stage: active
+name: churn-classifier

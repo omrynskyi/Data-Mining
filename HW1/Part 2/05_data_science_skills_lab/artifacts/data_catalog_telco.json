@@ -1,0 +1,409 @@
+{
+  "table_name": "Telco-Customer-Churn",
+  "qualified_name": "data/Telco-Customer-Churn.csv",
+  "domain": "Customer / Subscription (Telecom)",
+  "criticality": "critical",
+  "description": "One row per residential telecom customer, capturing subscribed services, account/contract attributes, billing amounts, and whether the customer churned. Source: Kaggle blastchar/telco-customer-churn (IBM Telco Customer Churn sample dataset).",
+  "grain": "One row per customer (customerID), snapshot at time of extract.",
+  "row_count": 7043,
+  "column_count": 21,
+  "extracted_at": "2026-09-02T23:13:00.510401+00:00",
+  "primary_key": "customerID",
+  "duplicate_customer_ids": 0,
+  "business_owner": "[simulated stakeholder input] VP of Customer Retention",
+  "technical_owner": "[simulated stakeholder input] Data Science / Analytics team (this project)",
+  "upstream_sources": [
+    "Kaggle dataset export (static, one-time download for this lab); in production this would be the billing system + CRM."
+  ],
+  "downstream_consumers": [
+    "CRISP-DM churn-prediction pipeline (this project, phases 2-6)",
+    "Retention team ranked risk list (planned deliverable)"
+  ],
+  "access_level": "internal",
+  "sensitivity": "PII (customerID is a pseudonymous key; gender, SeniorCitizen are demographic attributes) + billing/financial (MonthlyCharges, TotalCharges)",
+  "compliance_tags": [
+    "none applicable - public Kaggle sample; would be PII/financial in a real production telecom system"
+  ],
+  "columns": [
+    {
+      "name": "customerID",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 7043,
+      "is_categorical_low_cardinality": false,
+      "example_values": [
+        "7590-VHVEG",
+        "5575-GNVDE",
+        "3668-QPYBK",
+        "7795-CFOCW",
+        "9237-HQITU"
+      ],
+      "business_definition": "Unique customer identifier assigned at account creation. Primary key.",
+      "criticality": "critical",
+      "primary_key": true,
+      "notes": null
+    },
+    {
+      "name": "gender",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Female",
+        "Male"
+      ],
+      "business_definition": "Customer's self-reported gender at signup (Male/Female, as captured by this legacy system).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "SeniorCitizen",
+      "dtype_raw": "int64",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": false,
+      "example_values": [
+        0,
+        1
+      ],
+      "business_definition": "Whether the account holder is 65+ (1) or not (0), self-reported at signup.",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "Partner",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Yes",
+        "No"
+      ],
+      "business_definition": "Whether the customer has a partner (spouse/domestic partner) on the account profile.",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "Dependents",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes"
+      ],
+      "business_definition": "Whether the customer has dependents (children/other dependents) on the account profile.",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "tenure",
+      "dtype_raw": "int64",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 73,
+      "is_categorical_low_cardinality": false,
+      "example_values": [
+        1,
+        34,
+        2,
+        45,
+        8
+      ],
+      "business_definition": "Number of months the customer has been with the company as of the snapshot date. Used as the acquisition-to-date clock (business framing: months since acquisition).",
+      "criticality": "critical",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "PhoneService",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes"
+      ],
+      "business_definition": "Whether the customer subscribes to the phone service line.",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "MultipleLines",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No phone service",
+        "No",
+        "Yes"
+      ],
+      "business_definition": "Whether the customer has multiple phone lines (No / Yes / No phone service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "InternetService",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "DSL",
+        "Fiber optic",
+        "No"
+      ],
+      "business_definition": "Internet service technology subscribed to (DSL / Fiber optic / No internet service).",
+      "criticality": "high",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "OnlineSecurity",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the online security add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "OnlineBackup",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Yes",
+        "No",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the online backup add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "DeviceProtection",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the device protection add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "TechSupport",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the tech support add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "StreamingTV",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the streaming TV add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "StreamingMovies",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes",
+        "No internet service"
+      ],
+      "business_definition": "Whether the customer subscribes to the streaming movies add-on (requires internet service).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "Contract",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 3,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Month-to-month",
+        "One year",
+        "Two year"
+      ],
+      "business_definition": "Contract commitment term: Month-to-month, One year, or Two year. Primary churn-risk driver dimension.",
+      "criticality": "critical",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "PaperlessBilling",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Yes",
+        "No"
+      ],
+      "business_definition": "Whether the customer is enrolled in paperless billing (Yes/No).",
+      "criticality": "medium",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "PaymentMethod",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 4,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "Electronic check",
+        "Mailed check",
+        "Bank transfer (automatic)",
+        "Credit card (automatic)"
+      ],
+      "business_definition": "How the customer pays their bill (Electronic check, Mailed check, Bank transfer (automatic), Credit card (automatic)).",
+      "criticality": "high",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "MonthlyCharges",
+      "dtype_raw": "float64",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 1585,
+      "is_categorical_low_cardinality": false,
+      "example_values": [
+        29.85,
+        56.95,
+        53.85,
+        42.3,
+        70.7
+      ],
+      "business_definition": "Current recurring monthly charge in USD - treated as the customer's MRR contribution (business framing).",
+      "criticality": "critical",
+      "primary_key": false,
+      "notes": null
+    },
+    {
+      "name": "TotalCharges",
+      "dtype_raw": "object",
+      "nullable": true,
+      "null_count": 11,
+      "null_pct": 0.156,
+      "cardinality": 6531,
+      "is_categorical_low_cardinality": false,
+      "example_values": [
+        "29.85",
+        "1889.5",
+        "108.15",
+        "1840.75",
+        "151.65"
+      ],
+      "business_definition": "Cumulative amount billed to the customer to date (USD). Approximately tenure x MonthlyCharges, with small deviations from mid-cycle rate changes; blank for 11 customers with tenure=0 (billed nothing yet).",
+      "criticality": "critical",
+      "primary_key": false,
+      "notes": "Ships as object dtype (blank strings for tenure=0 rows); 11 rows become null after pd.to_numeric coercion (see data/processed/dataset_meta.json)."
+    },
+    {
+      "name": "Churn",
+      "dtype_raw": "object",
+      "nullable": false,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "cardinality": 2,
+      "is_categorical_low_cardinality": true,
+      "example_values": [
+        "No",
+        "Yes"
+      ],
+      "business_definition": "Target label: whether the customer churned (voluntarily left) during the observation window (Yes/No).",
+      "criticality": "critical",
+      "primary_key": false,
+      "notes": null
+    }
+  ]
+}

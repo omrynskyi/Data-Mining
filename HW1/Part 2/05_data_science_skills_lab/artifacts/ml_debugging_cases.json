@@ -1,0 +1,74 @@
+{
+  "bug_a_target_leakage": {
+    "honest_pr_auc_mean": 0.661745542271974,
+    "honest_pr_auc_std": 0.016513688844202068,
+    "leaky_pr_auc_mean": 1.0,
+    "leaky_pr_auc_std": 0.0,
+    "leaked_feature_correlation_with_target": 0.9937311388890381,
+    "diagnosis": "leakage-hunt checklist item 1 (|corr|~1.0 feature) flagged 'retention_flag_leaked' immediately",
+    "fix": "drop the leaked feature; verified score returns to the honest baseline"
+  },
+  "bug_b_unlearning_unscaled_high_lr": {
+    "broken": {
+      "predicted_class_counts": {
+        "0": 4993,
+        "1": 641
+      },
+      "accuracy": 0.7547035853745119,
+      "pr_auc": 0.3467525089853898
+    },
+    "fixed": {
+      "predicted_class_counts": {
+        "0": 3499,
+        "1": 2135
+      },
+      "accuracy": 0.7348242811501597,
+      "pr_auc": 0.5851883453873402
+    },
+    "diagnosis": "symptom 'stuck at chance'/degenerate single-class predictions -> cause: unscaled inputs (TotalCharges magnitude ~1000x the one-hot dummies) combined with an aggressive constant eta0=10.0 learning rate blows up the gradient step on the large-magnitude column and collapses the decision boundary to a constant prediction.",
+    "fix": "restore StandardScaler on numeric features (build_preprocessor()) and use learning_rate='optimal' instead of a fixed eta0=10.0"
+  },
+  "bug_c_nan_divergence_torch": {
+    "broken_lr": 10.0,
+    "broken_inputs": "unscaled (raw TotalCharges/tenure/MonthlyCharges magnitude)",
+    "broken_losses": [
+      6.157732009887695,
+      4344668.5,
+      4275272.0,
+      3384569.5,
+      2493866.5,
+      1603163.75,
+      712460.875,
+      937214.5,
+      4862466.0,
+      3971763.75,
+      3081060.5,
+      2190358.0,
+      1299655.0,
+      411864.5625,
+      2506418.5
+    ],
+    "broken_loss_orders_of_magnitude_swing": 5.897435793524515,
+    "fixed_lr": 0.05,
+    "fixed_grad_clip_max_norm": 1.0,
+    "fixed_inputs": "StandardScaler'd (build_preprocessor())",
+    "fixed_losses": [
+      0.752721905708313,
+      0.7053745985031128,
+      0.6687342524528503,
+      0.6403026580810547,
+      0.6177833080291748,
+      0.5995463132858276,
+      0.5844414830207825,
+      0.5716561079025269,
+      0.5606135129928589,
+      0.5509010553359985,
+      0.5422214865684509,
+      0.5343582630157471,
+      0.5271521806716919,
+      0.5204849243164062,
+      0.51426762342453
+    ],
+    "diagnosis": "one-batch overfit test shows loss oscillating over ~5.9 orders of magnitude instead of decreasing, with lr=10.0 on unscaled inputs -> decision tree: unstable/NaN-family loss -> LR too high + unscaled inputs -> fix: scale inputs, lower LR, clip grads. Verified the fixed config passes the one-batch test (monotonic decrease, no oscillation)."
+  }
+}

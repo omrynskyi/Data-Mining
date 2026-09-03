@@ -1,0 +1,4 @@
+Contract,n_active_customers,active_mrr,historical_churn_rate,expected_monthly_revenue_at_risk
+Month-to-month,2220,136447.05,0.4271,58276.09
+One year,1307,81698.15,0.1127,9206.99
+Two year,1647,98840.55,0.0283,2799.02

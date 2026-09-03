@@ -1,0 +1,99 @@
+---
+skill: context-packager
+pack: nimrodfisher/data-analytics-skills
+crisp_dm_phase: 1 - Business Understanding
+artifacts: [artifacts/context_sources/task.md, artifacts/context_sources/business.md, artifacts/context_sources/schema.md, artifacts/context_sources/prior_findings.md, artifacts/context_sources/constraints.md, artifacts/context_sources/format.md, artifacts/context_bundle_telco.txt, artifacts/context_bundle_token_report.txt]
+---
+
+# Context Packager — Telco Customer Churn
+
+## What the skill prescribes
+
+- Identify required context layers (task, business, schema, prior findings, constraints, output format) using `references/context_layering_guide.md`.
+- Collect and deduplicate context sources with `scripts/context_bundler.py`, which applies the priority layering order.
+- Check the token budget with `scripts/token_counter.py`; trim lower-priority layers first if over budget.
+- Score the bundle against `references/context_quality_rubric.md` — target >= 7/10.
+- Write a prompt header (task statement, output format, hard constraints) and save the package with `assets/context_package_template.md`.
+
+## Applied to Telco churn
+
+### Purpose
+
+A future agent picking up **any phase** of this project (Phase 2 onward, or a fresh session mid-lab) needs one bundle that gets it fully oriented without re-deriving the business framing, the data schema, or Phase 1's findings. This is that bundle.
+
+### Context layers assembled
+
+Six source files were written under `artifacts/context_sources/`, one per layer, then merged with the skill's own `scripts/context_bundler.py`:
+
+| Layer | Source file | Content |
+|---|---|---|
+| Task | `task.md` | The churn-risk-scoring task, scoped to CRISP-DM phases 1-6, output format constraint |
+| Business | `business.md` | Business framing + the real computed metrics from `business-metrics-calculator.md` (MRR, ARPU, churn rates, LTV, revenue at risk) |
+| Schema | `schema.md` | Column-by-column schema summary, pointing to `artifacts/data_catalog_telco.md` and `artifacts/semantic_model_telco.yml` for full detail |
+| Prior findings | `prior_findings.md` | Phase 1's key findings (contract term as the strongest churn driver, revenue-churn > logo-churn skew, MTM revenue exposure, documented data gaps) |
+| Constraints | `constraints.md` | Leakage-safety rules, the `TotalCharges` coercion requirement, the "don't treat this as a monthly ledger" guardrail |
+| Format | `format.md` | Output format, terminology conventions |
+
+Command actually run (the skill's real script, not a re-implementation):
+
+```
+python3 .claude/skills/context-packager/scripts/context_bundler.py \
+  --task "$(cat artifacts/context_sources/task.md)" \
+  --business artifacts/context_sources/business.md \
+  --schema artifacts/context_sources/schema.md \
+  --files artifacts/context_sources/prior_findings.md \
+  --constraints artifacts/context_sources/constraints.md \
+  --format artifacts/context_sources/format.md \
+  --output artifacts/context_bundle_telco.txt
+```
+
+Result: `Bundle written to artifacts/context_bundle_telco.txt` — `Characters: 6,826 | Estimated tokens: ~1,706`.
+
+### Token budget check (`scripts/token_counter.py`, actually run)
+
+```
+python3 .claude/skills/context-packager/scripts/token_counter.py \
+  --input artifacts/context_bundle_telco.txt --model claude-3-sonnet
+```
+
+Output (saved to `artifacts/context_bundle_token_report.txt`):
+
+```
+File: artifacts/context_bundle_telco.txt
+  Type: prose
+  Characters: 6,826
+  Estimated tokens: ~1,706
+  Token budget: 200,000 (1% used)
+  ✓ Within budget
+```
+
+~1,706 tokens against a 200K budget — 1% used, far under the skill's 30-35% input-spend rule of thumb (`context_layering_guide.md`). No trimming needed.
+
+### Quality score (`references/context_quality_rubric.md`)
+
+| Dimension | Score | Rationale |
+|---|---|---|
+| Completeness (0-3) | 3 | Task, business context, schema, and prior findings all present and specific |
+| Clarity (0-3) | 3 | Task is scoped, measurable ("ranked list... churn_probability... recommended_action"), success criteria explicit |
+| Relevance (0-2) | 2 | Every section ties directly to the churn-scoring task; no filler |
+| Token efficiency (0-2) | 2 | 1% of budget — well under the "under 30%" threshold for full marks |
+| **Total** | **10/10** | Excellent — send as-is (per the rubric's interpretation table) |
+
+Quick-fix checklist: not needed (score already at the ceiling).
+
+### Prompt header / package (`assets/context_package_template.md`, filled)
+
+**Session / task name:** Telco Churn — Phase 2+ Handoff Context Package
+**Created:** 2026-09-02
+**Token estimate:** ~1,706 tokens
+**Quality score:** 10 / 10
+**Model target:** claude-sonnet-5 (or any Claude/GPT model — well within every listed context limit)
+
+The `## TASK` / `## BUSINESS CONTEXT` / `## DATA SCHEMA` / `## PRIOR FINDINGS` / `## CONSTRAINTS` / `## OUTPUT FORMAT` sections are the actual bundle content in `artifacts/context_bundle_telco.txt` (generated by `context_bundler.py`, not retyped here to avoid duplicating the same text twice in the repo).
+
+## Outputs produced
+
+- `artifacts/context_sources/{task,business,schema,prior_findings,constraints,format}.md` — the six raw layer files
+- `artifacts/context_bundle_telco.txt` — merged, layered bundle (generated by the skill's real `context_bundler.py`)
+- `artifacts/context_bundle_token_report.txt` — real token-budget report (generated by the skill's real `token_counter.py`)
+- This document — quality score and prompt-header package record

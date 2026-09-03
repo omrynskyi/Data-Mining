@@ -1,0 +1,7 @@
+        column  outlier_count  outlier_pct   min     max      mean  iqr_outliers  zscore_outliers
+ SeniorCitizen           1142        16.21  0.00    1.00    0.1621          1142                0
+        tenure              0         0.00  0.00   72.00   32.3711             0                0
+MonthlyCharges              0         0.00 18.25  118.75   64.7617             0                0
+  TotalCharges              0         0.00 18.80 8684.80 2283.3004             0                0
+
+Saved to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/programmatic_eda/outliers.csv

@@ -1,0 +1,140 @@
+{
+  "ltv_ruling": {
+    "hazard_based_ltv": 7899.96,
+    "hazard_based_implied_lifetime_months": 122.0,
+    "tenure_based_ltv": 2283.3,
+    "observed_mean_tenure_months": 32.37,
+    "tenure_right_censored_at_months": 72,
+    "ruling": "The hazard-based LTV ($7,899.96) is computed as ARPU / monthly hazard = $64.76 / 0.008198 = $7,899.96, which ALGEBRAICALLY implies an expected customer lifetime of 1/0.008198 = 122.0 months (~10.2 years). But tenure in this dataset is right-censored at 72 months (~6 years) and the OBSERVED mean tenure is only 32.4 months -- no customer in the data has ever been observed to reach 122 months. The hazard-based figure is a single-snapshot cross-sectional hazard rate (aggregate customer-months churned / total customer-months observed), and treating it as a constant, indefinitely-repeatable monthly risk for a customer who has ALREADY survived to any given tenure is a survivorship-bias error: customers who reach high tenure in a cross-section are disproportionately the ones for whom month-to-month contracts have already converted to loyalty (churn hazard actually DECREASES with tenure per the Phase 3 cohort/hazard analysis -- see reports/figures/ts_hazard_by_tenure.png), so extrapolating the population-average hazard forward forever massively overstates revenue that will never actually be collected. VERDICT: hazard-based LTV ($7,899.96) is NOT used for campaign ROI. The tenure-based empirical LTV ($2,283.30) is grounded in revenue actually observed to have been collected (not extrapolated), so it is the safer anchor -- though it itself is a lower bound (it mixes complete lifetimes from churned customers with the still-ongoing, not-yet-fully-collected revenue of active customers, so true LTV for an average customer is somewhat higher than $2,283.30, just nowhere near $7,899.96).",
+    "chosen_value_of_a_save_methodology": "Rather than use either full-lifetime LTV figure directly in the EV arithmetic below (both have the biases explained above, and a full-lifetime payoff assumption is unusually optimistic for a monthly retention-campaign ROI decision), this evaluation uses a bounded, standard retention-economics framing: the value of a 'save' is the revenue protected over a stated decision horizon, not the customer's entire remaining lifetime. PRIMARY assumption: 12 months of Month-to-month ARPU ($66.40/mo x 12 = $796.80) -- Month-to-month is used because these are the customers a churn model realistically targets (42.71% churn rate vs 2.83% for Two-year, per Phase 1). This $796.80 figure is well below the tenure-based LTV anchor ($2,283.30), so it is conservative relative to even the safer of the two LTV numbers. A sensitivity range using the tenure-based LTV as an upper alternative is also reported."
+  },
+  "assumptions": {
+    "offer_cost_per_contact_usd": 50.0,
+    "save_rate": 0.3,
+    "value_of_save_primary_usd": 796.8,
+    "value_of_save_primary_methodology": "12 months of Month-to-month segment ARPU",
+    "value_of_save_upper_usd": 2283.3,
+    "value_of_save_upper_methodology": "tenure-based empirical LTV (conservative anchor, not hazard-based)"
+  },
+  "ev_table": [
+    {
+      "capacity_pct": 5.0,
+      "n_contacted": 71,
+      "true_churners_contacted": 59,
+      "precision_at_k": 0.831,
+      "expected_saves": 17.7,
+      "campaign_cost": 3550.0,
+      "revenue_preserved_primary_12mo_arpu": 14103.36,
+      "net_ev_primary_12mo_arpu": 10553.36,
+      "revenue_preserved_upper_tenure_ltv": 40414.41,
+      "net_ev_upper_tenure_ltv": 36864.41,
+      "roi_primary": 3.97
+    },
+    {
+      "capacity_pct": 10.0,
+      "n_contacted": 141,
+      "true_churners_contacted": 105,
+      "precision_at_k": 0.7447,
+      "expected_saves": 31.5,
+      "campaign_cost": 7050.0,
+      "revenue_preserved_primary_12mo_arpu": 25099.2,
+      "net_ev_primary_12mo_arpu": 18049.2,
+      "revenue_preserved_upper_tenure_ltv": 71923.95,
+      "net_ev_upper_tenure_ltv": 64873.95,
+      "roi_primary": 3.56
+    },
+    {
+      "capacity_pct": 15.0,
+      "n_contacted": 212,
+      "true_churners_contacted": 149,
+      "precision_at_k": 0.7028,
+      "expected_saves": 44.7,
+      "campaign_cost": 10600.0,
+      "revenue_preserved_primary_12mo_arpu": 35616.96,
+      "net_ev_primary_12mo_arpu": 25016.96,
+      "revenue_preserved_upper_tenure_ltv": 102063.51,
+      "net_ev_upper_tenure_ltv": 91463.51,
+      "roi_primary": 3.36
+    },
+    {
+      "capacity_pct": 20.0,
+      "n_contacted": 282,
+      "true_churners_contacted": 188,
+      "precision_at_k": 0.6667,
+      "expected_saves": 56.4,
+      "campaign_cost": 14100.0,
+      "revenue_preserved_primary_12mo_arpu": 44939.52,
+      "net_ev_primary_12mo_arpu": 30839.52,
+      "revenue_preserved_upper_tenure_ltv": 128778.12,
+      "net_ev_upper_tenure_ltv": 114678.12,
+      "roi_primary": 3.19
+    },
+    {
+      "capacity_pct": 25.0,
+      "n_contacted": 353,
+      "true_churners_contacted": 225,
+      "precision_at_k": 0.6374,
+      "expected_saves": 67.5,
+      "campaign_cost": 17650.0,
+      "revenue_preserved_primary_12mo_arpu": 53784.0,
+      "net_ev_primary_12mo_arpu": 36134.0,
+      "revenue_preserved_upper_tenure_ltv": 154122.75,
+      "net_ev_upper_tenure_ltv": 136472.75,
+      "roi_primary": 3.05
+    },
+    {
+      "capacity_pct": 30.0,
+      "n_contacted": 423,
+      "true_churners_contacted": 250,
+      "precision_at_k": 0.591,
+      "expected_saves": 75.0,
+      "campaign_cost": 21150.0,
+      "revenue_preserved_primary_12mo_arpu": 59760.0,
+      "net_ev_primary_12mo_arpu": 38610.0,
+      "revenue_preserved_upper_tenure_ltv": 171247.5,
+      "net_ev_upper_tenure_ltv": 150097.5,
+      "roi_primary": 2.83
+    },
+    {
+      "capacity_pct": 40.0,
+      "n_contacted": 564,
+      "true_churners_contacted": 294,
+      "precision_at_k": 0.5213,
+      "expected_saves": 88.2,
+      "campaign_cost": 28200.0,
+      "revenue_preserved_primary_12mo_arpu": 70277.76,
+      "net_ev_primary_12mo_arpu": 42077.76,
+      "revenue_preserved_upper_tenure_ltv": 201387.06,
+      "net_ev_upper_tenure_ltv": 173187.06,
+      "roi_primary": 2.49
+    },
+    {
+      "capacity_pct": 50.0,
+      "n_contacted": 705,
+      "true_churners_contacted": 328,
+      "precision_at_k": 0.4652,
+      "expected_saves": 98.4,
+      "campaign_cost": 35250.0,
+      "revenue_preserved_primary_12mo_arpu": 78405.12,
+      "net_ev_primary_12mo_arpu": 43155.12,
+      "revenue_preserved_upper_tenure_ltv": 224676.72,
+      "net_ev_upper_tenure_ltv": 189426.72,
+      "roi_primary": 2.22
+    },
+    {
+      "capacity_pct": 100.0,
+      "n_contacted": 1409,
+      "true_churners_contacted": 374,
+      "precision_at_k": 0.2654,
+      "expected_saves": 112.2,
+      "campaign_cost": 70450.0,
+      "revenue_preserved_primary_12mo_arpu": 89400.96,
+      "net_ev_primary_12mo_arpu": 18950.96,
+      "revenue_preserved_upper_tenure_ltv": 256186.26,
+      "net_ev_upper_tenure_ltv": 185736.26,
+      "roi_primary": 1.27
+    }
+  ],
+  "recommended_capacity_pct": 50.0,
+  "recommended_capacity_net_ev_usd": 43155.12
+}

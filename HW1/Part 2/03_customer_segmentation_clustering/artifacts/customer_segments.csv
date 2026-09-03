@@ -1,0 +1,201 @@
+CustomerID,Gender,Age,Annual_Income_k,Spending_Score,Cluster_ID,Cluster_Name,Persona_Name,PCA_1,PCA_2,PCA_3
+1,Male,19,15.0,39.0,4,Sensible / Budget,The Budget Conscious,-1.5371,-0.9222,0.0
+2,Male,21,15.0,81.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.3842,-2.0751,0.0
+3,Female,20,16.0,6.0,4,Sensible / Budget,The Budget Conscious,-2.416,0.0107,0.0
+4,Female,23,16.0,77.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.467,-1.9384,0.0
+5,Female,31,17.0,40.0,4,Sensible / Budget,The Budget Conscious,-1.4557,-0.8957,0.0
+6,Female,22,17.0,76.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.4674,-1.8839,0.0
+7,Female,35,18.0,6.0,4,Sensible / Budget,The Budget Conscious,-2.362,0.0646,0.0
+8,Female,23,18.0,94.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.0537,-2.351,0.0
+9,Male,64,19.0,3.0,4,Sensible / Budget,The Budget Conscious,-2.4174,0.174,0.0
+10,Female,30,19.0,72.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.5233,-1.7201,0.0
+11,Male,67,19.0,14.0,4,Sensible / Budget,The Budget Conscious,-2.1154,-0.128,0.0
+12,Female,35,19.0,99.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.2179,-2.4613,0.0
+13,Female,58,20.0,15.0,4,Sensible / Budget,The Budget Conscious,-2.061,-0.1284,0.0
+14,Female,24,20.0,77.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.359,-1.8304,0.0
+15,Male,37,20.0,13.0,4,Sensible / Budget,The Budget Conscious,-2.1159,-0.0735,0.0
+16,Male,22,20.0,79.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.3041,-1.8853,0.0
+17,Female,35,21.0,35.0,4,Sensible / Budget,The Budget Conscious,-1.485,-0.6505,0.0
+18,Male,20,21.0,66.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.634,-1.5014,0.0
+19,Male,52,23.0,29.0,4,Sensible / Budget,The Budget Conscious,-1.5957,-0.4318,0.0
+20,Female,35,23.0,98.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.2984,-2.3259,0.0
+21,Male,35,24.0,35.0,4,Sensible / Budget,The Budget Conscious,-1.404,-0.5695,0.0
+22,Male,25,24.0,73.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.3609,-1.6126,0.0
+23,Female,46,25.0,5.0,4,Sensible / Budget,The Budget Conscious,-2.2005,0.281,0.0
+24,Male,31,25.0,73.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.3339,-1.5856,0.0
+25,Female,54,28.0,14.0,4,Sensible / Budget,The Budget Conscious,-1.8725,0.1149,0.0
+26,Male,29,28.0,82.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.0058,-1.7517,0.0
+27,Female,45,28.0,32.0,4,Sensible / Budget,The Budget Conscious,-1.3784,-0.3792,0.0
+28,Male,35,28.0,61.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.5823,-1.1753,0.0
+29,Female,40,29.0,31.0,4,Sensible / Budget,The Budget Conscious,-1.3789,-0.3247,0.0
+30,Female,23,29.0,87.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.1584,-1.862,0.0
+31,Male,60,30.0,4.0,4,Sensible / Budget,The Budget Conscious,-2.093,0.4434,0.0
+32,Female,21,30.0,73.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.1989,-1.4507,0.0
+33,Male,53,33.0,4.0,4,Sensible / Budget,The Budget Conscious,-2.0121,0.5244,0.0
+34,Male,18,33.0,92.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.4036,-1.8913,0.0
+35,Female,49,33.0,14.0,4,Sensible / Budget,The Budget Conscious,-1.7376,0.2499,0.0
+36,Female,21,33.0,81.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.1016,-1.5893,0.0
+37,Female,42,34.0,17.0,4,Sensible / Budget,The Budget Conscious,-1.6282,0.1945,0.0
+38,Female,30,34.0,73.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.091,-1.3427,0.0
+39,Female,36,37.0,26.0,4,Sensible / Budget,The Budget Conscious,-1.3002,0.0284,0.0
+40,Female,20,37.0,75.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.0449,-1.3167,0.0
+41,Female,65,38.0,35.0,4,Sensible / Budget,The Budget Conscious,-1.0261,-0.1916,0.0
+42,Male,24,38.0,92.0,2,Spendthrifts / Trendsetters,The Spendthrifts,0.5386,-1.7563,0.0
+43,Male,48,39.0,36.0,4,Sensible / Budget,The Budget Conscious,-0.9717,-0.1921,0.0
+44,Female,31,39.0,61.0,0,Moderate / Standard,The Moderate Mainstream,-0.2854,-0.8784,0.0
+45,Female,49,39.0,28.0,4,Sensible / Budget,The Budget Conscious,-1.1913,0.0275,0.0
+46,Female,24,39.0,65.0,2,Spendthrifts / Trendsetters,The Spendthrifts,-0.1756,-0.9882,0.0
+47,Female,50,40.0,55.0,0,Moderate / Standard,The Moderate Mainstream,-0.4231,-0.6867,0.0
+48,Female,27,40.0,47.0,0,Moderate / Standard,The Moderate Mainstream,-0.6428,-0.4671,0.0
+49,Female,29,40.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.78,-0.3298,0.0
+50,Female,31,40.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.78,-0.3298,0.0
+51,Female,49,42.0,52.0,0,Moderate / Standard,The Moderate Mainstream,-0.4515,-0.5503,0.0
+52,Male,33,42.0,60.0,0,Moderate / Standard,The Moderate Mainstream,-0.2319,-0.77,0.0
+53,Female,31,43.0,54.0,0,Moderate / Standard,The Moderate Mainstream,-0.3696,-0.5783,0.0
+54,Male,59,43.0,60.0,0,Moderate / Standard,The Moderate Mainstream,-0.2049,-0.743,0.0
+55,Female,50,43.0,45.0,0,Moderate / Standard,The Moderate Mainstream,-0.6167,-0.3312,0.0
+56,Male,47,43.0,41.0,0,Moderate / Standard,The Moderate Mainstream,-0.7265,-0.2214,0.0
+57,Female,51,44.0,50.0,0,Moderate / Standard,The Moderate Mainstream,-0.4524,-0.4415,0.0
+58,Male,69,44.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.5622,-0.3317,0.0
+59,Female,27,46.0,51.0,0,Moderate / Standard,The Moderate Mainstream,-0.371,-0.4149,0.0
+60,Male,53,46.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.5083,-0.2777,0.0
+61,Male,70,46.0,56.0,0,Moderate / Standard,The Moderate Mainstream,-0.2338,-0.5522,0.0
+62,Male,19,46.0,55.0,0,Moderate / Standard,The Moderate Mainstream,-0.2612,-0.5247,0.0
+63,Female,67,47.0,52.0,0,Moderate / Standard,The Moderate Mainstream,-0.3166,-0.4154,0.0
+64,Female,54,47.0,59.0,0,Moderate / Standard,The Moderate Mainstream,-0.1244,-0.6076,0.0
+65,Male,63,48.0,51.0,0,Moderate / Standard,The Moderate Mainstream,-0.317,-0.361,0.0
+66,Male,18,48.0,59.0,0,Moderate / Standard,The Moderate Mainstream,-0.0974,-0.5806,0.0
+67,Female,43,48.0,50.0,0,Moderate / Standard,The Moderate Mainstream,-0.3445,-0.3335,0.0
+68,Female,68,48.0,48.0,0,Moderate / Standard,The Moderate Mainstream,-0.3994,-0.2786,0.0
+69,Male,19,48.0,59.0,0,Moderate / Standard,The Moderate Mainstream,-0.0974,-0.5806,0.0
+70,Female,32,48.0,47.0,0,Moderate / Standard,The Moderate Mainstream,-0.4268,-0.2511,0.0
+71,Male,70,49.0,55.0,0,Moderate / Standard,The Moderate Mainstream,-0.1802,-0.4438,0.0
+72,Female,47,49.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.5371,-0.0869,0.0
+73,Female,60,50.0,49.0,0,Moderate / Standard,The Moderate Mainstream,-0.318,-0.2521,0.0
+74,Female,60,50.0,56.0,0,Moderate / Standard,The Moderate Mainstream,-0.1258,-0.4442,0.0
+75,Male,59,54.0,47.0,0,Moderate / Standard,The Moderate Mainstream,-0.2649,-0.0892,0.0
+76,Male,26,54.0,54.0,0,Moderate / Standard,The Moderate Mainstream,-0.0727,-0.2814,0.0
+77,Female,45,54.0,53.0,0,Moderate / Standard,The Moderate Mainstream,-0.1002,-0.2539,0.0
+78,Male,40,54.0,48.0,0,Moderate / Standard,The Moderate Mainstream,-0.2374,-0.1167,0.0
+79,Female,23,54.0,52.0,0,Moderate / Standard,The Moderate Mainstream,-0.1276,-0.2265,0.0
+80,Female,49,54.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.4022,0.048,0.0
+81,Male,57,54.0,51.0,0,Moderate / Standard,The Moderate Mainstream,-0.1551,-0.199,0.0
+82,Male,38,54.0,55.0,0,Moderate / Standard,The Moderate Mainstream,-0.0453,-0.3088,0.0
+83,Male,67,54.0,41.0,0,Moderate / Standard,The Moderate Mainstream,-0.4296,0.0755,0.0
+84,Female,46,54.0,44.0,0,Moderate / Standard,The Moderate Mainstream,-0.3472,-0.0069,0.0
+85,Female,21,54.0,57.0,0,Moderate / Standard,The Moderate Mainstream,0.0096,-0.3637,0.0
+86,Male,48,54.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.2923,-0.0618,0.0
+87,Female,55,57.0,58.0,0,Moderate / Standard,The Moderate Mainstream,0.118,-0.3102,0.0
+88,Female,22,57.0,55.0,0,Moderate / Standard,The Moderate Mainstream,0.0357,-0.2278,0.0
+89,Female,34,58.0,60.0,0,Moderate / Standard,The Moderate Mainstream,0.1999,-0.3381,0.0
+90,Female,50,58.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.1844,0.0462,0.0
+91,Female,68,59.0,55.0,0,Moderate / Standard,The Moderate Mainstream,0.0897,-0.1739,0.0
+92,Male,18,59.0,41.0,0,Moderate / Standard,The Moderate Mainstream,-0.2947,0.2104,0.0
+93,Male,48,60.0,49.0,0,Moderate / Standard,The Moderate Mainstream,-0.0481,0.0178,0.0
+94,Female,40,60.0,40.0,0,Moderate / Standard,The Moderate Mainstream,-0.2951,0.2649,0.0
+95,Female,32,60.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.2402,0.21,0.0
+96,Male,24,60.0,52.0,0,Moderate / Standard,The Moderate Mainstream,0.0343,-0.0645,0.0
+97,Female,47,60.0,47.0,0,Moderate / Standard,The Moderate Mainstream,-0.103,0.0727,0.0
+98,Female,27,60.0,50.0,0,Moderate / Standard,The Moderate Mainstream,-0.0206,-0.0096,0.0
+99,Male,48,61.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.2132,0.237,0.0
+100,Male,20,61.0,49.0,0,Moderate / Standard,The Moderate Mainstream,-0.0211,0.0448,0.0
+101,Female,23,62.0,41.0,0,Moderate / Standard,The Moderate Mainstream,-0.2137,0.2914,0.0
+102,Female,49,62.0,48.0,0,Moderate / Standard,The Moderate Mainstream,-0.0215,0.0993,0.0
+103,Male,67,62.0,59.0,0,Moderate / Standard,The Moderate Mainstream,0.2804,-0.2027,0.0
+104,Male,26,62.0,55.0,0,Moderate / Standard,The Moderate Mainstream,0.1706,-0.0929,0.0
+105,Male,49,62.0,56.0,0,Moderate / Standard,The Moderate Mainstream,0.1981,-0.1204,0.0
+106,Female,21,62.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.1862,0.264,0.0
+107,Female,66,63.0,50.0,0,Moderate / Standard,The Moderate Mainstream,0.0604,0.0713,0.0
+108,Male,54,63.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.0494,0.1811,0.0
+109,Male,68,63.0,43.0,0,Moderate / Standard,The Moderate Mainstream,-0.1318,0.2635,0.0
+110,Male,66,63.0,48.0,0,Moderate / Standard,The Moderate Mainstream,0.0055,0.1262,0.0
+111,Male,65,63.0,52.0,0,Moderate / Standard,The Moderate Mainstream,0.1153,0.0164,0.0
+112,Female,19,63.0,54.0,0,Moderate / Standard,The Moderate Mainstream,0.1702,-0.0385,0.0
+113,Female,38,64.0,42.0,0,Moderate / Standard,The Moderate Mainstream,-0.1323,0.3179,0.0
+114,Male,19,64.0,46.0,0,Moderate / Standard,The Moderate Mainstream,-0.0224,0.2081,0.0
+115,Female,18,65.0,48.0,0,Moderate / Standard,The Moderate Mainstream,0.0594,0.1802,0.0
+116,Female,19,65.0,50.0,0,Moderate / Standard,The Moderate Mainstream,0.1143,0.1253,0.0
+117,Female,63,65.0,43.0,0,Moderate / Standard,The Moderate Mainstream,-0.0778,0.3175,0.0
+118,Female,49,65.0,59.0,0,Moderate / Standard,The Moderate Mainstream,0.3614,-0.1217,0.0
+119,Female,51,67.0,43.0,0,Moderate / Standard,The Moderate Mainstream,-0.0238,0.3715,0.0
+120,Female,50,67.0,57.0,0,Moderate / Standard,The Moderate Mainstream,0.3605,-0.0129,0.0
+121,Male,27,67.0,56.0,0,Moderate / Standard,The Moderate Mainstream,0.333,0.0146,0.0
+122,Female,38,67.0,40.0,0,Moderate / Standard,The Moderate Mainstream,-0.1062,0.4538,0.0
+123,Female,40,69.0,58.0,0,Moderate / Standard,The Moderate Mainstream,0.4419,0.0137,0.0
+124,Male,39,69.0,91.0,1,Target / Affluent Spenders,The Affluent Spenders,1.3478,-0.8922,0.0
+125,Female,23,70.0,29.0,3,Careful / Savers,The Careful Conservatives,-0.3272,0.8367,0.0
+126,Female,31,70.0,77.0,1,Target / Affluent Spenders,The Affluent Spenders,0.9905,-0.4809,0.0
+127,Male,43,71.0,35.0,0,Moderate / Standard,The Moderate Mainstream,-0.1355,0.699,0.0
+128,Male,40,71.0,95.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5116,-0.948,0.0
+129,Male,59,71.0,11.0,3,Careful / Savers,The Careful Conservatives,-0.7943,1.3579,0.0
+130,Male,38,71.0,75.0,1,Target / Affluent Spenders,The Affluent Spenders,0.9626,-0.399,0.0
+131,Male,47,71.0,9.0,3,Careful / Savers,The Careful Conservatives,-0.8492,1.4128,0.0
+132,Male,39,71.0,75.0,1,Target / Affluent Spenders,The Affluent Spenders,0.9626,-0.399,0.0
+133,Female,25,72.0,34.0,0,Moderate / Standard,The Moderate Mainstream,-0.1359,0.7535,0.0
+134,Female,31,72.0,71.0,1,Target / Affluent Spenders,The Affluent Spenders,0.8797,-0.2622,0.0
+135,Male,20,73.0,5.0,3,Careful / Savers,The Careful Conservatives,-0.905,1.5765,0.0
+136,Female,29,73.0,88.0,1,Target / Affluent Spenders,The Affluent Spenders,1.3734,-0.7019,0.0
+137,Female,44,73.0,7.0,3,Careful / Savers,The Careful Conservatives,-0.8501,1.5216,0.0
+138,Male,32,73.0,73.0,1,Target / Affluent Spenders,The Affluent Spenders,0.9616,-0.2901,0.0
+139,Male,19,74.0,10.0,3,Careful / Savers,The Careful Conservatives,-0.7408,1.4663,0.0
+140,Female,35,74.0,72.0,1,Target / Affluent Spenders,The Affluent Spenders,0.9612,-0.2357,0.0
+141,Female,57,75.0,5.0,3,Careful / Savers,The Careful Conservatives,-0.8511,1.6305,0.0
+142,Male,32,75.0,93.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5646,-0.7852,0.0
+143,Female,28,76.0,40.0,0,Moderate / Standard,The Moderate Mainstream,0.1367,0.6967,0.0
+144,Female,32,76.0,87.0,1,Target / Affluent Spenders,The Affluent Spenders,1.4269,-0.5935,0.0
+145,Male,25,77.0,12.0,3,Careful / Savers,The Careful Conservatives,-0.6049,1.4923,0.0
+146,Male,28,77.0,97.0,1,Target / Affluent Spenders,The Affluent Spenders,1.7284,-0.841,0.0
+147,Male,48,77.0,36.0,3,Careful / Savers,The Careful Conservatives,0.0539,0.8335,0.0
+148,Female,32,77.0,74.0,1,Target / Affluent Spenders,The Affluent Spenders,1.097,-0.2096,0.0
+149,Female,34,78.0,22.0,3,Careful / Savers,The Careful Conservatives,-0.3034,1.2448,0.0
+150,Male,34,78.0,90.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5633,-0.6218,0.0
+151,Male,43,78.0,17.0,3,Careful / Savers,The Careful Conservatives,-0.4407,1.3821,0.0
+152,Male,39,78.0,88.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5084,-0.5669,0.0
+153,Female,44,78.0,20.0,3,Careful / Savers,The Careful Conservatives,-0.3583,1.2997,0.0
+154,Female,38,78.0,76.0,1,Target / Affluent Spenders,The Affluent Spenders,1.1789,-0.2375,0.0
+155,Female,47,78.0,16.0,3,Careful / Savers,The Careful Conservatives,-0.4681,1.4095,0.0
+156,Female,27,78.0,89.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5358,-0.5944,0.0
+157,Male,37,78.0,1.0,3,Careful / Savers,The Careful Conservatives,-0.8799,1.8213,0.0
+158,Female,30,78.0,78.0,1,Target / Affluent Spenders,The Affluent Spenders,1.2338,-0.2924,0.0
+159,Male,34,78.0,1.0,3,Careful / Savers,The Careful Conservatives,-0.8799,1.8213,0.0
+160,Female,30,78.0,73.0,1,Target / Affluent Spenders,The Affluent Spenders,1.0966,-0.1552,0.0
+161,Female,56,79.0,35.0,3,Careful / Savers,The Careful Conservatives,0.0804,0.9149,0.0
+162,Female,29,79.0,83.0,1,Target / Affluent Spenders,The Affluent Spenders,1.3981,-0.4027,0.0
+163,Male,19,81.0,5.0,3,Careful / Savers,The Careful Conservatives,-0.6891,1.7925,0.0
+164,Female,31,81.0,93.0,1,Target / Affluent Spenders,The Affluent Spenders,1.7266,-0.6232,0.0
+165,Male,50,85.0,26.0,3,Careful / Savers,The Careful Conservatives,-0.0047,1.3239,0.0
+166,Female,36,85.0,75.0,1,Target / Affluent Spenders,The Affluent Spenders,1.3404,-0.0212,0.0
+167,Male,42,86.0,20.0,3,Careful / Savers,The Careful Conservatives,-0.1424,1.5156,0.0
+168,Female,33,86.0,95.0,1,Target / Affluent Spenders,The Affluent Spenders,1.9164,-0.5432,0.0
+169,Female,36,87.0,27.0,3,Careful / Savers,The Careful Conservatives,0.0767,1.3505,0.0
+170,Male,32,87.0,63.0,1,Target / Affluent Spenders,The Affluent Spenders,1.065,0.3622,0.0
+171,Male,40,87.0,13.0,3,Careful / Savers,The Careful Conservatives,-0.3076,1.7348,0.0
+172,Male,28,87.0,75.0,1,Target / Affluent Spenders,The Affluent Spenders,1.3944,0.0328,0.0
+173,Male,36,87.0,10.0,3,Careful / Savers,The Careful Conservatives,-0.3899,1.8171,0.0
+174,Male,36,87.0,92.0,1,Target / Affluent Spenders,The Affluent Spenders,1.8611,-0.4338,0.0
+175,Female,52,88.0,13.0,3,Careful / Savers,The Careful Conservatives,-0.2806,1.7618,0.0
+176,Female,30,88.0,86.0,1,Target / Affluent Spenders,The Affluent Spenders,1.7233,-0.2421,0.0
+177,Male,58,88.0,15.0,3,Careful / Savers,The Careful Conservatives,-0.2257,1.7069,0.0
+178,Male,27,88.0,69.0,1,Target / Affluent Spenders,The Affluent Spenders,1.2567,0.2245,0.0
+179,Male,59,93.0,14.0,3,Careful / Savers,The Careful Conservatives,-0.1182,1.8693,0.0
+180,Male,35,93.0,90.0,1,Target / Affluent Spenders,The Affluent Spenders,1.9681,-0.217,0.0
+181,Female,37,97.0,32.0,3,Careful / Savers,The Careful Conservatives,0.4839,1.4831,0.0
+182,Female,32,97.0,86.0,1,Target / Affluent Spenders,The Affluent Spenders,1.9663,0.0008,0.0
+183,Male,46,98.0,15.0,3,Careful / Savers,The Careful Conservatives,0.0442,1.9768,0.0
+184,Female,29,98.0,88.0,1,Target / Affluent Spenders,The Affluent Spenders,2.0481,-0.0271,0.0
+185,Female,41,99.0,39.0,3,Careful / Savers,The Careful Conservatives,0.73,1.3449,0.0
+186,Male,30,99.0,97.0,1,Target / Affluent Spenders,The Affluent Spenders,2.3222,-0.2472,0.0
+187,Female,54,101.0,24.0,3,Careful / Savers,The Careful Conservatives,0.3723,1.8107,0.0
+188,Male,28,101.0,68.0,1,Target / Affluent Spenders,The Affluent Spenders,1.5801,0.6028,0.0
+189,Female,41,103.0,17.0,3,Careful / Savers,The Careful Conservatives,0.2341,2.0568,0.0
+190,Female,36,103.0,85.0,1,Target / Affluent Spenders,The Affluent Spenders,2.1007,0.1902,0.0
+191,Female,34,103.0,23.0,3,Careful / Savers,The Careful Conservatives,0.3988,1.8921,0.0
+192,Female,32,103.0,69.0,1,Target / Affluent Spenders,The Affluent Spenders,1.6615,0.6294,0.0
+193,Male,33,113.0,8.0,3,Careful / Savers,The Careful Conservatives,0.2569,2.5738,0.0
+194,Female,38,113.0,91.0,1,Target / Affluent Spenders,The Affluent Spenders,2.5353,0.2953,0.0
+195,Female,47,120.0,16.0,3,Careful / Savers,The Careful Conservatives,0.6655,2.5431,0.0
+196,Female,35,120.0,79.0,1,Target / Affluent Spenders,The Affluent Spenders,2.3949,0.8137,0.0
+197,Female,45,126.0,28.0,3,Careful / Savers,The Careful Conservatives,1.1568,2.3756,0.0
+198,Male,32,126.0,74.0,1,Target / Affluent Spenders,The Affluent Spenders,2.4196,1.1129,0.0
+199,Male,32,137.0,18.0,3,Careful / Savers,The Careful Conservatives,1.1792,2.947,0.0
+200,Male,30,137.0,83.0,1,Target / Affluent Spenders,The Affluent Spenders,2.9635,1.1627,0.0

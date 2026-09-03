@@ -1,0 +1,14 @@
+{
+  "source": "Kaggle blastchar/telco-customer-churn (IBM Telco Customer Churn)",
+  "raw_sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "rows": 7043,
+  "cols": 21,
+  "seed": 42,
+  "churn_rate_overall": 0.26537,
+  "churn_rate_train": 0.265353,
+  "churn_rate_test": 0.265436,
+  "n_train": 5634,
+  "n_test": 1409,
+  "totalcharges_nulls_after_coercion": 11,
+  "duplicate_customerIDs": 0
+}

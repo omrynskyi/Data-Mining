@@ -1,0 +1,785 @@
+{
+  "pipeline_metadata": {
+    "run_timestamp": "2026-09-03T05:45:03.256785Z",
+    "execution_time_seconds": 1.0674,
+    "framework": "CRISP-DM",
+    "dataset_name": "online_retail_synthetic_fallback",
+    "algorithm": "fpgrowth",
+    "engine": "auto",
+    "parameters": {
+      "min_support": 0.01,
+      "min_confidence": 0.3,
+      "primary_metric": "lift",
+      "min_metric_val": 1.2,
+      "max_len": 4,
+      "country": "all"
+    }
+  },
+  "crisp_dm_stages": {
+    "business_understanding": {
+      "objective": "E-commerce market basket cross-sell discovery and catalog bundle optimization",
+      "target_kpi": "Lift >= 1.2, Confidence >= 0.3, Zhang Metric > 0.0",
+      "business_questions": [
+        "Which product combinations drive highest joint purchase affinities?",
+        "What complementary products should be recommended on checkout?",
+        "Which product pairs exhibit strong symmetric cross-shopping behavior?"
+      ]
+    },
+    "data_understanding": {
+      "dataset_name": "online_retail_synthetic_fallback",
+      "raw_records_count": 10370,
+      "unique_invoices": 2500,
+      "unique_items": 81,
+      "unique_customers": 1661,
+      "cancellation_rate_pct": 2.8833,
+      "sparsity_pct": 91.9853,
+      "matrix_density_pct": 8.0147,
+      "basket_size_stats": {
+        "min": 0,
+        "q25": 2.75,
+        "median": 4.0,
+        "q75": 5.0,
+        "max": 14,
+        "mean": 4.14,
+        "std": 2.29,
+        "iqr": 2.25,
+        "skewness": 1.02
+      },
+      "basket_size_distribution": [
+        {
+          "basket_size": 1,
+          "count": 201
+        },
+        {
+          "basket_size": 2,
+          "count": 422
+        },
+        {
+          "basket_size": 3,
+          "count": 542
+        },
+        {
+          "basket_size": 4,
+          "count": 456
+        },
+        {
+          "basket_size": 5,
+          "count": 311
+        },
+        {
+          "basket_size": 6,
+          "count": 192
+        },
+        {
+          "basket_size": 7,
+          "count": 140
+        },
+        {
+          "basket_size": 8,
+          "count": 87
+        },
+        {
+          "basket_size": 9,
+          "count": 65
+        },
+        {
+          "basket_size": 10,
+          "count": 44
+        },
+        {
+          "basket_size": 11,
+          "count": 23
+        },
+        {
+          "basket_size": 12,
+          "count": 10
+        },
+        {
+          "basket_size": 13,
+          "count": 4
+        },
+        {
+          "basket_size": 14,
+          "count": 1
+        }
+      ],
+      "top_5_frequent_items": [
+        {
+          "item": "CROISSANT ALL BUTTER",
+          "count": 277,
+          "frequency": 0.1108
+        },
+        {
+          "item": "PAIN AU CHOCOLAT",
+          "count": 275,
+          "frequency": 0.11
+        },
+        {
+          "item": "ARTISAN PASTA PENNE",
+          "count": 272,
+          "frequency": 0.1088
+        },
+        {
+          "item": "GARDENING GLOVES PAIR",
+          "count": 271,
+          "frequency": 0.1084
+        },
+        {
+          "item": "CAPPUCCINO CUP & SAUCER",
+          "count": 270,
+          "frequency": 0.108
+        }
+      ],
+      "top_frequent_items": [
+        {
+          "item": "CROISSANT ALL BUTTER",
+          "count": 277,
+          "frequency": 0.1108
+        },
+        {
+          "item": "PAIN AU CHOCOLAT",
+          "count": 275,
+          "frequency": 0.11
+        },
+        {
+          "item": "ARTISAN PASTA PENNE",
+          "count": 272,
+          "frequency": 0.1088
+        },
+        {
+          "item": "GARDENING GLOVES PAIR",
+          "count": 271,
+          "frequency": 0.1084
+        },
+        {
+          "item": "CAPPUCCINO CUP & SAUCER",
+          "count": 270,
+          "frequency": 0.108
+        },
+        {
+          "item": "WATERING CAN GREEN 2L",
+          "count": 266,
+          "frequency": 0.1064
+        },
+        {
+          "item": "ALMOND DANISH",
+          "count": 265,
+          "frequency": 0.106
+        },
+        {
+          "item": "ITALIAN EXTRA VIRGIN OLIVE OIL",
+          "count": 265,
+          "frequency": 0.106
+        },
+        {
+          "item": "WHOLE WHEAT BREAD",
+          "count": 264,
+          "frequency": 0.1056
+        },
+        {
+          "item": "GARLIC HERB BREADSTICKS",
+          "count": 264,
+          "frequency": 0.1056
+        },
+        {
+          "item": "CERAMIC PLANT POT WHITE",
+          "count": 263,
+          "frequency": 0.1052
+        },
+        {
+          "item": "COLOMBIAN ROAST COFFEE",
+          "count": 262,
+          "frequency": 0.1048
+        },
+        {
+          "item": "FRENCH VANILLA SYRUP",
+          "count": 260,
+          "frequency": 0.104
+        },
+        {
+          "item": "ORGANIC EGGS DOZEN",
+          "count": 257,
+          "frequency": 0.1028
+        },
+        {
+          "item": "DARK CHOCOLATE BAR 85%",
+          "count": 255,
+          "frequency": 0.102
+        },
+        {
+          "item": "REGENCY CAKESTAND 3 TIER",
+          "count": 254,
+          "frequency": 0.1016
+        },
+        {
+          "item": "ORGANIC TOMATO BASIL SAUCE",
+          "count": 253,
+          "frequency": 0.1012
+        },
+        {
+          "item": "WHITE HANGING HEART T-LIGHT HOLDER",
+          "count": 251,
+          "frequency": 0.1004
+        },
+        {
+          "item": "PURE CANE SUGAR",
+          "count": 249,
+          "frequency": 0.0996
+        },
+        {
+          "item": "MONITOR LIGHT BAR",
+          "count": 248,
+          "frequency": 0.0992
+        }
+      ],
+      "pareto_analysis": {
+        "top_10_percent_items_coverage_pct": 15.77,
+        "top_20_percent_items_coverage_pct": 31.08,
+        "top_50_percent_items_coverage_pct": 74.21,
+        "total_unique_items_analyzed": 59
+      },
+      "country_distribution": [
+        {
+          "country": "United Kingdom",
+          "count": 8959,
+          "percentage": 86.39
+        },
+        {
+          "country": "France",
+          "count": 402,
+          "percentage": 3.88
+        },
+        {
+          "country": "Germany",
+          "count": 401,
+          "percentage": 3.87
+        },
+        {
+          "country": "EIRE",
+          "count": 180,
+          "percentage": 1.74
+        },
+        {
+          "country": "Spain",
+          "count": 179,
+          "percentage": 1.73
+        },
+        {
+          "country": "Netherlands",
+          "count": 106,
+          "percentage": 1.02
+        },
+        {
+          "country": "Belgium",
+          "count": 97,
+          "percentage": 0.94
+        },
+        {
+          "country": "Switzerland",
+          "count": 46,
+          "percentage": 0.44
+        }
+      ],
+      "temporal_stats": {
+        "start_date": "2025-01-10",
+        "end_date": "2026-01-06",
+        "total_days_span": 360,
+        "busiest_day_of_week": "Wednesday",
+        "busiest_hour_of_day": 23
+      }
+    },
+    "data_preparation": {
+      "raw_record_count": 10370,
+      "cleaned_record_count": 9808,
+      "cleaned_transactions_count": 2225,
+      "cleaned_unique_items_count": 55,
+      "unique_invoices": 2225,
+      "unique_items": 55,
+      "single_item_baskets_dropped": 199,
+      "cancellations_dropped": 299,
+      "matrix_shape": [
+        2225,
+        55
+      ],
+      "matrix_density_pct": 8.0147,
+      "cleaning_steps_applied": [
+        "filter_negative_quantities_and_cancellations",
+        "strip_whitespace_and_normalize_descriptions",
+        "drop_null_descriptions",
+        "filter_administrative_stock_codes",
+        "filter_zero_or_negative_unit_prices",
+        "filter_single_item_baskets"
+      ]
+    },
+    "modeling": {
+      "frequent_itemsets_total": 244,
+      "itemsets_by_length": {
+        "k=2": 84,
+        "k=3": 70,
+        "k=1": 55,
+        "k=4": 35
+      },
+      "raw_rules_generated": 796
+    },
+    "evaluation": {
+      "rules_after_threshold_filtering": 796,
+      "redundant_rules_pruned": 170,
+      "final_actionable_rules_count": 626,
+      "rule_categories": {
+        "High-Lift Affinity Pair": 516,
+        "High-Confidence Cross-Sell": 110
+      }
+    },
+    "deployment": {
+      "artifacts_generated": [
+        "artifacts/pipeline_summary.json",
+        "artifacts/pipeline_report.md",
+        "artifacts/rules.csv",
+        "artifacts/rules.json",
+        "artifacts/frequent_itemsets.csv"
+      ]
+    }
+  },
+  "top_rules": [
+    {
+      "id": 1,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "consequents": [
+        "GARDENING GLOVES PAIR",
+        "LED GROW LIGHT BULB"
+      ],
+      "support": 0.023371,
+      "confidence": 0.422764,
+      "lift": 6.967781,
+      "leverage": 0.020017,
+      "conviction": 1.627283,
+      "zhangs_metric": 0.9066,
+      "kulczynski": 0.403975,
+      "imbalance_ratio": 0.058252,
+      "cosine": 0.403538,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7504
+    },
+    {
+      "id": 2,
+      "antecedents": [
+        "GARDENING GLOVES PAIR",
+        "LED GROW LIGHT BULB"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "support": 0.023371,
+      "confidence": 0.385185,
+      "lift": 6.967781,
+      "leverage": 0.020017,
+      "conviction": 1.536591,
+      "zhangs_metric": 0.911805,
+      "kulczynski": 0.403975,
+      "imbalance_ratio": 0.058252,
+      "cosine": 0.403538,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7396
+    },
+    {
+      "id": 3,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "consequents": [
+        "LED GROW LIGHT BULB",
+        "WATERING CAN GREEN 2L"
+      ],
+      "support": 0.022921,
+      "confidence": 0.414634,
+      "lift": 6.833785,
+      "leverage": 0.019567,
+      "conviction": 1.604682,
+      "zhangs_metric": 0.903621,
+      "kulczynski": 0.396206,
+      "imbalance_ratio": 0.057971,
+      "cosine": 0.395777,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.738
+    },
+    {
+      "id": 4,
+      "antecedents": [
+        "LED GROW LIGHT BULB",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "support": 0.022921,
+      "confidence": 0.377778,
+      "lift": 6.833785,
+      "leverage": 0.019567,
+      "conviction": 1.518299,
+      "zhangs_metric": 0.908809,
+      "kulczynski": 0.396206,
+      "imbalance_ratio": 0.057971,
+      "cosine": 0.395777,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7275
+    },
+    {
+      "id": 5,
+      "antecedents": [
+        "LED GROW LIGHT BULB",
+        "ORGANIC POTTING SOIL 10L",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE"
+      ],
+      "support": 0.022921,
+      "confidence": 0.761194,
+      "lift": 6.829261,
+      "leverage": 0.019565,
+      "conviction": 3.720758,
+      "zhangs_metric": 0.880072,
+      "kulczynski": 0.48342,
+      "imbalance_ratio": 0.685606,
+      "cosine": 0.395646,
+      "rule_category": "High-Confidence Cross-Sell",
+      "composite_score": 0.8394
+    },
+    {
+      "id": 6,
+      "antecedents": [
+        "LARGE DESK PAD BLACK",
+        "MECHANICAL KEYBOARD",
+        "WIRELESS ERGONOMIC MOUSE"
+      ],
+      "consequents": [
+        "USB-C MULTIPORT ADAPTER"
+      ],
+      "support": 0.018876,
+      "confidence": 0.688525,
+      "lift": 6.778616,
+      "leverage": 0.016092,
+      "conviction": 2.884423,
+      "zhangs_metric": 0.876507,
+      "kulczynski": 0.437183,
+      "imbalance_ratio": 0.673469,
+      "cosine": 0.357709,
+      "rule_category": "High-Confidence Cross-Sell",
+      "composite_score": 0.8081
+    },
+    {
+      "id": 7,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "ORGANIC POTTING SOIL 10L",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "LED GROW LIGHT BULB"
+      ],
+      "support": 0.022921,
+      "confidence": 0.708333,
+      "lift": 6.70656,
+      "leverage": 0.019504,
+      "conviction": 3.066453,
+      "zhangs_metric": 0.879348,
+      "kulczynski": 0.462677,
+      "imbalance_ratio": 0.636719,
+      "cosine": 0.392076,
+      "rule_category": "High-Confidence Cross-Sell",
+      "composite_score": 0.8152
+    },
+    {
+      "id": 8,
+      "antecedents": [
+        "LED GROW LIGHT BULB",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "WATERING CAN GREEN 2L"
+      ],
+      "support": 0.022921,
+      "confidence": 0.425,
+      "lift": 6.70656,
+      "leverage": 0.019504,
+      "conviction": 1.62892,
+      "zhangs_metric": 0.899399,
+      "kulczynski": 0.393351,
+      "imbalance_ratio": 0.1,
+      "cosine": 0.392076,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7322
+    },
+    {
+      "id": 9,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "LED GROW LIGHT BULB",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "support": 0.022921,
+      "confidence": 0.361702,
+      "lift": 6.70656,
+      "leverage": 0.019504,
+      "conviction": 1.482172,
+      "zhangs_metric": 0.908462,
+      "kulczynski": 0.393351,
+      "imbalance_ratio": 0.1,
+      "cosine": 0.392076,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7141
+    },
+    {
+      "id": 10,
+      "antecedents": [
+        "ORGANIC POTTING SOIL 10L",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "LED GROW LIGHT BULB"
+      ],
+      "support": 0.022921,
+      "confidence": 0.404762,
+      "lift": 6.671076,
+      "leverage": 0.019485,
+      "conviction": 1.578067,
+      "zhangs_metric": 0.901129,
+      "kulczynski": 0.39127,
+      "imbalance_ratio": 0.042857,
+      "cosine": 0.391037,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7239
+    },
+    {
+      "id": 11,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "LED GROW LIGHT BULB"
+      ],
+      "consequents": [
+        "ORGANIC POTTING SOIL 10L",
+        "WATERING CAN GREEN 2L"
+      ],
+      "support": 0.022921,
+      "confidence": 0.377778,
+      "lift": 6.671076,
+      "leverage": 0.019485,
+      "conviction": 1.516132,
+      "zhangs_metric": 0.90501,
+      "kulczynski": 0.39127,
+      "imbalance_ratio": 0.042857,
+      "cosine": 0.391037,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7162
+    },
+    {
+      "id": 12,
+      "antecedents": [
+        "LED GROW LIGHT BULB",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "GARDENING GLOVES PAIR"
+      ],
+      "support": 0.023371,
+      "confidence": 0.433333,
+      "lift": 6.558957,
+      "leverage": 0.019808,
+      "conviction": 1.648116,
+      "zhangs_metric": 0.895852,
+      "kulczynski": 0.393537,
+      "imbalance_ratio": 0.125581,
+      "cosine": 0.39152,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7251
+    },
+    {
+      "id": 13,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "GARDENING GLOVES PAIR"
+      ],
+      "consequents": [
+        "LED GROW LIGHT BULB",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "support": 0.023371,
+      "confidence": 0.353741,
+      "lift": 6.558957,
+      "leverage": 0.019808,
+      "conviction": 1.463915,
+      "zhangs_metric": 0.907492,
+      "kulczynski": 0.393537,
+      "imbalance_ratio": 0.125581,
+      "cosine": 0.39152,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7024
+    },
+    {
+      "id": 14,
+      "antecedents": [
+        "GARDENING GLOVES PAIR",
+        "LED GROW LIGHT BULB"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "WATERING CAN GREEN 2L"
+      ],
+      "support": 0.025169,
+      "confidence": 0.414815,
+      "lift": 6.545837,
+      "leverage": 0.021324,
+      "conviction": 1.600569,
+      "zhangs_metric": 0.901957,
+      "kulczynski": 0.405989,
+      "imbalance_ratio": 0.027273,
+      "cosine": 0.405893,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7218
+    },
+    {
+      "id": 15,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "WATERING CAN GREEN 2L"
+      ],
+      "consequents": [
+        "GARDENING GLOVES PAIR",
+        "LED GROW LIGHT BULB"
+      ],
+      "support": 0.025169,
+      "confidence": 0.397163,
+      "lift": 6.545837,
+      "leverage": 0.021324,
+      "conviction": 1.558176,
+      "zhangs_metric": 0.904553,
+      "kulczynski": 0.405989,
+      "imbalance_ratio": 0.027273,
+      "cosine": 0.405893,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7168
+    },
+    {
+      "id": 16,
+      "antecedents": [
+        "GARDENING GLOVES PAIR",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "consequents": [
+        "CERAMIC PLANT POT WHITE",
+        "LED GROW LIGHT BULB"
+      ],
+      "support": 0.023371,
+      "confidence": 0.396947,
+      "lift": 6.542267,
+      "leverage": 0.019799,
+      "conviction": 1.557616,
+      "zhangs_metric": 0.900145,
+      "kulczynski": 0.391066,
+      "imbalance_ratio": 0.018692,
+      "cosine": 0.391022,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7135
+    },
+    {
+      "id": 17,
+      "antecedents": [
+        "CERAMIC PLANT POT WHITE",
+        "LED GROW LIGHT BULB"
+      ],
+      "consequents": [
+        "GARDENING GLOVES PAIR",
+        "ORGANIC POTTING SOIL 10L"
+      ],
+      "support": 0.023371,
+      "confidence": 0.385185,
+      "lift": 6.542267,
+      "leverage": 0.019799,
+      "conviction": 1.530743,
+      "zhangs_metric": 0.901868,
+      "kulczynski": 0.391066,
+      "imbalance_ratio": 0.018692,
+      "cosine": 0.391022,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7101
+    },
+    {
+      "id": 18,
+      "antecedents": [
+        "HEART OF WICKER LARGE",
+        "HEART OF WICKER SMALL"
+      ],
+      "consequents": [
+        "REGENCY CAKESTAND 3 TIER",
+        "WHITE HANGING HEART T-LIGHT HOLDER"
+      ],
+      "support": 0.023371,
+      "confidence": 0.416,
+      "lift": 6.51831,
+      "leverage": 0.019785,
+      "conviction": 1.603048,
+      "zhangs_metric": 0.896978,
+      "kulczynski": 0.391099,
+      "imbalance_ratio": 0.07907,
+      "cosine": 0.390305,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7173
+    },
+    {
+      "id": 19,
+      "antecedents": [
+        "REGENCY CAKESTAND 3 TIER",
+        "WHITE HANGING HEART T-LIGHT HOLDER"
+      ],
+      "consequents": [
+        "HEART OF WICKER LARGE",
+        "HEART OF WICKER SMALL"
+      ],
+      "support": 0.023371,
+      "confidence": 0.366197,
+      "lift": 6.51831,
+      "leverage": 0.019785,
+      "conviction": 1.489139,
+      "zhangs_metric": 0.904299,
+      "kulczynski": 0.391099,
+      "imbalance_ratio": 0.07907,
+      "cosine": 0.390305,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7031
+    },
+    {
+      "id": 20,
+      "antecedents": [
+        "LARGE DESK PAD BLACK",
+        "USB-C MULTIPORT ADAPTER"
+      ],
+      "consequents": [
+        "MECHANICAL KEYBOARD",
+        "MONITOR LIGHT BAR"
+      ],
+      "support": 0.021124,
+      "confidence": 0.382114,
+      "lift": 6.490101,
+      "leverage": 0.017869,
+      "conviction": 1.523134,
+      "zhangs_metric": 0.895419,
+      "kulczynski": 0.370446,
+      "imbalance_ratio": 0.038647,
+      "cosine": 0.370262,
+      "rule_category": "High-Lift Affinity Pair",
+      "composite_score": 0.7019
+    }
+  ]
+}

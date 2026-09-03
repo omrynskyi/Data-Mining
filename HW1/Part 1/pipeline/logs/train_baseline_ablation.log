@@ -1,0 +1,50 @@
+=== Stratified 5-fold CV: feature-family ablation ===
+-- step 1_core_tabular (include_text=False) --
+  [1_core_tabular] fold 0: n_features=363 fit_seconds=2.2 converged=False
+  [1_core_tabular] fold 1: n_features=350 fit_seconds=2.6 converged=False
+  [1_core_tabular] fold 2: n_features=358 fit_seconds=2.1 converged=False
+  [1_core_tabular] fold 3: n_features=357 fit_seconds=2.1 converged=False
+  [1_core_tabular] fold 4: n_features=363 fit_seconds=2.2 converged=False
+  majority={'qwk': 0.0, 'mae': 1.483558994197292, 'accuracy': 0.2799306342960048, 'macro_f1': 0.08748306409588327}
+  logreg={'qwk': 0.27584204048168715, 'mae': 1.0074034549456412, 'accuracy': 0.3698392583205496, 'macro_f1': 0.2787334281829462}
+-- step 2_plus_text_shape (include_text=False) --
+  [2_plus_text_shape] fold 0: n_features=368 fit_seconds=2.7 converged=False
+  [2_plus_text_shape] fold 1: n_features=355 fit_seconds=2.3 converged=False
+  [2_plus_text_shape] fold 2: n_features=363 fit_seconds=2.5 converged=False
+  [2_plus_text_shape] fold 3: n_features=362 fit_seconds=2.6 converged=False
+  [2_plus_text_shape] fold 4: n_features=368 fit_seconds=2.4 converged=False
+  majority={'qwk': 0.0, 'mae': 1.483558994197292, 'accuracy': 0.2799306342960048, 'macro_f1': 0.08748306409588327}
+  logreg={'qwk': 0.27246719594237767, 'mae': 1.0100713666377643, 'accuracy': 0.3715734009204295, 'macro_f1': 0.2797715261906125}
+-- step 3_plus_sentiment (include_text=False) --
+  [3_plus_sentiment] fold 0: n_features=379 fit_seconds=2.6 converged=False
+  [3_plus_sentiment] fold 1: n_features=366 fit_seconds=2.7 converged=False
+  [3_plus_sentiment] fold 2: n_features=374 fit_seconds=2.7 converged=False
+  [3_plus_sentiment] fold 3: n_features=373 fit_seconds=2.6 converged=False
+  [3_plus_sentiment] fold 4: n_features=379 fit_seconds=2.6 converged=False
+  majority={'qwk': 0.0, 'mae': 1.483558994197292, 'accuracy': 0.2799306342960048, 'macro_f1': 0.08748306409588327}
+  logreg={'qwk': 0.27165457705069795, 'mae': 1.0123390915760688, 'accuracy': 0.3691722803975188, 'macro_f1': 0.27924456610869497}
+-- step 4_plus_metadata_image (include_text=False) --
+  [4_plus_metadata_image] fold 0: n_features=427 fit_seconds=4.1 converged=False
+  [4_plus_metadata_image] fold 1: n_features=414 fit_seconds=4.2 converged=False
+  [4_plus_metadata_image] fold 2: n_features=422 fit_seconds=4.2 converged=False
+  [4_plus_metadata_image] fold 3: n_features=421 fit_seconds=4.1 converged=False
+  [4_plus_metadata_image] fold 4: n_features=427 fit_seconds=4.2 converged=False
+  majority={'qwk': 0.0, 'mae': 1.483558994197292, 'accuracy': 0.2799306342960048, 'macro_f1': 0.08748306409588327}
+  logreg={'qwk': 0.3027197535828243, 'mae': 0.9824584806242913, 'accuracy': 0.38264523444273996, 'macro_f1': 0.29571367228483625}
+-- step 5_plus_tfidf_text (include_text=True) --
+  [5_plus_tfidf_text] fold 0: n_features=8427 fit_seconds=19.0 converged=False
+  [5_plus_tfidf_text] fold 1: n_features=8414 fit_seconds=16.7 converged=False
+  [5_plus_tfidf_text] fold 2: n_features=8422 fit_seconds=18.5 converged=False
+  [5_plus_tfidf_text] fold 3: n_features=8421 fit_seconds=19.3 converged=False
+  [5_plus_tfidf_text] fold 4: n_features=8427 fit_seconds=16.1 converged=False
+  majority={'qwk': 0.0, 'mae': 1.483558994197292, 'accuracy': 0.2799306342960048, 'macro_f1': 0.08748306409588327}
+  logreg={'qwk': 0.32285746556903516, 'mae': 0.9594477422797305, 'accuracy': 0.39905289134929633, 'macro_f1': 0.3162218201879825}
+=== Rescuer-grouped 5-fold CV: full-feature robustness check ===
+  [grouped_5_plus_tfidf_text] fold 0: n_features=8416 fit_seconds=18.3 converged=False
+  [grouped_5_plus_tfidf_text] fold 1: n_features=8417 fit_seconds=24.8 converged=False
+  [grouped_5_plus_tfidf_text] fold 2: n_features=8419 fit_seconds=25.3 converged=False
+  [grouped_5_plus_tfidf_text] fold 3: n_features=8423 fit_seconds=22.6 converged=False
+  [grouped_5_plus_tfidf_text] fold 4: n_features=8424 fit_seconds=20.2 converged=False
+  majority={'qwk': -0.012148015927137212, 'mae': 1.4128593343560327, 'accuracy': 0.2684586140198759, 'macro_f1': 0.1239982435366926}
+  logreg={'qwk': 0.293845931174481, 'mae': 1.0217434802908023, 'accuracy': 0.36323617688254517, 'macro_f1': 0.27762815416249237}
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/baseline_ablation_results.json

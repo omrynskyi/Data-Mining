@@ -1,0 +1,20 @@
+{
+  "holdout_mape_pct": 3.83,
+  "adf_pvalue": 0.9988,
+  "trend_strength": 0.994,
+  "seasonal_strength": 0.097,
+  "first_year_hazard_mean": 0.0132,
+  "later_hazard_mean": 0.006,
+  "hazard_ttest_p_underpowered": 0.08856,
+  "hazard_person_month_rate_early": 0.0143,
+  "hazard_person_month_rate_later": 0.0055,
+  "hazard_proportions_ztest_p": 1.15e-82,
+  "forecast_next_6mo": [
+    5792.8,
+    5951.0,
+    6108.6,
+    6265.6,
+    6422.0,
+    6577.9
+  ]
+}

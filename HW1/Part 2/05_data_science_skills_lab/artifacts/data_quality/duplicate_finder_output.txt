@@ -1,0 +1,3 @@
+Total rows: 7,043
+Full-row duplicates: 0 (0.0%) [PASS]
+Key [customerID] duplicates: 0 rows (0 entities) [PASS]

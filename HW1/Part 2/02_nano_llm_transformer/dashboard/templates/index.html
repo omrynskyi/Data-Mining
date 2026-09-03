@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nano LLM Transformer — Data Science Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="brand-title">
+        <span>⚡️ Nano LLM Transformer</span>
+        <span class="brand-badge">Pure PyTorch</span>
+        <span class="brand-badge" style="background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); border-color: rgba(168, 85, 247, 0.3);">Apple Silicon MPS</span>
+      </div>
+    </div>
+    <div class="hw-status" id="headerHardware">
+      <div class="hw-item"><span class="status-dot"></span> Device: <strong id="headDevice" style="color: var(--text-main); margin-left: 0.25rem;">mps</strong></div>
+      <div class="hw-item">Process RSS: <strong id="headRss" style="color: var(--text-main); margin-left: 0.25rem;">-- MB</strong></div>
+      <div class="hw-item">Budget: <strong style="color: var(--accent-green);">4.0 GB UMA</strong></div>
+      <div class="hw-item" id="modelStatus">Weights: <strong id="headWeights" style="color: var(--text-muted); margin-left: 0.25rem;">checking…</strong></div>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('crisp')">📊 CRISP-DM Pipeline</button>
+    <button class="tab-btn" onclick="switchTab('kvcache')">⚡️ KV-Cache Inspector</button>
+    <button class="tab-btn" onclick="switchTab('attention')">🔥 Attention Heatmaps</button>
+    <button class="tab-btn" onclick="switchTab('tokenizer')">🔤 Tokenizer Explorer</button>
+    <button class="tab-btn" onclick="switchTab('generate')">💬 Autoregressive Generation</button>
+    <button class="tab-btn" onclick="switchTab('hardware')">🖥 Hardware Telemetry</button>
+  </nav>
+
+  <main>
+
+    <!-- TAB 1: CRISP-DM -->
+    <section id="tab-crisp" class="tab-pane active">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">CRISP-DM Data Mining Lifecycle Stages (Nano LLM)</h2>
+          <button class="btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="loadCrispDM()">🔄 Refresh Stages</button>
+        </div>
+        <div class="grid-6" id="crispStagesGrid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: KV-CACHE -->
+    <section id="tab-kvcache" class="tab-pane">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">KV-Cache Live Generation Profiler</h2>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prompt</label>
+            <input type="text" id="kvPrompt" class="form-input" value="The quick brown fox">
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Tokens to Generate</label>
+              <input type="number" id="kvTokens" class="form-input" value="6" min="1" max="32">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Temperature</label>
+              <input type="number" id="kvTemp" class="form-input" value="0.8" step="0.1" min="0" max="2">
+            </div>
+          </div>
+          <button class="btn" onclick="profileKVCache()">Profile KV-Cache</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">KV-Cache Step Telemetry</h2>
+          </div>
+          <div id="kvSummaryBadges"></div>
+          <div style="margin-top: 1rem;">
+            <pre class="code-output" id="kvStepsLog">// Click Profile to trace single-token cache expansion</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ATTENTION HEATMAPS -->
+    <section id="tab-attention" class="tab-pane">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Causal Self-Attention Extractor</h2>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Input Sequence</label>
+            <input type="text" id="attnPrompt" class="form-input" value="To be or not to be">
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Layer Index (0..3)</label>
+              <input type="number" id="attnLayer" class="form-input" value="0" min="0" max="3">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Head Index (0..3)</label>
+              <input type="number" id="attnHead" class="form-input" value="0" min="0" max="3">
+            </div>
+          </div>
+          <button class="btn" onclick="loadAttentionHeatmap()">Extract Attention Matrix</button>
+
+          <div style="margin-top: 1.5rem;" id="attnMetricsBox"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Post-Softmax Attention Heatmap</h2>
+          </div>
+          <div id="heatmapTokens" class="token-chips" style="margin-bottom: 1rem;"></div>
+          <div class="heatmap-container" id="heatmapContainer">
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Click Extract Attention Matrix to render heatmaps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TOKENIZER EXPLORER -->
+    <section id="tab-tokenizer" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">UTF-8 ByteTokenizer & Diagnostics Explorer</h2>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Text to Tokenize (supports Emojis, Math, Unicode)</label>
+          <input type="text" id="tokInput" class="form-input" value="Hello, Apple Silicon 🚀 Transformer 🍎">
+        </div>
+        <button class="btn" onclick="inspectTokenizerText()">Inspect Tokens</button>
+
+        <div class="grid-3" style="margin-top: 1.5rem;" id="tokStatsGrid">
+          <!-- Tokenizer summary stats -->
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-muted);">Token Sequence Breakdown</h3>
+          <div class="token-chips" id="tokChipsContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GENERATION PLAYGROUND -->
+    <section id="tab-generate" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Autoregressive Model Generation Playground</h2>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Prompt</label>
+          <textarea id="genPrompt" class="form-textarea" rows="3">Once upon a time in Silicon Valley</textarea>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 140px;">
+            <label class="form-label">Max New Tokens</label>
+            <input type="number" id="genMaxTokens" class="form-input" value="20" min="1" max="100">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 140px;">
+            <label class="form-label">Temperature</label>
+            <input type="number" id="genTemp" class="form-input" value="0.8" step="0.1" min="0" max="2">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 140px;">
+            <label class="form-label">Top-k</label>
+            <input type="number" id="genTopK" class="form-input" value="50" min="0" max="100">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 140px;">
+            <label class="form-label">Top-p</label>
+            <input type="number" id="genTopP" class="form-input" value="0.9" step="0.05" min="0" max="1">
+          </div>
+        </div>
+        <button class="btn" onclick="generateText()">Generate Text</button>
+
+        <div style="margin-top: 1.5rem;">
+          <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-muted);">Generation Output</h3>
+          <pre class="code-output" id="genOutputText">// Generated text will appear here...</pre>
+          <div id="genMetricsFooter" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: HARDWARE TELEMETRY -->
+    <section id="tab-hardware" class="tab-pane">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Apple Silicon Unified Memory (UMA) Telemetry</h2>
+            <button class="btn" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;" onclick="loadHardwareStats()">🔄 Poll Memory</button>
+          </div>
+          <div id="hwDetailedList"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Hardware Architecture Specifications</h2>
+          </div>
+          <div class="metric-badge"><span class="metric-key">Architecture</span><span class="metric-val">Decoder-Only Nano Transformer</span></div>
+          <div class="metric-badge"><span class="metric-key">Positional Embedding</span><span class="metric-val">Rotary (RoPE, split-half)</span></div>
+          <div class="metric-badge"><span class="metric-key">Feed-Forward Network</span><span class="metric-val">SwiGLU (8/3 scaled, 64-aligned)</span></div>
+          <div class="metric-badge"><span class="metric-key">Normalization</span><span class="metric-val">RMSNorm (Pre-LN)</span></div>
+          <div class="metric-badge"><span class="metric-key">Attention</span><span class="metric-val">Multi-Head & Grouped-Query (GQA)</span></div>
+          <div class="metric-badge"><span class="metric-key">Memory Ceiling</span><span class="metric-val">Strict 4.0 GB UMA Bound</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

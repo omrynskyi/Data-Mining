@@ -1,0 +1,15 @@
+=== Stratified 5-fold CV: text-only (TF-IDF + logistic regression) ===
+  [stratified] fold 0: vocab_size=8000
+  [stratified] fold 1: vocab_size=8000
+  [stratified] fold 2: vocab_size=8000
+  [stratified] fold 3: vocab_size=8000
+  [stratified] fold 4: vocab_size=8000
+  {'qwk': 0.21213789087156587, 'mae': 1.0502234376042152, 'accuracy': 0.3697058627359434, 'macro_f1': 0.28823695917638975, 'convergence_warning_folds': 0}
+=== Rescuer-grouped 5-fold CV: text-only (TF-IDF + logistic regression) ===
+  [grouped] fold 0: vocab_size=8000
+  [grouped] fold 1: vocab_size=8000
+  [grouped] fold 2: vocab_size=8000
+  [grouped] fold 3: vocab_size=8000
+  [grouped] fold 4: vocab_size=8000
+  {'qwk': 0.1475084953714223, 'mae': 1.16420996465017, 'accuracy': 0.31081171213232844, 'macro_f1': 0.23063943572985193, 'convergence_warning_folds': 0}
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/text_only_ablation_results.json

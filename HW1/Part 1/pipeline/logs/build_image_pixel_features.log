@@ -1,0 +1,13 @@
+processed_files=10000/58311; listings_with_features=2494
+processed_files=20000/58311; listings_with_features=4988
+processed_files=30000/58311; listings_with_features=7471
+processed_files=40000/58311; listings_with_features=9985
+processed_files=50000/58311; listings_with_features=12483
+input_image_files=58311
+unreadable_image_files=0
+aggregate_shape=(14652, 20)
+stage2_shape=(14993, 62); stage2_unique_petid=14993
+coverage=
+image_pixels_available
+0      341
+1    14652

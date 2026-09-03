@@ -1,0 +1,22 @@
+          column   dtype  null_count  null_pct  warn_threshold  fail_threshold status
+    TotalCharges float64          11      0.16             5.0            20.0   PASS
+      customerID  object           0      0.00             5.0            20.0   PASS
+DeviceProtection  object           0      0.00             5.0            20.0   PASS
+  MonthlyCharges float64           0      0.00             5.0            20.0   PASS
+   PaymentMethod  object           0      0.00             5.0            20.0   PASS
+PaperlessBilling  object           0      0.00             5.0            20.0   PASS
+        Contract  object           0      0.00             5.0            20.0   PASS
+ StreamingMovies  object           0      0.00             5.0            20.0   PASS
+     StreamingTV  object           0      0.00             5.0            20.0   PASS
+     TechSupport  object           0      0.00             5.0            20.0   PASS
+    OnlineBackup  object           0      0.00             5.0            20.0   PASS
+          gender  object           0      0.00             5.0            20.0   PASS
+  OnlineSecurity  object           0      0.00             5.0            20.0   PASS
+ InternetService  object           0      0.00             5.0            20.0   PASS
+   MultipleLines  object           0      0.00             5.0            20.0   PASS
+    PhoneService  object           0      0.00             5.0            20.0   PASS
+          tenure   int64           0      0.00             5.0            20.0   PASS
+      Dependents  object           0      0.00             5.0            20.0   PASS
+         Partner  object           0      0.00             5.0            20.0   PASS
+   SeniorCitizen   int64           0      0.00             5.0            20.0   PASS
+           Churn  object           0      0.00             5.0            20.0   PASS

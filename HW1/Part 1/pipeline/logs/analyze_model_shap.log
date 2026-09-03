@@ -1,0 +1,28 @@
+=== Fitting reference model on 100% of labeled data (interpretability only) ===
+=== Computing SHAP values ===
+expected_value (base prediction)=2.5166
+
+Top 20 features by mean |SHAP| (cross-checked against PredictionValuesChange rank):
+                     feature  mean_abs_shap  prediction_values_change
+                         Age       0.201015                  9.775581
+                      Breed1       0.134167                  6.963935
+                  Sterilized       0.092946                  3.206386
+               img_emb_pca_2       0.068514                  3.337107
+               img_emb_pca_4       0.055877                  2.612266
+            image_height_max       0.052108                  1.758591
+     vision_label_score_mean       0.050292                  2.187597
+      vision_label_score_max       0.048297                  2.971064
+                    Quantity       0.045496                  2.205950
+                       State       0.040065                  2.020681
+                      Gender       0.030453                  0.926537
+                  text_svd_3       0.026479                  1.009854
+                         Fee       0.025930                  1.209026
+ image_resolution_pixels_max       0.024788                  0.987845
+                 text_svd_14       0.023735                  1.217264
+           image_height_mean       0.023325                  1.003996
+               img_emb_pca_3       0.022153                  1.053027
+                  Vaccinated       0.018299                  0.775247
+              img_emb_pca_13       0.017658                  0.728979
+vision_labels_per_image_mean       0.017498                  0.620012
+
+Saved full SHAP analysis to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/results/model_shap_analysis.json

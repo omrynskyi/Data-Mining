@@ -1,0 +1,5 @@
+column,outlier_count,outlier_pct,min,max,mean,iqr_outliers,zscore_outliers
+SeniorCitizen,1142,16.21,0.0,1.0,0.1621,1142,0
+tenure,0,0.0,0.0,72.0,32.3711,0,0
+MonthlyCharges,0,0.0,18.25,118.75,64.7617,0,0
+TotalCharges,0,0.0,18.8,8684.8,2283.3004,0,0

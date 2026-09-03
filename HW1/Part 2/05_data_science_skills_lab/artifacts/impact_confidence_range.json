@@ -1,0 +1,18 @@
+{
+  "medium_confidence": {
+    "base_estimate": 43155.12,
+    "low_estimate": 25893.07,
+    "high_estimate": 69048.19,
+    "range_label": "Medium confidence (\u221240% / +60%)",
+    "low_multiplier": 0.6,
+    "high_multiplier": 1.6
+  },
+  "low_confidence": {
+    "base_estimate": 43155.12,
+    "low_estimate": 12946.54,
+    "high_estimate": 107887.8,
+    "range_label": "Low confidence (\u221270% / +150%)",
+    "low_multiplier": 0.3,
+    "high_multiplier": 2.5
+  }
+}

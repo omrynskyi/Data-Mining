@@ -1,0 +1,39 @@
+=== Final config, grouped 5-fold CV, full-data refit ===
+  fold 0: n_iter=197 (fixed, full training fold)
+  fold 1: n_iter=160 (fixed, full training fold)
+  fold 2: n_iter=153 (fixed, full training fold)
+  fold 3: n_iter=182 (fixed, full training fold)
+  fold 4: n_iter=310 (fixed, full training fold)
+  {'qwk': 0.352568903749811, 'mae': 0.9453078103114787, 'accuracy': 0.4004535449876609, 'macro_f1': 0.28572298549495667}
+=== Final config, stratified 5-fold CV, full-data refit ===
+  fold 0: n_iter=246 (fixed, full training fold)
+  fold 1: n_iter=189 (fixed, full training fold)
+  fold 2: n_iter=235 (fixed, full training fold)
+  fold 3: n_iter=339 (fixed, full training fold)
+  fold 4: n_iter=211 (fixed, full training fold)
+  {'qwk': 0.3741378845534651, 'mae': 0.9074234642833322, 'accuracy': 0.4214633495631295, 'macro_f1': 0.3125765711859506}
+Saved grouped-CV OOF predictions to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/final_model_oof_predictions.csv
+=== Reference model fit on 100% of labeled data (interpretability only) ===
+reference_model_iterations=200
+Saved feature importances to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/final_model_feature_importance.csv
+                     feature  importance
+                         Age    8.034591
+                      Breed1    7.853143
+                  Sterilized    5.367716
+                    PhotoAmt    2.780428
+               img_emb_pca_2    2.634367
+     vision_label_score_mean    2.146443
+                       State    2.071209
+               img_emb_pca_4    2.043937
+      vision_label_score_max    1.974648
+            image_height_max    1.690173
+                    Dewormed    1.521021
+                  text_svd_3    1.470970
+image_resolution_pixels_mean    1.427316
+                      Gender    1.417760
+                MaturitySize    1.407902
+                    Quantity    1.360380
+                  text_svd_2    1.269671
+               img_emb_pca_0    1.174526
+                  Vaccinated    1.123472
+                   FurLength    1.108583

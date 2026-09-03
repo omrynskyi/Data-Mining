@@ -1,0 +1,42 @@
+Directional error (predicted - true) by true class:
+ true_class      mean      std  count
+          0  2.280488 0.846023    410
+          1  1.193528 0.743651   3090
+          2  0.445133 0.837829   4037
+          3 -0.393679 0.885722   3259
+          4 -0.783417 0.868653   4197
+
+Cohort slices:
+  by_type:
+    1: n=8132 qwk=0.391 mae=0.830 acc=0.393
+    2: n=6861 qwk=0.343 mae=0.907 acc=0.336
+  by_age_bucket:
+    0-2mo: n=5986 qwk=0.263 mae=0.838 acc=0.346
+    3-6mo: n=4228 qwk=0.308 mae=0.903 acc=0.348
+    7-12mo: n=1997 qwk=0.320 mae=0.880 acc=0.409
+    13-60mo: n=2390 qwk=0.405 mae=0.858 acc=0.415
+    60mo+: n=392 qwk=0.411 mae=0.832 acc=0.383
+  by_has_photo:
+    has_photo: n=14652 qwk=0.378 mae=0.864 acc=0.363
+    no_photo: n=341 qwk=0.085 mae=0.906 acc=0.537
+  by_fee:
+    fee_charged: n=2330 qwk=0.404 mae=0.851 acc=0.382
+    free: n=12663 qwk=0.375 mae=0.867 acc=0.364
+  by_rescuer_listing_count:
+    single_listing: n=3783 qwk=0.351 mae=0.934 acc=0.365
+    2-5_listings: n=3836 qwk=0.382 mae=0.898 acc=0.348
+    6-20_listings: n=3015 qwk=0.365 mae=0.851 acc=0.367
+    20+_listings: n=4359 qwk=0.384 mae=0.785 acc=0.385
+
+Feature importance by family (% of total):
+family
+text_tfidf_svd            31.05
+frozen_image_embedding    22.84
+categorical               17.77
+core_numeric              13.73
+image_pixels               6.61
+vision_metadata            6.41
+sentiment                  0.97
+text_shape                 0.64
+
+Saved full error analysis to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/results/ordinal_model_error_analysis.json

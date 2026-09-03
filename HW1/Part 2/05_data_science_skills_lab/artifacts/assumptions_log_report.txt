@@ -1,0 +1,54 @@
+============================================================
+ASSUMPTIONS LOG: Telco Customer Churn — full CRISP-DM lab (05_data_science_skills_lab)
+Analyst: Phase 6 communication & governance agent  |  Created: 2026-09-02
+============================================================
+Total assumptions: 10
+Validated: 0
+
+--- DATA ---
+  #1 [HIGH conf / LOW impact | risk=3]
+    The 11 customers with blank TotalCharges are new signups (tenure==0) who have not been billed yet, and can be safely imputed as $0 TotalCharges rather than dropped.
+    Rationale: Verified: 100% of the 11 null TotalCharges rows have tenure==0 (data_quality_scorecard.md consistency check); this matches the billing-cycle explanation exactly, not a random data-entry gap.
+    Validation: ✗ not validated
+  #2 [HIGH conf / MEDIUM impact | risk=3]
+    The 'No internet service' / 'No phone service' sentinel values in the 6 add-on columns and MultipleLines are collapsed to a plain 'No' category during cleaning.
+    Rationale: Verified 100% redundant with InternetService=='No' / PhoneService=='No' (equal row counts); collapsing removes duplicate one-hot columns without losing information, since has_internet/has_phone flags carry that fact once (cleaning_report.md).
+    Validation: ✗ not validated
+  #3 [MEDIUM conf / HIGH impact | risk=6]
+    tenure can stand in for a customer's true signup recency when no signup-date field exists, for cohort/time-series reconstruction.
+    Rationale: No signup_date column ships with this dataset; tenure is the only available recency proxy.
+    Validation: ✗ not validated
+
+--- BUSINESS LOGIC ---
+  #4 [HIGH conf / HIGH impact | risk=5]
+    Cross-sectional cohort reconstruction (join_date = snapshot_date - tenure) systematically misplaces churned customers into more-recent cohort buckets than their true signup quarter, biasing older reconstructed cohorts' survival curves upward.
+    Rationale: Directly measured: oldest reconstructed cohort (2014Q1, n=434) sits +24.38pp above the pooled life-table baseline at matched tenure months — confirms the predicted direction and gives a quantified magnitude (cohort-analysis.md).
+    Validation: ✗ not validated
+  #5 [HIGH conf / CRITICAL impact | risk=6]
+    The Contract-vs-churn comparison (month-to-month vs. two-year) is observational and cannot be interpreted as the causal effect of switching a customer's contract length.
+    Rationale: No randomization occurred; customers self-selected their contract. Confirmed by design: SRM check on the two groups is non-diagnostic here (no randomization to break), and the gap shrinks from +39.88pp unadjusted to +36.09pp after tenure-stratification but does not disappear, consistent with residual confounding (ab-test-analysis.md).
+    Validation: ✗ not validated
+  #6 [HIGH conf / MEDIUM impact | risk=3]
+    k=3 is used for the customer segmentation instead of the silhouette-optimal k=2.
+    Rationale: k=2 scores a higher silhouette (0.3369 vs. k=3's 0.3075), but produces a split too coarse to assign differentiated retention strategies to (2 groups vs. 3-7 the skill's own process recommends as actionable). k=3's 0.3075 still clears the skill's 0.3 validity bar (segmentation-analysis.md).
+    Validation: ✗ not validated
+  #7 [MEDIUM conf / CRITICAL impact | risk=7]
+    Two conflicting customer lifetime value (LTV) figures exist — hazard-based ($7,899.96, implying ~122 months of expected lifetime) and tenure-based empirical ($2,283.30) — and the tenure-based figure is treated as the defensible one pending Phase 5's explicit ruling.
+    Rationale: The hazard-based estimate (ARPU / monthly hazard rate) is biased upward by single-snapshot survivorship: it implicitly assumes today's still-active customers' future hazard mirrors the population average forever, ignoring right-censoring at the observed 72-month tenure ceiling. business_metrics.json documents both formulas explicitly (ltv section).
+    Validation: ✗ not validated
+
+--- STATISTICAL ---
+  #8 [HIGH conf / LOW impact | risk=3]
+    Cramér's V and point-biserial correlations (feature-vs-churn association strength) are computed on the 5,634-row train split only, not the full 7,043-row population, to avoid leaking test-set information into feature/model decisions.
+    Rationale: Explicit instruction in the exploratory-data-analysis skill's Pitfalls section: fit only on train.
+    Validation: ✗ not validated
+  #9 [MEDIUM conf / LOW impact | risk=3]
+    The Kitagawa/Oaxaca-style two-term decomposition (mix effect + rate effect) fully attributes the Fiber-vs-non-Fiber churn gap without a separate interaction term.
+    Rationale: Standard simplification for a two-group, single-dimension decomposition; the two terms reconcile to the total gap up to the standard residual of this method (root-cause-investigation.md), which is small enough here not to change the 78%/22% headline split materially.
+    Validation: ✗ not validated
+
+--- TECHNICAL ---
+  #10 [HIGH conf / LOW impact | risk=3]
+    A fixed random seed (42) applied consistently across Python's random, NumPy, and (where used) PyTorch produces a reproducible train/test split and reproducible model runs across re-execution.
+    Rationale: Verified via repro_determinism_proof.json — same seed, same split, same downstream metrics across independent runs (reproducible-ml.md).
+    Validation: ✗ not validated

@@ -1,0 +1,36 @@
+{
+  "pattern_1_chained_vs_loc": {
+    "settingwithcopy_warnings_raised_by_chained_version": 1,
+    "loc_version_correct": true,
+    "loc_version_value_counts": {
+      "veteran": 3833,
+      "new": 3210
+    },
+    "conclusion": "Chained assignment (df[mask]['col'] = value) raised 1 SettingWithCopyWarning(s) and its effect on the original DataFrame is undefined (may or may not persist depending on whether pandas returned a view or a copy). .loc[mask, 'col'] = value is unambiguous and always correct."
+  },
+  "pattern_2_apply_vs_vectorized": {
+    "n_rows": 7043,
+    "timeit_repeats": 5,
+    "apply_axis1_seconds": 0.05037,
+    "vectorized_seconds": 0.001197,
+    "speedup_x": 42.1,
+    "results_identical": true
+  },
+  "pattern_3_category_dtype": {
+    "columns_downcast": 16,
+    "total_df_memory_before_MB": 7.78,
+    "total_df_memory_after_MB": 0.815,
+    "total_reduction_pct": 89.5,
+    "downcast_columns_memory_before_MB": 7.083,
+    "downcast_columns_memory_after_MB": 0.117,
+    "downcast_columns_reduction_pct": 98.3
+  },
+  "pattern_4_transform_vs_merge": {
+    "timeit_repeats": 20,
+    "merge_seconds": 0.003466,
+    "transform_seconds": 0.000382,
+    "speedup_x": 9.07,
+    "results_identical": true,
+    "note": "transform also avoids the reset_index()/column-rename bookkeeping and cannot silently change row count the way a badly-validated merge could."
+  }
+}

@@ -1,0 +1,22 @@
+artifact_path: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999/models/m-785867d7fc8c4ca08f52cc1bf4fedf86/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.9.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+mlflow_version: 3.1.4
+model_id: m-785867d7fc8c4ca08f52cc1bf4fedf86
+model_size_bytes: 5564
+model_uuid: m-785867d7fc8c4ca08f52cc1bf4fedf86
+prompts: null
+run_id: 546df2a927af4a28aa52a4d1373773cf
+utc_time_created: '2026-09-03 04:41:03.346113'

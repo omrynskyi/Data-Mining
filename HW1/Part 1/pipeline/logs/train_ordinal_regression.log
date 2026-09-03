@@ -1,0 +1,45 @@
+=== Grouped 5-fold CV: ordinal regression ===
+  fold 0: best_iter=235 thresholds=[0.52, 1.719, 2.609, 2.771]
+  fold 1: best_iter=303 thresholds=[0.455, 1.905, 2.519, 2.895]
+  fold 2: best_iter=268 thresholds=[0.516, 1.914, 2.53, 2.725]
+  fold 3: best_iter=360 thresholds=[0.53, 1.646, 2.523, 2.812]
+  fold 4: best_iter=478 thresholds=[0.536, 1.756, 2.562, 2.869]
+  naive_rounding: 0.2886 qwk
+  optimized_thresholds: 0.3793 qwk
+=== Stratified 5-fold CV: ordinal regression ===
+  fold 0: best_iter=638 thresholds=[0.489, 1.818, 2.564, 2.734]
+  fold 1: best_iter=969 thresholds=[0.507, 1.773, 2.655, 2.851]
+  fold 2: best_iter=745 thresholds=[0.456, 2.14, 2.504, 2.764]
+  fold 3: best_iter=656 thresholds=[0.472, 1.795, 2.497, 2.624]
+  fold 4: best_iter=600 thresholds=[0.518, 1.772, 2.393, 2.759]
+  naive_rounding: 0.3330 qwk
+  optimized_thresholds: 0.4173 qwk
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/results/ordinal_regression_results.json
+
+grouped / naive_rounding per-class recall:
+  class 0: recall=0.000 support=410
+  class 1: recall=0.018 support=3090
+  class 2: recall=0.621 support=4037
+  class 3: recall=0.457 support=3259
+  class 4: recall=0.058 support=4197
+
+grouped / optimized_thresholds per-class recall:
+  class 0: recall=0.000 support=410
+  class 1: recall=0.112 support=3090
+  class 2: recall=0.607 support=4037
+  class 3: recall=0.187 support=3259
+  class 4: recall=0.500 support=4197
+
+stratified / naive_rounding per-class recall:
+  class 0: recall=0.000 support=410
+  class 1: recall=0.037 support=3090
+  class 2: recall=0.601 support=4037
+  class 3: recall=0.464 support=3259
+  class 4: recall=0.117 support=4197
+
+stratified / optimized_thresholds per-class recall:
+  class 0: recall=0.000 support=410
+  class 1: recall=0.214 support=3090
+  class 2: recall=0.509 support=4037
+  class 3: recall=0.184 support=3259
+  class 4: recall=0.603 support=4197

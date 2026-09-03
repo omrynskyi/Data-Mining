@@ -1,0 +1,1725 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-02T23:04:38.207550Z",
+    "execution_time_seconds": 0.4449,
+    "seed": 42,
+    "dataset": "synthetic_retail",
+    "total_transactions": 2225,
+    "unique_items": 55,
+    "candidate_rule_superset": 28886,
+    "superset_build_seconds": 0.2274
+  },
+  "target_paper": {
+    "key": "ghosh2004",
+    "title": "Multi-objective rule mining using genetic algorithms",
+    "authors": "Ashish Ghosh and Bhabesh Nath",
+    "venue": "Information Sciences, Vol. 163, pp. 123-133, 2004",
+    "doi": "10.1016/j.ins.2003.03.021",
+    "summary": "Treats association rule mining as a multi-objective optimisation problem, searching simultaneously for rules that are comprehensible, of high predictive accuracy (confidence) and interesting (lift/surprise) rather than optimising a single support-confidence threshold pair.",
+    "target_basis": "The paper's Pareto fronts settle on a compact, high-precision rule set: a few dozen rules with confidence in the low-0.7 band and lift comfortably above 2, mined at low single-digit-percent support. The operating point below encodes that regime.",
+    "target_metrics": {
+      "rule_count": 50,
+      "avg_support": 0.025,
+      "avg_confidence": 0.72,
+      "avg_lift": 2.45,
+      "coverage": 0.18
+    }
+  },
+  "config": {
+    "iterations_per_restart": 30,
+    "max_restarts": 3,
+    "initial_step_size": 0.05,
+    "fitness_mode": "hybrid",
+    "neighbors_per_step": 12,
+    "scout_samples": 768,
+    "stagnation_limit": 5,
+    "hybrid_beta": 0.7,
+    "seed": 42,
+    "algorithm": "fpgrowth",
+    "search_bounds": {
+      "min_support": [
+        0.002,
+        0.15
+      ],
+      "min_confidence": [
+        0.1,
+        0.95
+      ],
+      "min_lift": [
+        1.0,
+        10.0
+      ],
+      "max_len": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "pruning_factor": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "summary": {
+    "total_iterations_run": 64,
+    "restarts_triggered": 2,
+    "termination_reason": "Search budget exhausted after 2 stochastic restart(s)",
+    "initial_fitness": 64.514,
+    "best_fitness": 71.304,
+    "best_loss": 0.412371,
+    "fitness_improvement": 6.7899,
+    "evaluations": 67
+  },
+  "target_vs_achieved": {
+    "rule_count": {
+      "target": 50.0,
+      "achieved": 52.0,
+      "error_pct": 4.0
+    },
+    "avg_support": {
+      "target": 0.025,
+      "achieved": 0.024866,
+      "error_pct": 0.5359
+    },
+    "avg_confidence": {
+      "target": 0.72,
+      "achieved": 0.668054,
+      "error_pct": 7.2148
+    },
+    "avg_lift": {
+      "target": 2.45,
+      "achieved": 5.915857,
+      "error_pct": 141.4635
+    },
+    "coverage": {
+      "target": 0.18,
+      "achieved": 0.227865,
+      "error_pct": 26.5918
+    }
+  },
+  "best_hyperparameters": {
+    "min_support": 0.021161,
+    "min_confidence": 0.629253,
+    "min_lift": 3.732624,
+    "max_len": 5,
+    "pruning_factor": 0.025817
+  },
+  "best_metrics": {
+    "rule_count": 52,
+    "avg_support": 0.024866,
+    "avg_confidence": 0.668054,
+    "avg_lift": 5.915857,
+    "coverage": 0.227865
+  },
+  "iteration_trail": [
+    {
+      "iteration": 1,
+      "restart_id": 0,
+      "step_type": "initial",
+      "current_state": {
+        "min_support": 0.026345,
+        "min_confidence": 0.598904,
+        "min_lift": 3.409959,
+        "max_len": 5,
+        "pruning_factor": 0.015724
+      },
+      "metrics": {
+        "rule_count": 24,
+        "avg_support": 0.04161,
+        "avg_confidence": 0.629851,
+        "avg_lift": 5.550731,
+        "coverage": 0.361348
+      },
+      "loss": 0.62308,
+      "fitness": 64.51404,
+      "best_fitness": 64.51404,
+      "step_size": 0.05,
+      "accepted": true
+    },
+    {
+      "iteration": 2,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.024559,
+        "min_confidence": 0.598568,
+        "min_lift": 3.201797,
+        "max_len": 5,
+        "pruning_factor": 0.067543
+      },
+      "metrics": {
+        "rule_count": 17,
+        "avg_support": 0.041216,
+        "avg_confidence": 0.651266,
+        "avg_lift": 5.737205,
+        "coverage": 0.247191
+      },
+      "loss": 0.576555,
+      "fitness": 64.989698,
+      "best_fitness": 64.989698,
+      "step_size": 0.0425,
+      "accepted": true
+    },
+    {
+      "iteration": 3,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.022866,
+        "min_confidence": 0.614407,
+        "min_lift": 3.332493,
+        "max_len": 5,
+        "pruning_factor": 0.05128
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.030278,
+        "avg_confidence": 0.667751,
+        "avg_lift": 5.935152,
+        "coverage": 0.276404
+      },
+      "loss": 0.472753,
+      "fitness": 69.253512,
+      "best_fitness": 69.253512,
+      "step_size": 0.048875,
+      "accepted": true
+    },
+    {
+      "iteration": 4,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022866,
+        "min_confidence": 0.614407,
+        "min_lift": 3.332493,
+        "max_len": 5,
+        "pruning_factor": 0.05128
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.030278,
+        "avg_confidence": 0.667751,
+        "avg_lift": 5.935152,
+        "coverage": 0.276404
+      },
+      "loss": 0.472753,
+      "fitness": 69.253512,
+      "best_fitness": 69.253512,
+      "step_size": 0.041544,
+      "accepted": false
+    },
+    {
+      "iteration": 5,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.021922,
+        "min_confidence": 0.633053,
+        "min_lift": 3.449883,
+        "max_len": 5,
+        "pruning_factor": 0.053701
+      },
+      "metrics": {
+        "rule_count": 41,
+        "avg_support": 0.025662,
+        "avg_confidence": 0.674184,
+        "avg_lift": 5.98306,
+        "coverage": 0.187416
+      },
+      "loss": 0.4268,
+      "fitness": 70.392178,
+      "best_fitness": 70.392178,
+      "step_size": 0.035312,
+      "accepted": true
+    },
+    {
+      "iteration": 6,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021922,
+        "min_confidence": 0.633053,
+        "min_lift": 3.449883,
+        "max_len": 5,
+        "pruning_factor": 0.053701
+      },
+      "metrics": {
+        "rule_count": 41,
+        "avg_support": 0.025662,
+        "avg_confidence": 0.674184,
+        "avg_lift": 5.98306,
+        "coverage": 0.187416
+      },
+      "loss": 0.4268,
+      "fitness": 70.392178,
+      "best_fitness": 70.392178,
+      "step_size": 0.030015,
+      "accepted": false
+    },
+    {
+      "iteration": 7,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021922,
+        "min_confidence": 0.633053,
+        "min_lift": 3.449883,
+        "max_len": 5,
+        "pruning_factor": 0.053701
+      },
+      "metrics": {
+        "rule_count": 41,
+        "avg_support": 0.025662,
+        "avg_confidence": 0.674184,
+        "avg_lift": 5.98306,
+        "coverage": 0.187416
+      },
+      "loss": 0.4268,
+      "fitness": 70.392178,
+      "best_fitness": 70.392178,
+      "step_size": 0.025513,
+      "accepted": false
+    },
+    {
+      "iteration": 8,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021922,
+        "min_confidence": 0.633053,
+        "min_lift": 3.449883,
+        "max_len": 5,
+        "pruning_factor": 0.053701
+      },
+      "metrics": {
+        "rule_count": 41,
+        "avg_support": 0.025662,
+        "avg_confidence": 0.674184,
+        "avg_lift": 5.98306,
+        "coverage": 0.187416
+      },
+      "loss": 0.4268,
+      "fitness": 70.392178,
+      "best_fitness": 70.392178,
+      "step_size": 0.021686,
+      "accepted": false
+    },
+    {
+      "iteration": 9,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021922,
+        "min_confidence": 0.633053,
+        "min_lift": 3.449883,
+        "max_len": 5,
+        "pruning_factor": 0.053701
+      },
+      "metrics": {
+        "rule_count": 41,
+        "avg_support": 0.025662,
+        "avg_confidence": 0.674184,
+        "avg_lift": 5.98306,
+        "coverage": 0.187416
+      },
+      "loss": 0.4268,
+      "fitness": 70.392178,
+      "best_fitness": 70.392178,
+      "step_size": 0.018433,
+      "accepted": false
+    },
+    {
+      "iteration": 10,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.01988,
+        "min_confidence": 0.635195,
+        "min_lift": 3.697145,
+        "max_len": 5,
+        "pruning_factor": 0.038376
+      },
+      "metrics": {
+        "rule_count": 55,
+        "avg_support": 0.02436,
+        "avg_confidence": 0.669995,
+        "avg_lift": 5.977085,
+        "coverage": 0.245843
+      },
+      "loss": 0.438639,
+      "fitness": 70.582086,
+      "best_fitness": 70.582086,
+      "step_size": 0.015668,
+      "accepted": true
+    },
+    {
+      "iteration": 11,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.01988,
+        "min_confidence": 0.635195,
+        "min_lift": 3.697145,
+        "max_len": 5,
+        "pruning_factor": 0.038376
+      },
+      "metrics": {
+        "rule_count": 55,
+        "avg_support": 0.02436,
+        "avg_confidence": 0.669995,
+        "avg_lift": 5.977085,
+        "coverage": 0.245843
+      },
+      "loss": 0.438639,
+      "fitness": 70.582086,
+      "best_fitness": 70.582086,
+      "step_size": 0.013318,
+      "accepted": false
+    },
+    {
+      "iteration": 12,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.021144,
+        "min_confidence": 0.635296,
+        "min_lift": 3.743054,
+        "max_len": 5,
+        "pruning_factor": 0.027497
+      },
+      "metrics": {
+        "rule_count": 47,
+        "avg_support": 0.023878,
+        "avg_confidence": 0.671843,
+        "avg_lift": 5.969425,
+        "coverage": 0.191461
+      },
+      "loss": 0.415592,
+      "fitness": 70.913787,
+      "best_fitness": 70.913787,
+      "step_size": 0.01132,
+      "accepted": true
+    },
+    {
+      "iteration": 13,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021144,
+        "min_confidence": 0.635296,
+        "min_lift": 3.743054,
+        "max_len": 5,
+        "pruning_factor": 0.027497
+      },
+      "metrics": {
+        "rule_count": 47,
+        "avg_support": 0.023878,
+        "avg_confidence": 0.671843,
+        "avg_lift": 5.969425,
+        "coverage": 0.191461
+      },
+      "loss": 0.415592,
+      "fitness": 70.913787,
+      "best_fitness": 70.913787,
+      "step_size": 0.009622,
+      "accepted": false
+    },
+    {
+      "iteration": 14,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021144,
+        "min_confidence": 0.635296,
+        "min_lift": 3.743054,
+        "max_len": 5,
+        "pruning_factor": 0.027497
+      },
+      "metrics": {
+        "rule_count": 47,
+        "avg_support": 0.023878,
+        "avg_confidence": 0.671843,
+        "avg_lift": 5.969425,
+        "coverage": 0.191461
+      },
+      "loss": 0.415592,
+      "fitness": 70.913787,
+      "best_fitness": 70.913787,
+      "step_size": 0.008179,
+      "accepted": false
+    },
+    {
+      "iteration": 15,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021144,
+        "min_confidence": 0.635296,
+        "min_lift": 3.743054,
+        "max_len": 5,
+        "pruning_factor": 0.027497
+      },
+      "metrics": {
+        "rule_count": 47,
+        "avg_support": 0.023878,
+        "avg_confidence": 0.671843,
+        "avg_lift": 5.969425,
+        "coverage": 0.191461
+      },
+      "loss": 0.415592,
+      "fitness": 70.913787,
+      "best_fitness": 70.913787,
+      "step_size": 0.006952,
+      "accepted": false
+    },
+    {
+      "iteration": 16,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021144,
+        "min_confidence": 0.635296,
+        "min_lift": 3.743054,
+        "max_len": 5,
+        "pruning_factor": 0.027497
+      },
+      "metrics": {
+        "rule_count": 47,
+        "avg_support": 0.023878,
+        "avg_confidence": 0.671843,
+        "avg_lift": 5.969425,
+        "coverage": 0.191461
+      },
+      "loss": 0.415592,
+      "fitness": 70.913787,
+      "best_fitness": 70.913787,
+      "step_size": 0.005909,
+      "accepted": false
+    },
+    {
+      "iteration": 17,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.631346,
+        "min_lift": 3.748163,
+        "max_len": 5,
+        "pruning_factor": 0.021792
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.025169,
+        "avg_confidence": 0.668196,
+        "avg_lift": 5.915465,
+        "coverage": 0.235056
+      },
+      "loss": 0.415704,
+      "fitness": 71.231944,
+      "best_fitness": 71.231944,
+      "step_size": 0.005023,
+      "accepted": true
+    },
+    {
+      "iteration": 18,
+      "restart_id": 0,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": true
+    },
+    {
+      "iteration": 19,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": false
+    },
+    {
+      "iteration": 20,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": false
+    },
+    {
+      "iteration": 21,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": false
+    },
+    {
+      "iteration": 22,
+      "restart_id": 0,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": false
+    },
+    {
+      "iteration": 23,
+      "restart_id": 0,
+      "step_type": "restart_triggered",
+      "current_state": {
+        "min_support": 0.021161,
+        "min_confidence": 0.629253,
+        "min_lift": 3.732624,
+        "max_len": 5,
+        "pruning_factor": 0.025817
+      },
+      "metrics": {
+        "rule_count": 52,
+        "avg_support": 0.024866,
+        "avg_confidence": 0.668054,
+        "avg_lift": 5.915857,
+        "coverage": 0.227865
+      },
+      "loss": 0.412371,
+      "fitness": 71.303975,
+      "best_fitness": 71.303975,
+      "step_size": 0.005,
+      "accepted": false
+    },
+    {
+      "iteration": 24,
+      "restart_id": 1,
+      "step_type": "initial",
+      "current_state": {
+        "min_support": 0.033203,
+        "min_confidence": 0.23168,
+        "min_lift": 5.4189,
+        "max_len": 4,
+        "pruning_factor": 0.485469
+      },
+      "metrics": {
+        "rule_count": 23,
+        "avg_support": 0.039687,
+        "avg_confidence": 0.361285,
+        "avg_lift": 5.576062,
+        "coverage": 0.24809
+      },
+      "loss": 0.535966,
+      "fitness": 63.418993,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": true
+    },
+    {
+      "iteration": 25,
+      "restart_id": 1,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.028952,
+        "min_confidence": 0.295241,
+        "min_lift": 5.430958,
+        "max_len": 4,
+        "pruning_factor": 0.538524
+      },
+      "metrics": {
+        "rule_count": 26,
+        "avg_support": 0.038565,
+        "avg_confidence": 0.354722,
+        "avg_lift": 5.571215,
+        "coverage": 0.271461
+      },
+      "loss": 0.528085,
+      "fitness": 63.845153,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": true
+    },
+    {
+      "iteration": 26,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.028952,
+        "min_confidence": 0.295241,
+        "min_lift": 5.430958,
+        "max_len": 4,
+        "pruning_factor": 0.538524
+      },
+      "metrics": {
+        "rule_count": 26,
+        "avg_support": 0.038565,
+        "avg_confidence": 0.354722,
+        "avg_lift": 5.571215,
+        "coverage": 0.271461
+      },
+      "loss": 0.528085,
+      "fitness": 63.845153,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 27,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.028952,
+        "min_confidence": 0.295241,
+        "min_lift": 5.430958,
+        "max_len": 4,
+        "pruning_factor": 0.538524
+      },
+      "metrics": {
+        "rule_count": 26,
+        "avg_support": 0.038565,
+        "avg_confidence": 0.354722,
+        "avg_lift": 5.571215,
+        "coverage": 0.271461
+      },
+      "loss": 0.528085,
+      "fitness": 63.845153,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    },
+    {
+      "iteration": 28,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.028952,
+        "min_confidence": 0.295241,
+        "min_lift": 5.430958,
+        "max_len": 4,
+        "pruning_factor": 0.538524
+      },
+      "metrics": {
+        "rule_count": 26,
+        "avg_support": 0.038565,
+        "avg_confidence": 0.354722,
+        "avg_lift": 5.571215,
+        "coverage": 0.271461
+      },
+      "loss": 0.528085,
+      "fitness": 63.845153,
+      "best_fitness": 71.303975,
+      "step_size": 0.0261,
+      "accepted": false
+    },
+    {
+      "iteration": 29,
+      "restart_id": 1,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.026808,
+        "min_confidence": 0.29261,
+        "min_lift": 5.420444,
+        "max_len": 3,
+        "pruning_factor": 0.527069
+      },
+      "metrics": {
+        "rule_count": 27,
+        "avg_support": 0.038568,
+        "avg_confidence": 0.353788,
+        "avg_lift": 5.56601,
+        "coverage": 0.271461
+      },
+      "loss": 0.521648,
+      "fitness": 64.066016,
+      "best_fitness": 71.303975,
+      "step_size": 0.022185,
+      "accepted": true
+    },
+    {
+      "iteration": 30,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.026808,
+        "min_confidence": 0.29261,
+        "min_lift": 5.420444,
+        "max_len": 3,
+        "pruning_factor": 0.527069
+      },
+      "metrics": {
+        "rule_count": 27,
+        "avg_support": 0.038568,
+        "avg_confidence": 0.353788,
+        "avg_lift": 5.56601,
+        "coverage": 0.271461
+      },
+      "loss": 0.521648,
+      "fitness": 64.066016,
+      "best_fitness": 71.303975,
+      "step_size": 0.018857,
+      "accepted": false
+    },
+    {
+      "iteration": 31,
+      "restart_id": 1,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.016029,
+      "accepted": true
+    },
+    {
+      "iteration": 32,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.013625,
+      "accepted": false
+    },
+    {
+      "iteration": 33,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.011581,
+      "accepted": false
+    },
+    {
+      "iteration": 34,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.009844,
+      "accepted": false
+    },
+    {
+      "iteration": 35,
+      "restart_id": 1,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.008367,
+      "accepted": false
+    },
+    {
+      "iteration": 36,
+      "restart_id": 1,
+      "step_type": "restart_triggered",
+      "current_state": {
+        "min_support": 0.022771,
+        "min_confidence": 0.300506,
+        "min_lift": 5.36429,
+        "max_len": 3,
+        "pruning_factor": 0.523928
+      },
+      "metrics": {
+        "rule_count": 35,
+        "avg_support": 0.040745,
+        "avg_confidence": 0.375645,
+        "avg_lift": 5.525954,
+        "coverage": 0.30427
+      },
+      "loss": 0.518991,
+      "fitness": 64.826423,
+      "best_fitness": 71.303975,
+      "step_size": 0.007112,
+      "accepted": false
+    },
+    {
+      "iteration": 37,
+      "restart_id": 2,
+      "step_type": "initial",
+      "current_state": {
+        "min_support": 0.025783,
+        "min_confidence": 0.286464,
+        "min_lift": 5.444839,
+        "max_len": 5,
+        "pruning_factor": 0.67444
+      },
+      "metrics": {
+        "rule_count": 23,
+        "avg_support": 0.038476,
+        "avg_confidence": 0.355813,
+        "avg_lift": 5.588323,
+        "coverage": 0.265169
+      },
+      "loss": 0.543981,
+      "fitness": 63.227447,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": true
+    },
+    {
+      "iteration": 38,
+      "restart_id": 2,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": true
+    },
+    {
+      "iteration": 39,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 40,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    },
+    {
+      "iteration": 41,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.0261,
+      "accepted": false
+    },
+    {
+      "iteration": 42,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.022185,
+      "accepted": false
+    },
+    {
+      "iteration": 43,
+      "restart_id": 2,
+      "step_type": "step_kick",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": false
+    },
+    {
+      "iteration": 44,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": false
+    },
+    {
+      "iteration": 45,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 46,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    },
+    {
+      "iteration": 47,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.0261,
+      "accepted": false
+    },
+    {
+      "iteration": 48,
+      "restart_id": 2,
+      "step_type": "step_kick",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": false
+    },
+    {
+      "iteration": 49,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": false
+    },
+    {
+      "iteration": 50,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 51,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.022413,
+        "min_confidence": 0.220595,
+        "min_lift": 5.37256,
+        "max_len": 5,
+        "pruning_factor": 0.65409
+      },
+      "metrics": {
+        "rule_count": 50,
+        "avg_support": 0.03591,
+        "avg_confidence": 0.331463,
+        "avg_lift": 5.653405,
+        "coverage": 0.319101
+      },
+      "loss": 0.518305,
+      "fitness": 64.820836,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    },
+    {
+      "iteration": 52,
+      "restart_id": 2,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.006374,
+        "min_confidence": 0.222087,
+        "min_lift": 5.377481,
+        "max_len": 5,
+        "pruning_factor": 0.68598
+      },
+      "metrics": {
+        "rule_count": 48,
+        "avg_support": 0.036451,
+        "avg_confidence": 0.336054,
+        "avg_lift": 5.633904,
+        "coverage": 0.319101
+      },
+      "loss": 0.516171,
+      "fitness": 64.89406,
+      "best_fitness": 71.303975,
+      "step_size": 0.0261,
+      "accepted": true
+    },
+    {
+      "iteration": 53,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.006374,
+        "min_confidence": 0.222087,
+        "min_lift": 5.377481,
+        "max_len": 5,
+        "pruning_factor": 0.68598
+      },
+      "metrics": {
+        "rule_count": 48,
+        "avg_support": 0.036451,
+        "avg_confidence": 0.336054,
+        "avg_lift": 5.633904,
+        "coverage": 0.319101
+      },
+      "loss": 0.516171,
+      "fitness": 64.89406,
+      "best_fitness": 71.303975,
+      "step_size": 0.022185,
+      "accepted": false
+    },
+    {
+      "iteration": 54,
+      "restart_id": 2,
+      "step_type": "improvement",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.018857,
+      "accepted": true
+    },
+    {
+      "iteration": 55,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.016029,
+      "accepted": false
+    },
+    {
+      "iteration": 56,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.013625,
+      "accepted": false
+    },
+    {
+      "iteration": 57,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.011581,
+      "accepted": false
+    },
+    {
+      "iteration": 58,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.009844,
+      "accepted": false
+    },
+    {
+      "iteration": 59,
+      "restart_id": 2,
+      "step_type": "step_kick",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": false
+    },
+    {
+      "iteration": 60,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": false
+    },
+    {
+      "iteration": 61,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 62,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    },
+    {
+      "iteration": 63,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.0261,
+      "accepted": false
+    },
+    {
+      "iteration": 64,
+      "restart_id": 2,
+      "step_type": "step_kick",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.05,
+      "accepted": false
+    },
+    {
+      "iteration": 65,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.0425,
+      "accepted": false
+    },
+    {
+      "iteration": 66,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.036125,
+      "accepted": false
+    },
+    {
+      "iteration": 67,
+      "restart_id": 2,
+      "step_type": "plateau",
+      "current_state": {
+        "min_support": 0.008562,
+        "min_confidence": 0.221655,
+        "min_lift": 5.433589,
+        "max_len": 5,
+        "pruning_factor": 0.682734
+      },
+      "metrics": {
+        "rule_count": 38,
+        "avg_support": 0.034169,
+        "avg_confidence": 0.315271,
+        "avg_lift": 5.694397,
+        "coverage": 0.271461
+      },
+      "loss": 0.490106,
+      "fitness": 64.969322,
+      "best_fitness": 71.303975,
+      "step_size": 0.030706,
+      "accepted": false
+    }
+  ]
+}

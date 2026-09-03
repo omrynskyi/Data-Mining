@@ -1,0 +1,257 @@
+# Semantic model — Telco Customer Churn
+# Built with the semantic-model-builder skill: scaffolded via
+# scripts/metric_template_generator.py, hand-filled from the business framing +
+# real numbers in artifacts/business_metrics.json, validated with
+# scripts/model_yaml_validator.py and a plain yaml.safe_load parse check.
+#
+# Follows dbt Semantic Layer / MetricFlow conventions
+# (references/dbt_semantic_layer_guide.md): a `semantic_models:` block ties
+# entities + dimensions + measures to a source model, and a top-level `metrics:`
+# block defines named metrics built on those measures.
+#
+# Source model: data/Telco-Customer-Churn.csv, loaded as `stg_telco_customers`
+# (one row per customer.customerID; TotalCharges coerced to numeric, Churn
+# coerced to 0/1 — see src/00_foundation.py).
+
+semantic_models:
+  - name: telco_customers
+    description: >
+      One row per residential telecom customer: subscribed services, contract
+      terms, billing amounts, and churn outcome. See
+      artifacts/data_catalog_telco.md for full column documentation.
+    model: ref('stg_telco_customers')
+
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id  # customerID in the raw CSV
+
+    dimensions:
+      - name: contract
+        type: categorical
+        expr: contract
+        description: Contract commitment term.
+        meta:
+          possible_values: ["Month-to-month", "One year", "Two year"]
+          notes: >
+            Primary churn-risk driver. Logo churn rate by value (from
+            artifacts/business_metrics.json): Month-to-month 42.71%,
+            One year 11.27%, Two year 2.83%.
+
+      - name: internet_service
+        type: categorical
+        expr: internet_service
+        description: Internet service technology subscribed to.
+        meta:
+          possible_values: ["DSL", "Fiber optic", "No"]
+          notes: "'No' means the customer has no internet service (and therefore cannot subscribe to internet-dependent add-ons: OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies)."
+
+      - name: payment_method
+        type: categorical
+        expr: payment_method
+        description: How the customer pays their bill.
+        meta:
+          possible_values:
+            - "Electronic check"
+            - "Mailed check"
+            - "Bank transfer (automatic)"
+            - "Credit card (automatic)"
+          notes: "Electronic check is a known higher-churn payment method in exploratory analysis of this dataset; confirm in Phase 2 (Data Understanding) before treating as a driver."
+
+      - name: tenure_bucket
+        type: categorical
+        expr: >
+          case
+            when tenure <= 12 then '0-12 months'
+            when tenure <= 24 then '13-24 months'
+            when tenure <= 48 then '25-48 months'
+            when tenure <= 60 then '49-60 months'
+            else '61-72 months'
+          end
+        description: >
+          Bucketed customer tenure (months since acquisition), derived from the
+          continuous `tenure` column (observed range 0-72 months) per the
+          high-cardinality-dimension bucketing pattern (bucket at ingestion
+          rather than exposing raw month counts as a filter dimension).
+        meta:
+          possible_values: ["0-12 months", "13-24 months", "25-48 months", "49-60 months", "61-72 months"]
+          hierarchy:
+            - level: tenure_bucket
+              column: tenure_bucket
+            - level: tenure_months
+              column: tenure
+
+      - name: acquired_at
+        type: time
+        expr: acquired_at
+        description: >
+          Placeholder acquisition timestamp. NOT present in the source CSV
+          (this is a cross-sectional snapshot, not a dated ledger) — included
+          here to show the intended time dimension for when this model is
+          backed by a real dated billing/CRM source. Do not query against this
+          field until it is backed by real data.
+        type_params:
+          time_granularity: day
+        meta:
+          owner: analytics
+          notes: "Data gap — see artifacts/business_metrics.json:data_gaps."
+
+    measures:
+      - name: monthly_charges_sum
+        description: Sum of MonthlyCharges across customers in scope (this is the MRR measure).
+        agg: sum
+        expr: monthly_charges
+      - name: monthly_charges_avg
+        description: Average MonthlyCharges per customer in scope (this is the ARPU measure).
+        agg: average
+        expr: monthly_charges
+      - name: customer_count
+        description: Count of distinct customers in scope.
+        agg: count_distinct
+        expr: customer_id
+      - name: churned_customer_count
+        description: Count of customers where churn = 1.
+        agg: count_distinct
+        expr: customer_id
+        # filtered at the metric level via `filter:` (churn = true) rather than
+        # baked into the measure, so the same measure can be reused unfiltered.
+      - name: total_charges_avg
+        description: Average lifetime TotalCharges per customer — basis for tenure-based LTV.
+        agg: average
+        expr: total_charges
+
+metrics:
+  - name: mrr
+    label: "Monthly Recurring Revenue"
+    description: "Total recurring monthly revenue from customers in scope (sum of MonthlyCharges)."
+    type: simple
+    type_params:
+      measure:
+        name: monthly_charges_sum
+        fill_nulls_with: 0
+    meta:
+      owner: "analytics (this project)"
+      data_source: "ref('stg_telco_customers')"
+      grain: "one row per customer"
+      business_context: >
+        Used by retention/finance stakeholders to track total recurring
+        subscription revenue and how much of it sits in each contract /
+        service segment. Feeds revenue-at-risk sizing for the retention program.
+      calculation_notes: >
+        This dataset is a single cross-sectional snapshot, not a monthly
+        ledger, so MRR here is "MRR as of the snapshot date" — there is no
+        new/expansion/contraction/churned MRR waterfall to decompose it into
+        (see artifacts/business_metrics.json:data_gaps). Computed real value
+        (all customers): $456,116.60. Active customers only: $316,985.75.
+      good_value_range: "n/a — no historical trend in this snapshot to benchmark against."
+      verified_by: "src/p1_business_metrics.py (executed)"
+      last_verified: "2026-09-02"
+
+  - name: arpu
+    label: "Average Revenue Per User"
+    description: "Average MonthlyCharges per customer (MRR / customer count)."
+    type: ratio
+    type_params:
+      numerator:
+        name: monthly_charges_sum
+      denominator:
+        name: customer_count
+    meta:
+      owner: "analytics (this project)"
+      data_source: "ref('stg_telco_customers')"
+      grain: "one row per customer"
+      business_context: >
+        Standard per-customer price point metric; used to compare monetization
+        across contract types and as the numerator input to LTV.
+      calculation_notes: >
+        Computed real value (all customers): $64.76/month. By contract:
+        Month-to-month $66.40, One year $65.05, Two year $60.77
+        (artifacts/business_metrics.json:revenue.arpu_by_contract).
+      good_value_range: "n/a — no external ARPU benchmark supplied for this vertical."
+      verified_by: "src/p1_business_metrics.py (executed)"
+      last_verified: "2026-09-02"
+
+  - name: churn_rate
+    label: "Logo Churn Rate"
+    description: "Share of customers with churn = 1 (churned customers / total customers)."
+    type: ratio
+    type_params:
+      numerator:
+        name: churned_customer_count
+        filter: "{{ Dimension('customer__churn') }} = true"
+      denominator:
+        name: customer_count
+    meta:
+      owner: "analytics (this project)"
+      data_source: "ref('stg_telco_customers')"
+      grain: "one row per customer"
+      business_context: >
+        Headline churn KPI for the retention program; sliced by contract,
+        internet_service, payment_method and tenure_bucket to find the
+        highest-risk segments.
+      calculation_notes: >
+        This is the whole-tenure "base" churn rate (26.537% — matches
+        data/processed/dataset_meta.json:churn_rate_overall), not a monthly
+        rate, since the source is a single snapshot with no monthly ledger.
+        A monthly hazard-rate approximation (0.82%/month, derived from
+        churned customers / total customer-months of tenure) is also computed
+        in artifacts/business_metrics.json:churn.monthly_churn_rate_hazard and
+        used as the denominator for the `ltv` metric below.
+      good_value_range: "SaaS 'good' monthly logo churn often cited as <2-3%/month; this vertical (telecom) runs structurally higher."
+      verified_by: "src/p1_business_metrics.py (executed)"
+      last_verified: "2026-09-02"
+
+  - name: revenue_churn_rate
+    label: "Revenue Churn Rate"
+    description: "Share of MRR held by churned customers (churned customers' MonthlyCharges / total MRR)."
+    type: ratio
+    type_params:
+      numerator:
+        name: monthly_charges_sum
+        filter: "{{ Dimension('customer__churn') }} = true"
+      denominator:
+        name: monthly_charges_sum
+    meta:
+      owner: "analytics (this project)"
+      data_source: "ref('stg_telco_customers')"
+      grain: "one row per customer"
+      business_context: >
+        Weights churn by dollar value rather than customer count — flags
+        whether churn is concentrated among higher- or lower-value accounts.
+      calculation_notes: >
+        Computed real value: 30.503% — higher than the 26.537% logo churn
+        rate, meaning churned customers skew toward higher MonthlyCharges than
+        the base average (artifacts/business_metrics.json:churn).
+      good_value_range: "Should track close to logo churn rate; a large gap (as observed here) signals value-skewed churn worth investigating in Phase 2."
+      verified_by: "src/p1_business_metrics.py (executed)"
+      last_verified: "2026-09-02"
+
+  - name: ltv
+    label: "Customer Lifetime Value"
+    description: "Expected total revenue per customer over their subscription lifetime."
+    type: derived
+    type_params:
+      expr: "arpu / monthly_churn_rate_hazard"
+      metrics:
+        - name: arpu
+    meta:
+      owner: "analytics (this project)"
+      data_source: "ref('stg_telco_customers')"
+      grain: "one row per customer"
+      business_context: >
+        Sizes the value of retaining a customer; used alongside revenue-at-risk
+        to prioritize the retention program's ROI case. No CAC field exists in
+        this dataset, so LTV:CAC and payback period cannot be computed here
+        (documented data gap).
+      calculation_notes: >
+        Two variants computed for real in artifacts/business_metrics.json:
+        (1) churn-rate-based: ARPU / monthly_churn_rate_hazard = $7,899.96
+        (omits the gross-margin factor from the textbook formula — no COGS
+        field in this dataset); (2) tenure-based empirical: mean(TotalCharges)
+        = $2,283.30, i.e. actual revenue collected so far per customer
+        (a lower-bound / already-realized figure, since many customers are
+        still active and not yet at end of life). Both are reported —
+        neither alone is "the" LTV for this dataset.
+      good_value_range: "n/a — no CAC to compare against for an LTV:CAC read."
+      verified_by: "src/p1_business_metrics.py (executed)"
+      last_verified: "2026-09-02"

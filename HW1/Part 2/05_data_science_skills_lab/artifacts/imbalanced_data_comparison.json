@@ -1,0 +1,66 @@
+{
+  "a_baseline": {
+    "pr_auc_mean": 0.6631251593222147,
+    "pr_auc_std": 0.016625855872144928,
+    "roc_auc_mean": 0.8476081532135138,
+    "roc_auc_std": 0.011376967009548341,
+    "accuracy_mean": 0.8068880900108905,
+    "accuracy_std": 0.011251969978469847,
+    "recall_mean": 0.537123745819398,
+    "recall_std": 0.033551668773202564
+  },
+  "b_class_weight_balanced": {
+    "pr_auc_mean": 0.661745542271974,
+    "pr_auc_std": 0.016513688844202068,
+    "roc_auc_mean": 0.8474804754806492,
+    "roc_auc_std": 0.011363181867160352,
+    "accuracy_mean": 0.7508019687912235,
+    "accuracy_std": 0.013405375940240284,
+    "recall_mean": 0.7979933110367894,
+    "recall_std": 0.028268289778080834
+  },
+  "c_smote_inside_cv_honest": {
+    "pr_auc_mean": 0.6578830621741939,
+    "pr_auc_std": 0.019211163779093515,
+    "roc_auc_mean": 0.8449654717718849,
+    "roc_auc_std": 0.012216995889999974,
+    "accuracy_mean": 0.7550632701918516,
+    "accuracy_std": 0.01621101177234881,
+    "recall_mean": 0.7866220735785954,
+    "recall_std": 0.03635499195103999
+  },
+  "e_smote_before_split_LEAKY": {
+    "pr_auc_mean": 0.8355380550410845,
+    "pr_auc_std": 0.00605215002147964,
+    "roc_auc_mean": 0.8516618458796973,
+    "roc_auc_std": 0.004001866490978336,
+    "note": "SMOTE fit on the FULL dataset before CV split -- synthetic neighbors leak across folds. Inflated relative to (c)."
+  },
+  "d_threshold_tuning": {
+    "default_threshold": 0.5,
+    "default_precision": 0.6697247706422018,
+    "default_recall": 0.537123745819398,
+    "tuned_threshold_for_precision_ge_0.50": 0.23395972823198086,
+    "tuned_recall_at_that_threshold": 0.8307692307692308,
+    "tuned_accuracy_at_that_threshold": 0.7346467873624423
+  },
+  "f_accuracy_trap_dummy_majority": {
+    "accuracy_mean": 0.7346467539058252,
+    "recall_mean": 0.0,
+    "pr_auc_mean": 0.2653532460941748,
+    "note": "73.5% accuracy predicting 'No churn' for everyone, catches ZERO churners (recall=0). Accuracy alone would make this look like a strong model."
+  },
+  "_leakage_summary": {
+    "smote_inside_cv_honest_pr_auc": 0.6578830621741939,
+    "smote_before_split_leaky_pr_auc": 0.8355380550410845,
+    "leakage_inflation_pr_auc": 0.17765499286689057,
+    "smote_inside_cv_honest_roc_auc": 0.8449654717718849,
+    "smote_before_split_leaky_roc_auc": 0.8516618458796973,
+    "leakage_inflation_roc_auc": 0.006696374107812431
+  },
+  "_summary": {
+    "positive_rate": 0.2653532126375577,
+    "imbalance_verdict": "moderate (26.5%) -- class_weight/threshold tuning are sufficient; SMOTE not clearly better here, consistent with the skill's guidance not to over-apply it.",
+    "best_by_pr_auc": "baseline"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "target": {
+    "n_train": 5634,
+    "n_churn": 1495,
+    "n_no_churn": 4139,
+    "churn_rate": 0.265353,
+    "imbalance_ratio_neg_to_pos": 2.769
+  },
+  "multicollinearity_flags_r_ge_0.7": [
+    {
+      "col_a": "tenure",
+      "col_b": "TotalCharges",
+      "r": 0.8294
+    }
+  ],
+  "totalcharges_leakage_check": {
+    "hypothesis": "TotalCharges approx= tenure * MonthlyCharges",
+    "pearson_r_TotalCharges_vs_tenure_x_MonthlyCharges": 0.999561,
+    "pearson_p_value": 0.0,
+    "median_abs_pct_error": 0.0197,
+    "mean_abs_pct_error": 0.032,
+    "n": 5626
+  },
+  "totalcharges_leakage_verdict": "NOT target leakage. TotalCharges and tenure/MonthlyCharges are all *pre-outcome* billing attributes known at prediction time for an existing customer -- none of them encode the Churn outcome itself (r with Churn is weak-to-moderate per point-biserial results above, not >0.95). The near-identity relationship (Pearson r=0.9996 between TotalCharges and tenure*MonthlyCharges) is a REDUNDANCY / multicollinearity finding, not a leakage finding: TotalCharges is almost fully reconstructible from tenure and MonthlyCharges (both already in the feature set), so it carries little independent information for a model beyond what those two columns already supply. Recommendation for Phase 3 feature-engineering: consider dropping TotalCharges or replacing it with an engineered residual (TotalCharges - tenure*MonthlyCharges, capturing plan/price changes over the customer's tenure) rather than feeding all three raw columns into a linear model, where the near-collinearity would inflate coefficient variance without leaking the target."
+}

@@ -1,0 +1,22 @@
+column_name,data_type,nullable,description
+customerID,object,False,Unique customer identifier string e.g. 7590-VHVEG
+gender,object,False,Male/Female as shipped
+SeniorCitizen,int64,False,0/1 flag shipped as integer not boolean
+Partner,object,False,Yes/No string
+Dependents,object,False,Yes/No string
+tenure,int64,False,Months since acquisition integer 0-72
+PhoneService,object,False,Yes/No string
+MultipleLines,object,False,"Yes/No/'No phone service' 3-value string"
+InternetService,object,False,"DSL/Fiber optic/No 3-value string"
+OnlineSecurity,object,False,"Yes/No/'No internet service' 3-value string"
+OnlineBackup,object,False,"Yes/No/'No internet service' 3-value string"
+DeviceProtection,object,False,"Yes/No/'No internet service' 3-value string"
+TechSupport,object,False,"Yes/No/'No internet service' 3-value string"
+StreamingTV,object,False,"Yes/No/'No internet service' 3-value string"
+StreamingMovies,object,False,"Yes/No/'No internet service' 3-value string"
+Contract,object,False,"Month-to-month/One year/Two year"
+PaperlessBilling,object,False,Yes/No string
+PaymentMethod,object,False,4-value payment method string
+MonthlyCharges,float64,False,Recurring monthly price in USD
+TotalCharges,object,True,"Ships as STRING not numeric; 11 blank-string values at tenure==0"
+Churn,object,False,Yes/No string target label

@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-surface-950 text-slate-200 font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'tnum';
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-700 rounded-full;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-surface-700/70 bg-surface-900/80 shadow-lg shadow-black/20;
+  }
+
+  .panel-header {
+    @apply flex items-start justify-between gap-4 border-b border-surface-700/60 px-5 py-4;
+  }
+
+  .panel-title {
+    @apply text-sm font-semibold uppercase tracking-widest text-slate-300;
+  }
+
+  .panel-subtitle {
+    @apply mt-1 text-xs text-slate-500;
+  }
+
+  .metric-value {
+    @apply font-mono text-2xl font-semibold text-slate-50;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-850 px-2.5 py-1 text-[11px] font-medium text-slate-300;
+  }
+
+  .data-table {
+    @apply w-full border-collapse text-left text-sm;
+  }
+
+  .data-table th {
+    @apply sticky top-0 z-10 whitespace-nowrap bg-surface-850 px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400;
+  }
+
+  .data-table td {
+    @apply whitespace-nowrap border-t border-surface-800 px-3 py-2 text-slate-300;
+  }
+}

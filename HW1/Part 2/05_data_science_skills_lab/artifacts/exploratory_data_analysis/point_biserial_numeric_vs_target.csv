@@ -1,0 +1,4 @@
+feature,point_biserial_r,p_value,n
+tenure,-0.3456,8.634919746452708e-158,5634
+MonthlyCharges,0.198,6.266597841469518e-51,5634
+TotalCharges,-0.1948,3.0473811810942334e-49,5626

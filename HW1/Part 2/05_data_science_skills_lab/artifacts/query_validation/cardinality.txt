@@ -1,0 +1,6 @@
+
+Join: customers ⋈ contract_dim on Contract
+  Left rows:           7,043
+  Right rows:          3
+  Estimated output:    7,043
+  Fan-out risk:        LOW

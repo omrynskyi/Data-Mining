@@ -1,0 +1,115 @@
+{
+  "timestamp": 1788370750.2146401,
+  "total_suites": 8,
+  "passed_suites": 8,
+  "failed_suites": 0,
+  "total_duration_seconds": 52.971,
+  "suites": [
+    {
+      "suite_name": "Tier 1: Feature Coverage (>=5 tests per feature)",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/test_tier1_features.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 9.454,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.3.4, pluggy-1.6.0\nrootdir: /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer\nplugins: anyio-4.12.1, cov-7.1.0, langsmith-0.4.37, asyncio-0.25.3\nasyncio: mode=strict, asyncio_default_fixture_loop_scope=None\ncollected 70 items\n\ntests/test_tier1_features.py ........................................... [ 61%]\n...........................                                              [100%]\n\n============================== 70 passed in 4.95s ==============================\n",
+      "stderr": "/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n/Users/oleg/Library/Python/3.9/lib/python/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option \"asyncio_default_fixture_loop_scope\" is unset.\nThe event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: \"function\", \"class\", \"module\", \"package\", \"session\"\n\n  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))\n"
+    },
+    {
+      "suite_name": "Tier 2: Boundary & Corner Cases (>=5 tests per feature)",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/test_tier2_boundaries.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 5.34,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.3.4, pluggy-1.6.0\nrootdir: /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer\nplugins: anyio-4.12.1, cov-7.1.0, langsmith-0.4.37, asyncio-0.25.3\nasyncio: mode=strict, asyncio_default_fixture_loop_scope=None\ncollected 65 items\n\ntests/test_tier2_boundaries.py ......................................... [ 63%]\n........................                                                 [100%]\n\n============================== 65 passed in 2.69s ==============================\n",
+      "stderr": "/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n/Users/oleg/Library/Python/3.9/lib/python/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option \"asyncio_default_fixture_loop_scope\" is unset.\nThe event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: \"function\", \"class\", \"module\", \"package\", \"session\"\n\n  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))\n"
+    },
+    {
+      "suite_name": "Tier 3: Combinatorial & Cross-Feature Interactions",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/test_tier3_combinations.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 8.106,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.3.4, pluggy-1.6.0\nrootdir: /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer\nplugins: anyio-4.12.1, cov-7.1.0, langsmith-0.4.37, asyncio-0.25.3\nasyncio: mode=strict, asyncio_default_fixture_loop_scope=None\ncollected 10 items\n\ntests/test_tier3_combinations.py ..........                              [100%]\n\n============================== 10 passed in 3.93s ==============================\n",
+      "stderr": "/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n/Users/oleg/Library/Python/3.9/lib/python/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option \"asyncio_default_fixture_loop_scope\" is unset.\nThe event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: \"function\", \"class\", \"module\", \"package\", \"session\"\n\n  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))\n"
+    },
+    {
+      "suite_name": "Tier 4: Real-World Workloads & E2E Simulations",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/test_tier4_workloads.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 13.717,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.3.4, pluggy-1.6.0\nrootdir: /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer\nplugins: anyio-4.12.1, cov-7.1.0, langsmith-0.4.37, asyncio-0.25.3\nasyncio: mode=strict, asyncio_default_fixture_loop_scope=None\ncollected 5 items\n\ntests/test_tier4_workloads.py .....                                      [100%]\n\n============================== 5 passed in 10.39s ==============================\n",
+      "stderr": "/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n/Users/oleg/Library/Python/3.9/lib/python/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option \"asyncio_default_fixture_loop_scope\" is unset.\nThe event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: \"function\", \"class\", \"module\", \"package\", \"session\"\n\n  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))\n"
+    },
+    {
+      "suite_name": "Tier 5: Adversarial Stress & Empirical Fuzzing",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "-m",
+        "pytest",
+        "tests/test_tier5_adversarial_challenge.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 7.204,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.3.4, pluggy-1.6.0\nrootdir: /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer\nplugins: anyio-4.12.1, cov-7.1.0, langsmith-0.4.37, asyncio-0.25.3\nasyncio: mode=strict, asyncio_default_fixture_loop_scope=None\ncollected 244 items\n\ntests/test_tier5_adversarial_challenge.py .............................. [ 12%]\n........................................................................ [ 41%]\n........................................................................ [ 71%]\n......................................................................   [100%]\n\n============================= 244 passed in 4.11s ==============================\n",
+      "stderr": "/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n/Users/oleg/Library/Python/3.9/lib/python/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option \"asyncio_default_fixture_loop_scope\" is unset.\nThe event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: \"function\", \"class\", \"module\", \"package\", \"session\"\n\n  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))\n"
+    },
+    {
+      "suite_name": "Root Acceptance: Model Verification",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "test_model.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 1.221,
+      "stdout": "======================================================================\n ACCEPTANCE CRITERIA 1: MODEL ARCHITECTURE & GRADIENT VERIFICATION\n======================================================================\n[1/3] Initializing Transformer model configuration...\n    [+] Model successfully initialized with 820,864 parameters.\n    [+] Architecture: 4 layers, 4 Q-heads, 2 KV-heads, d_model=128.\n\n[2/3] Verifying Forward Pass Tensor Shapes...\n    [+] Logits shape verified: torch.Size([2, 16, 260]) == (Batch=2, SeqLen=16, Vocab=260)\n    [+] Attention heatmaps shape verified: 4 layers of torch.Size([2, 4, 16, 16])\n\n[3/3] Verifying SFT Loss & Gradient Flow through RoPE, SwiGLU, RMSNorm...\n    [+] SFT Cross-Entropy Loss computed: 5.5198 (prompt tokens masked)\n    [+] Token Embeddings                    | Grad Norm: 219.155640 (PASS)\n    [+] Final RMSNorm                       | Grad Norm: 0.398264 (PASS)\n    [+] Layer 0 Attention RMSNorm           | Grad Norm: 0.370144 (PASS)\n    [+] Layer 0 Q-Projection (RoPE Input)   | Grad Norm: 4.106456 (PASS)\n    [+] Layer 0 K-Projection (RoPE Input)   | Grad Norm: 2.896331 (PASS)\n    [+] Layer 0 V-Projection                | Grad Norm: 137.247665 (PASS)\n    [+] Layer 0 Out-Projection              | Grad Norm: 186.471542 (PASS)\n    [+] Layer 0 FFN RMSNorm                 | Grad Norm: 0.134298 (PASS)\n    [+] Layer 0 SwiGLU Gate Proj (w1)       | Grad Norm: 84.272697 (PASS)\n    [+] Layer 0 SwiGLU Up Proj (w2)         | Grad Norm: 85.646988 (PASS)\n    [+] Layer 0 SwiGLU Down Proj (w3)       | Grad Norm: 89.540703 (PASS)\n\n======================================================================\n ALL MODEL ARCHITECTURE & SFT GRADIENT CHECKS PASSED (100%)\n======================================================================\n",
+      "stderr": ""
+    },
+    {
+      "suite_name": "Root Acceptance: Dashboard Verification",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "test_dashboard.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 4.024,
+      "stdout": "======================================================================\n ACCEPTANCE CRITERIA 2: DASHBOARD & CRISP-DM VERIFICATION\n======================================================================\n\n[1/4] Verifying Admin Web Dashboard UI Endpoints (HTTP GET)...\n    [+] /                    -> Status 200 OK | Content-Type: text/html | Length: 28507 bytes\n    [+] /dashboard           -> Status 200 OK | Content-Type: text/html | Length: 28507 bytes\n\n[2/4] Verifying CRISP-DM Pipeline Tracker State (>= 3 stages)...\n    [+] Total stages tracked: 6\n        - business_understanding   : Name='Business Understanding', Status='completed'\n        - data_understanding       : Name='Data Understanding', Status='completed'\n        - data_preparation         : Name='Data Preparation', Status='completed'\n        - modeling                 : Name='Modeling', Status='running'\n        - evaluation               : Name='Evaluation', Status='not_started'\n        - deployment               : Name='Deployment', Status='not_started'\n    [+] Programmatic check PASSED: Tracks required stages ['data_preparation', 'modeling', 'evaluation']\n\n[3/4] Verifying Live Diagnostic Inspection Endpoints (HTTP GET & POST)...\n    [+] GET  /api/inspect/kv-cache -> Status 200 OK | 4 generation steps profiled\n    [+] POST /api/inspect/kv-cache -> Status 200 OK\n    [+] GET  /api/inspect/attention -> Status 200 OK | Matrix size 10x10\n    [+] POST /api/inspect/attention -> Status 200 OK\n    [+] GET  /api/inspect/tokenizer -> Status 200 OK | Tokens: 16, Compression: 1.00\n    [+] POST /api/inspect/tokenizer -> Status 200 OK\n\n[4/4] Verifying Health & Hardware Telemetry Endpoints...\n    [+] GET  /api/health            -> Status 200 OK | Health Status: healthy\n    [+] GET  /api/hardware/memory   -> Status 200 OK | Process RSS: 295.61 MB (Within 4.0GB Budget)\n\n======================================================================\n ALL DASHBOARD & CRISP-DM CHECKS PASSED (100%)\n======================================================================\n",
+      "stderr": ""
+    },
+    {
+      "suite_name": "Root Acceptance: MPS Benchmark",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "benchmark_mps.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 3.905,
+      "stdout": "======================================================================\n ACCEPTANCE CRITERIA 3: APPLE SILICON MPS GENERATION & MEMORY BENCHMARK\n======================================================================\n[1/5] Resolving Hardware Compute Device...\n    [+] PyTorch MPS Backend Available : True\n    [+] Selected Hardware Device       : mps (MPS)\n    [+] Apple Silicon Metal acceleration ACTIVE.\n\n[2/5] Initializing Benchmark Model on Device...\n    [+] Model Parameters : 820,864\n    [+] Prompt Tokens    : 90 tokens ('Apple Silicon unified memory architectur...')\n\n[3/5] Executing Metal Kernel Warm-up Passes...\n\n[4/5] Running Autoregressive Generation Benchmark (50 tokens)...\n\n[5/5] Auditing Memory Usage & Enforcing Unified Memory Ceiling...\n    [+] Process RSS Memory       : 265.59 MB (0.2594 GB)\n    [+] MPS Tensor Memory        : 3.38 MB\n    [+] Metal Driver Memory      : 26.69 MB\n    [+] Predefined Memory Ceiling: 4.00 GB\n    [+] Strict Memory Bound Check: PASSED (Well below 4.0 GB limit)\n\n----------------------------------------------------------------------\n BENCHMARK PERFORMANCE TELEMETRY SUMMARY\n----------------------------------------------------------------------\n Device              : mps\n Tokens Generated    : 50 tokens in 1.831 s\n Throughput          : 27.31 tokens/sec\n Inter-Token Latency : 36.62 ms/token\n Peak Memory RSS     : 265.59 MB (0.259 GB / 4.0 GB)\n Telemetry Artifact  : /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/02_nano_llm_transformer/benchmark_report.json\n======================================================================\n MPS BENCHMARK & HARDWARE OPTIMIZATION VERIFIED (100% PASS)\n======================================================================\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999/23a6619f843c4eb7a296911baf82312a/artifacts
+end_time: 1788410476863
+entry_point_name: ''
+experiment_id: '882523434356890999'
+lifecycle_stage: active
+run_id: 23a6619f843c4eb7a296911baf82312a
+run_name: final_calibrated_xgboost
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1788410474543
+status: 3
+tags: []
+user_id: oleg

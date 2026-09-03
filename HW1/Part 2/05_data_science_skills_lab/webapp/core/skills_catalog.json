@@ -1,0 +1,1369 @@
+[
+  {
+    "id": "ab-test-analysis",
+    "name": "A/B Test Analysis",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Rigorous A/B test statistical analysis. Use when analyzing experiment results, calculating statistical significance, checking for sample ratio mismatch, or validating test design before launch.",
+    "math_intuition": "Uses the two-proportion z-test z = (p1 - p2) / sqrt(p_pool*(1-p_pool)*(1/n1 + 1/n2)) with p_pool = (x1+x2)/(n1+n2) for significance, and the sample-size formula n = 2*(z_alpha/2 + z_beta)^2 * p*(1-p) / MDE^2 to power a test before launch.",
+    "pitfalls": [
+      "Running the z-test machinery on observational (non-randomized) data and presenting it as if it were a real experiment result.",
+      "Skipping the SRM (sample ratio mismatch) chi-square check before trusting the headline lift.",
+      "Sizing a test off a rate that isn't the true eligible-population baseline (must condition on the actual targeting segment, e.g. M2M+Fiber, not the whole base)."
+    ],
+    "input_schema": {
+      "required": [
+        "Test plan or hypothesis document (variant definitions, randomisation unit, primary metric)",
+        "Data with at minimum: user_id, variant assignment, primary metric outcome",
+        "Optional: guardrail metric values per user, daily aggregate data for temporal validity checks",
+        "Target split ratio (e.g., 50/50)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/ab_test_analyzer.py` \u2014 runs SRM check, significance test, power analysis, and guardrail checks from a CSV or summary stats input",
+        "`references/statistical_tests_reference.md` \u2014 which test to use and when",
+        "`references/ab_test_design_guide.md` \u2014 SRM causes, power planning, peeking and multiple testing",
+        "`assets/ab_test_report_template.md` \u2014 structured report: design, results, checks, recommendation, expected impact"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Measured 55.07% baseline churn in the M2M+Fiber segment (n=1,707); an 8pp MDE needs 607/arm, the finest power achievable without expanding eligibility.",
+    "doc_link": "crisp_dm/03_data_preparation/ab-test-analysis.md"
+  },
+  {
+    "id": "analysis-assumptions-log",
+    "name": "Analysis Assumptions Log",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Track and document analytical assumptions and decisions. Use when making analytical choices, documenting trade-offs, ensuring transparency, or creating audit trails for analytical work.",
+    "math_intuition": "Prioritizes assumptions by a likelihood x impact score, the same expected-severity logic behind expected value EV = P(assumption wrong) * cost(if wrong) -- assumptions with the highest product get tested first, not asserted.",
+    "pitfalls": [
+      "Treating a large, unverified assumption as settled just because it's convenient for the narrative (e.g. logging bias without quantifying its direction/magnitude).",
+      "Letting an assumption go unlogged when it materially changes a downstream number (must score likelihood x impact and decide whether to test it)."
+    ],
+    "input_schema": {
+      "required": [
+        "Analysis name and the decision it informs",
+        "Data sources, time period, and population being analysed",
+        "Key methodological choices made (and alternatives considered)",
+        "Stakeholder-provided business rule definitions"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/assumptions_tracker.py` \u2014 CLI tool to log assumptions, flag critical ones, and export a summary",
+        "`assets/assumptions_log_template.md` \u2014 completed log for peer review and audit trail"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Logged 4+ assumptions scored by likelihood x impact; the cross-sectional cohort bias (#4) was elevated to 'quantified, not assumed away' at +24.38pp.",
+    "doc_link": "crisp_dm/06_deployment/analysis-assumptions-log.md"
+  },
+  {
+    "id": "analysis-documentation",
+    "name": "Analysis Documentation",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Structured, reproducible analysis documentation. Use when documenting analysis findings, creating analysis notebooks, ensuring reproducibility, or building analysis archives for future reference.",
+    "math_intuition": "Treats every reported number as a deterministic function of the raw data, x = f(D); reproducibility means a reader can recompute f(D) from the documented steps and get the same x, which is what a diff-against-artifacts check actually verifies.",
+    "pitfalls": [
+      "Writing a caveats/limitations section as an afterthought instead of surfacing it prominently next to the headline finding.",
+      "Documenting only the happy path and omitting the reconstruction assumptions a later reader would need to trust the numbers."
+    ],
+    "input_schema": {
+      "required": [
+        "Final code (SQL, Python, notebook) and outputs (charts, tables)",
+        "Business question and stakeholder context",
+        "Key findings and recommendations already identified",
+        "Data source details (tables, date ranges, sample sizes)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/analysis_doc_template.md` \u2014 completed analysis document covering context, data, methodology, results, and reproducibility",
+        "Linked or embedded visualisations and code references"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Assembled the full phase 1-6 documentation set with an explicit Caveats and Limitations section, including the +24.38pp survivorship bias finding.",
+    "doc_link": "crisp_dm/06_deployment/analysis-documentation.md"
+  },
+  {
+    "id": "analysis-planning",
+    "name": "Analysis Planning",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Structure analysis approach before starting work. Use when receiving new analysis requests, breaking down complex questions into steps, or planning iterative analysis workflows.",
+    "math_intuition": "Sequences work by an implicit effort-vs-impact ratio per planned analysis, and flags any metric computed from a cross-sectional snapshot as a biased estimator of the true time-varying quantity rather than an unbiased one.",
+    "pitfalls": [
+      "Planning around a snapshot dataset as though it supports true time-series/monthly metrics without labeling the approximation explicitly.",
+      "Skipping an explicit feasibility check for each planned analysis before committing to it."
+    ],
+    "input_schema": {
+      "required": [
+        "Analysis brief or requirements doc (from `stakeholder-requirements-gathering` skill)",
+        "Available data sources",
+        "Deadline and resource constraints"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Completed analysis plan with sequenced steps and time estimates (`analysis_plan_template.md`)",
+        "Kickoff doc for stakeholder alignment (optional, `kickoff_doc_template.md`)",
+        "Risk / dependency log"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Scoped all 6 CRISP-DM phases across 48 skills up front, flagging the cross-sectional-snapshot limitation on every planned 'monthly' metric before computing any of them.",
+    "doc_link": "crisp_dm/01_business_understanding/analysis-planning.md"
+  },
+  {
+    "id": "analysis-qa-checklist",
+    "name": "Analysis Qa Checklist",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Pre-delivery quality assurance for analysis work. Use when reviewing analysis before sharing with stakeholders, checking for completeness, validating assumptions, or ensuring clarity of recommendations.",
+    "math_intuition": "Sign-off is a tolerance check |x_recomputed - x_reported| < epsilon between an independently recomputed figure and the one in the deliverable, the same principle behind the project's independent verification harness.",
+    "pitfalls": [
+      "A phase script 'reproducing itself' in the check isn't real reproducibility \u2014 must diff generated artifacts against what's actually on disk.",
+      "Confirming a business ask reflexively ('does this justify the campaign?') instead of checking it against the honest caveats already on record."
+    ],
+    "input_schema": {
+      "required": [
+        "Output file to review (CSV, notebook, SQL result, or written doc)",
+        "Original analysis question / brief",
+        "Name of reviewer and intended audience"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "QA runner report (automated flags)",
+        "Completed checklist with pass/fail per section",
+        "Signed-off `qa_signoff_template.md` confirming delivery readiness"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Signed off the mlflow-comparison deliverable after diffing generated artifacts against disk contents and checking the caveat section is present (qa_signoff.md).",
+    "doc_link": "crisp_dm/06_deployment/analysis-qa-checklist.md"
+  },
+  {
+    "id": "analysis-retrospective",
+    "name": "Analysis Retrospective",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Post-analysis learning and process improvement. Use when completing major analysis projects, documenting lessons learned, or improving team analytical practices.",
+    "math_intuition": "Measures process health by the real elapsed time between planned and actual milestones and by the real error rate the verification harness caught (here: zero, but with nonzero counterfactual catch-rate), not by a subjective post-mortem alone.",
+    "pitfalls": [
+      "Assuming the planned execution model (e.g. parallel subagents) will hold throughout \u2014 a shared account-level limit can force a mid-project handoff with no warning.",
+      "Not tracking subagent/session quota visibility, which removes the ability to react before a hard stop."
+    ],
+    "input_schema": {
+      "required": [
+        "Completed analysis project (name, scope, timeline)",
+        "Original plan or brief (for comparison)",
+        "Participants (solo or team members involved)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Completed retrospective (`retrospective_template.md`) with what-went-well, issues, root causes, and action items",
+        "Learnings log entry (`learnings_log_template.md`) for reusable insights"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Documented that phases 1-3 (25 skills) ran cleanly via parallel subagents, while phase 4/5/6 (21 skills) hit a simultaneous account-level session limit mid-task.",
+    "doc_link": "crisp_dm/06_deployment/analysis-retrospective.md"
+  },
+  {
+    "id": "business-metrics-calculator",
+    "name": "Business Metrics Calculator",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Standard business metric calculation with industry benchmarks. Use when calculating SaaS metrics (MRR, churn, LTV, CAC), e-commerce KPIs, or product analytics metrics with proper definitions.",
+    "math_intuition": "LTV = ARPU / churn_rate falls out of summing a customer's expected revenue as a geometric series over the customer's expected lifetime, sum_{t=0}^inf ARPU*(1-churn_rate)^t = ARPU / churn_rate, valid only when churn is assumed constant per period -- the exact assumption this lab's peer review rejected as survivorship-biased.",
+    "pitfalls": [
+      "Presenting a derived monthly churn rate (customer-months based) as if it were an observed month-over-month figure.",
+      "Computing LTV:CAC or payback when the dataset has no acquisition-cost field \u2014 must flag as an explicit scope gap rather than omit silently."
+    ],
+    "input_schema": {
+      "required": [
+        "Subscription or transaction data with at minimum: customer ID, date, value, status",
+        "Marketing spend data (for CAC calculation)",
+        "Monthly targets or goals (for vs-target comparisons)",
+        "The agreed-upon metric definitions (or default to industry standard)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/saas_metrics.py` \u2014 calculates standard SaaS metrics from a subscriptions CSV; includes MRR waterfall, churn, LTV/CAC",
+        "`references/metric_definitions.md` \u2014 canonical definitions and benchmark thresholds by model type",
+        "`assets/metrics_report_template.md` \u2014 structured report: revenue metrics, customer metrics, unit economics, benchmark comparison, insights"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Computed real MRR $456,116.60, ARPU $64.76, logo churn 26.537%, revenue churn 30.503% directly from the 7,043-row Telco extract.",
+    "doc_link": "crisp_dm/01_business_understanding/business-metrics-calculator.md"
+  },
+  {
+    "id": "cohort-analysis",
+    "name": "Cohort Analysis",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Time-based cohort analysis with retention and behaviour tracking. Activate when you need to measure how groups of users/customers behave over time \u2014 retention rates, revenue by cohort, or feature adoption curves.",
+    "math_intuition": "The retention matrix entry retention[cohort][t] = active_customers(cohort, t) / cohort_size is literally an empirical discrete survival function S(t) tracked separately per cohort, which is why unequal cohort ages (right-censoring) bias later-period comparisons if not handled.",
+    "pitfalls": [
+      "Back-deriving cohort membership from `tenure` when `tenure` is also the outcome duration being studied \u2014 creates a measurable survivorship bias in reconstructed cohorts (quantified here at +24.38pp for the oldest cohort).",
+      "Trusting an under-100-user cohort's retention rate as stable."
+    ],
+    "input_schema": {
+      "required": [
+        "Required: event data with `user_id`, `cohort_date` (e.g. `signup_date`), `activity_date`",
+        "Required: cohort grouping granularity (daily / weekly / monthly)",
+        "Required: retention event definition \u2014 what counts as \"active\" or \"retained\"?",
+        "Optional: minimum cohort size (recommend \u2265 100 users; smaller cohorts have noisy rates)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/cohort_report_template.md` (filled) \u2014 narrative interpretation and retention figures",
+        "`assets/retention_matrix.html` (filled) \u2014 colour-coded retention heatmap",
+        "`scripts/retention_matrix.py` output CSV \u2014 raw retention rates for downstream use"
+      ]
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Reconstructed 25 signup cohorts (105-495 customers each) and quantified the oldest cohort's survivorship bias at +24.38pp vs. the pooled baseline.",
+    "doc_link": "crisp_dm/03_data_preparation/cohort-analysis.md"
+  },
+  {
+    "id": "context-packager",
+    "name": "Context Packager",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Efficiently package context for AI-assisted analysis. Use when preparing to work with Claude on analysis, organizing context documents, or structuring prompts for complex analytical tasks.",
+    "math_intuition": "Bundling is constrained by a token budget: sum of tokens across all included layers must stay under the model's context window C, so layer selection is implicitly a knapsack problem over information value per token.",
+    "pitfalls": [
+      "Bundling only the task description and omitting the constraints layer (e.g. leakage-safety rules, required column coercions) that a downstream agent needs to avoid repeating a solved bug."
+    ],
+    "input_schema": {
+      "required": [
+        "Task description (what you want the AI to do)",
+        "List of context source files or snippets (schema docs, prior reports, business definitions)",
+        "Token budget (default: 100k tokens)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Merged context bundle (single text file)",
+        "Token count estimate",
+        "Context quality score",
+        "Ready-to-use prompt with task header (`context_package_template.md`)"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Bundled 6 context layers (task/business/schema/prior-findings/constraints/format) into one onboarding document for any agent resuming the project mid-phase.",
+    "doc_link": "crisp_dm/01_business_understanding/context-packager.md"
+  },
+  {
+    "id": "dashboard-specification",
+    "name": "Dashboard Specification",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Design specifications for effective dashboards. Use when planning new dashboards, improving existing ones, or documenting dashboard requirements before development starts.",
+    "math_intuition": "Correct aggregation grain matters because SUM/AVG/COUNT DISTINCT do not commute across join fan-out -- summing a metric across a one-to-many join double-counts unless the grain is fixed before aggregating, a real cause of dashboard number mismatches.",
+    "pitfalls": [
+      "Leaving a calculation ambiguous so a BI developer has to guess it, instead of writing the exact formula into the spec.",
+      "Scope-creeping the dashboard by including row-level detail the stated audience doesn't need or want."
+    ],
+    "input_schema": {
+      "required": [
+        "The business question the dashboard is meant to answer",
+        "A list of candidate metrics (team can provide a rough list; you'll curate it)",
+        "The primary audience (role, visit frequency, decision they make)",
+        "Data availability: confirmed source tables and refresh schedules"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`references/dashboard_design_principles.md` \u2014 layout hierarchy, chart selection, information density guidelines",
+        "`references/dashboard_requirements_guide.md` \u2014 how to run requirements gathering, avoid scope creep, and validate the spec",
+        "`assets/dashboard_spec_template.md` \u2014 complete spec: purpose, users, metric hierarchy, layout wireframe, interactivity, data sources, success criteria"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Specified exact calculation formulas and explicit non-goals (no row-level call list) so a BI developer needs no guesswork.",
+    "doc_link": "crisp_dm/06_deployment/dashboard-specification.md"
+  },
+  {
+    "id": "data-catalog-entry",
+    "name": "Data Catalog Entry",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Create standardized metadata for data assets. Use when documenting new datasets, building data catalogs, improving data discoverability, or creating data dictionaries for teams.",
+    "math_intuition": "Uses the uniqueness ratio nunique(col)/n to flag primary-key candidates (ratio approx 1) versus low-cardinality categorical columns (ratio near 0), the same cardinality check schema-mapper uses to verify candidate keys.",
+    "pitfalls": [
+      "Cataloging a database-shaped source with the skill's SQL-inspection tooling when the real source is a flat file \u2014 must substitute an equivalent pandas-based extraction rather than skip the step.",
+      "Omitting the business-owner interview fields (purpose, criticality, known use cases) and shipping only technical metadata."
+    ],
+    "input_schema": {
+      "required": [
+        "Connection or export from the database/source system for technical metadata",
+        "Data owner contact for business context interview",
+        "Knowledge of upstream sources and downstream consumers",
+        "Applicable governance policies (PII classification, retention rules)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/catalog_extractor.py` \u2014 extracts schema and basic stats from a database table",
+        "`assets/catalog_entry_template.md` \u2014 completed catalog entry with technical, business, quality, lineage, and governance sections"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Profiled all 21 real columns (dtype, null%, cardinality, example values) directly from the CSV since no live database existed to inspect.",
+    "doc_link": "crisp_dm/01_business_understanding/data-catalog-entry.md"
+  },
+  {
+    "id": "data-cleaning",
+    "name": "Data Cleaning",
+    "category": "Data Prep & Feature Engineering",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when preparing raw data for modeling \u2014 handling missing values, duplicates, inconsistent types, outliers, and bad categorical values. Emphasizes fitting all imputation on train-only to avoid leakage.",
+    "math_intuition": "Median/most-frequent imputation minimizes squared/zero-one loss against the training distribution without using test-set statistics; fitting imputers on train-only avoids leaking test-set information into the fill values.",
+    "pitfalls": [
+      "**`df.fillna(df.mean())` on the whole dataset** \u2014 classic leakage. Compute stats on train only.",
+      "**`dropna()` on rows** silently shrinks and biases the dataset; prefer imputation + indicators.",
+      "**Deleting outliers** that are real signal (fraud, rare events) \u2014 investigate before removing.",
+      "**Cleaning before splitting** \u2014 split first, then clean using train statistics."
+    ],
+    "input_schema": {
+      "raw_dataframe": "pandas.DataFrame",
+      "train_test_split": "bool"
+    },
+    "output_schema": {
+      "clean_dataframe": "pandas.DataFrame",
+      "decisions_log": "list[str]"
+    },
+    "example_dataset": "Titanic passengers (891 rows, seaborn-data mirror)",
+    "benchmark_link": "titanic",
+    "result": "Cleaned the 11 real null TotalCharges rows (tenure==0 customers) using train-only imputation, avoiding the fillna(df.mean())-on-everything leak.",
+    "doc_link": "crisp_dm/03_data_preparation/data-cleaning.md"
+  },
+  {
+    "id": "data-narrative-builder",
+    "name": "Data Narrative Builder",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Build compelling data-driven narratives. Use when presenting analysis results, creating stakeholder reports, or transforming a set of findings into a story that drives a specific decision or action.",
+    "math_intuition": "Not a statistical technique -- its 'math' is structural: hook/complication/resolution beats are ordered so the reader's belief update happens in the sequence the evidence actually supports it, front-loading the single highest-information stat (the hook).",
+    "pitfalls": [
+      "Burying the one central message among several supporting points instead of stating it first and building everything else as support.",
+      "Choosing a narrative framework (e.g. Before-After-Bridge) that doesn't fit whether the ask is retrospective or forward-looking."
+    ],
+    "input_schema": {
+      "required": [
+        "The central finding or insight to be communicated",
+        "The audience (role, knowledge level, what they care about most)",
+        "The desired action or decision at the end of the presentation",
+        "All supporting data and charts already prepared"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`references/narrative_frameworks.md` \u2014 SCR, BAB, hero journey, and sparklines patterns with data storytelling examples",
+        "`references/data_writing_guide.md` \u2014 pyramid principle, number formatting, annotation, plain-language techniques",
+        "`assets/narrative_template.md` \u2014 fill-in-the-blank narrative structure: hook, situation, complication, resolution, call to action"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Built an SCR-framed narrative around one central ask: approve a $35K campaign expected to return $43K, hooked on the 30.5% revenue-churn vs 26.5% logo-churn gap.",
+    "doc_link": "crisp_dm/06_deployment/data-narrative-builder.md"
+  },
+  {
+    "id": "data-quality-audit",
+    "name": "Data Quality Audit",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Comprehensive data quality assessment against business rules, schema constraints, and freshness expectations. Activate when validating data pipeline outputs before production use, auditing a dataset against defined business rules, or producing a quality scorecard for a data asset.",
+    "math_intuition": "Completeness per column is 1 - (nulls/total); the composite quality score is a weighted sum Q = sum_i(w_i * s_i) over dimension scores s_i (completeness, validity, uniqueness, ...), which is why it moves when any weighted issue count changes rather than staying pinned at PASS.",
+    "pitfalls": [
+      "Marking referential-integrity and freshness checks as silently skipped instead of explicitly N/A with a stated reason when the source has no FKs or timestamp column.",
+      "Using a fixed accuracy tolerance (e.g. TotalCharges within 25% of tenure x MonthlyCharges) without documenting it as a sanity check, not a precise leakage measurement."
+    ],
+    "input_schema": {
+      "required": [
+        "Required: dataset (CSV / Parquet / database table reference)",
+        "Required: schema relationships \u2014 which columns are primary keys, which are foreign keys to which tables",
+        "Required: business rules \u2014 acceptable value ranges, expected value sets, freshness SLA",
+        "Optional: acceptable error rates \u2014 at what threshold does a failure become CRITICAL vs. HIGH"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/audit_report_template.html` (filled) \u2014 full quality report, shareable with stakeholders",
+        "`assets/quality_rubric.md` (filled) \u2014 one-page quality scorecard with dimension scores",
+        "Script console output \u2014 per-check pass/fail counts for each validation script"
+      ]
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Tested 8+ real business rules (value ranges, cross-column implications, PK uniqueness) against the live extract, explicitly marking referential-integrity/freshness as N/A with a stated reason rather than skipping.",
+    "doc_link": "crisp_dm/02_data_understanding/data-quality-audit.md"
+  },
+  {
+    "id": "executive-summary-generator",
+    "name": "Executive Summary Generator",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Create concise executive summaries from detailed analysis. Use when preparing board decks, executive briefings, or condensing complex analysis into decision-ready formats for senior audiences.",
+    "math_intuition": "Compression keeps only statistics with the highest decision-relevant information content -- practically, whichever numbers change the recommended action if removed -- everything else is cut regardless of how 'interesting' it is statistically.",
+    "pitfalls": [
+      "Omitting a real limitation to make the ask look cleaner \u2014 produces a worse decision for the executive, not a better one."
+    ],
+    "input_schema": {
+      "required": [
+        "The full analysis or report to be summarised",
+        "Knowledge of the executive audience (role, priorities, decisions they're responsible for)",
+        "Quantified business impact for each major finding",
+        "Recommended actions already identified"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`references/pyramid_principle_guide.md` \u2014 answer-first structure, BLUF writing, how to edit a bottom-up draft into top-down",
+        "`references/executive_communication.md` \u2014 adapting tone, removing jargon, quantifying everything, avoiding hedge language",
+        "`assets/executive_summary_template.md` \u2014 1\u20132 page template: situation, key insights (with impact), recommendations (with outcomes), decision needed"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Produced a board-ready summary with the campaign ask, ROI, and an explicit limitation paragraph left in rather than trimmed for polish.",
+    "doc_link": "crisp_dm/06_deployment/executive-summary-generator.md"
+  },
+  {
+    "id": "experiment-tracking",
+    "name": "Experiment Tracking",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when running ML experiments that need to be compared, reproduced, or shared. Covers MLflow/Weights & Biases logging, what to track, run organization, and model registry basics.",
+    "math_intuition": "Treats each run as a tuple (hyperparameters theta, metric M(theta)); comparing runs is comparing real M(theta) values across the same held-out split, so a run can only be trusted if its data/CV split is identical to the ones it's compared against.",
+    "pitfalls": [
+      "Logging only the final metric (no per-epoch curve) \u2014 you can't diagnose overfitting later.",
+      "Forgetting the git SHA \u2014 \"best model\" becomes unreproducible.",
+      "Tracking metrics but not the **exact dataset** used.",
+      "Comparing runs with different seeds and calling a 0.1% delta \"improvement\" \u2014 see the `model-evaluation` skill on significance."
+    ],
+    "input_schema": {
+      "run_params": "dict",
+      "metrics": "dict",
+      "artifacts": "list[path]"
+    },
+    "output_schema": {
+      "run_id": "str",
+      "registry_entry": "dict"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Logged real Optuna + baseline runs to MLflow (mlruns/), comparing model versions with reproducible run IDs (mlflow_runs_comparison.csv).",
+    "doc_link": "crisp_dm/04_modeling/experiment-tracking.md"
+  },
+  {
+    "id": "exploratory-data-analysis",
+    "name": "Exploratory Data Analysis",
+    "category": "Data Quality & Validation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when starting on a new dataset, before modeling, or when asked to \"explore\", \"profile\", \"understand\", or \"summarize\" data. Covers structured EDA, distributions, correlations, target leakage checks, and visualization.",
+    "math_intuition": "Leakage and association checks lean on Pearson correlation r = Cov(X,Y) / (sigma_X * sigma_Y) for numeric pairs and Cramer's V = sqrt(chi2 / (n * min(k-1, r-1))) for categorical association, both bounded so a near-1 value flags near-duplication with the target.",
+    "pitfalls": [
+      "**Profiling on the full dataset then splitting.** EDA that informs feature choices must be done on the **training split only**, or you leak test information.",
+      "**Ignoring class imbalance.** A 99/1 split makes accuracy meaningless \u2014 note it now so you pick the right metric later.",
+      "**Treating IDs as features.** Order IDs, row indices, and hashes correlate with the target by accident.",
+      "**Trusting `.corr()` for non-linear / categorical relationships.** Use mutual information or grouped means for those."
+    ],
+    "input_schema": {
+      "dataframe": "pandas.DataFrame",
+      "target_col": "str"
+    },
+    "output_schema": {
+      "leakage_flags": "list[str]",
+      "target_associations": "dict"
+    },
+    "example_dataset": "Titanic passengers (891 rows, seaborn-data mirror)",
+    "benchmark_link": "titanic",
+    "result": "Investigated the tenure-TotalCharges r=0.826 correlation and ruled it a structural relationship (TotalCharges ~= tenure x MonthlyCharges), not target leakage.",
+    "doc_link": "crisp_dm/02_data_understanding/exploratory-data-analysis.md"
+  },
+  {
+    "id": "feature-engineering",
+    "name": "Feature Engineering",
+    "category": "Data Prep & Feature Engineering",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when creating, encoding, scaling, or selecting features for ML models. Covers categorical encoding, numeric transforms, datetime/text/aggregation features, and leakage-safe target encoding.",
+    "math_intuition": "Numeric transforms like log1p(x) compress right-skew before scaling; smoothed target encoding TE = (n_c * mean_c + m * global_mean) / (n_c + m) shrinks small-category means toward the global mean to control variance/overfitting.",
+    "pitfalls": [
+      "**Target encoding fit on all rows** \u2192 severe leakage, inflated CV, collapse in production.",
+      "**Scaling fit on full data** \u2192 use `Pipeline` so scaler fits on train folds only.",
+      "**Aggregations over the whole timeline** in time-series \u2192 only use past data (rolling windows with proper shift).",
+      "**Creating thousands of features** then trusting noisy importance \u2014 prefer a few well-motivated features + regularization."
+    ],
+    "input_schema": {
+      "raw_dataframe": "pandas.DataFrame"
+    },
+    "output_schema": {
+      "engineered_dataframe": "pandas.DataFrame",
+      "feature_manifest": "dict"
+    },
+    "example_dataset": "Ames Housing (2,930 rows, 82 cols, official De Cock source)",
+    "benchmark_link": "house",
+    "result": "Engineered avg_monthly_spend, tenure_bucket, num_addon_services, and 3 more features inside a leakage-safe fit/transform step (FeatureEngineer in src/p3_pipeline.py).",
+    "doc_link": "crisp_dm/03_data_preparation/feature-engineering.md"
+  },
+  {
+    "id": "funnel-analysis",
+    "name": "Funnel Analysis",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Conversion funnel analysis with drop-off investigation. Use when analyzing multi-step processes, identifying conversion bottlenecks, comparing segments through a funnel, or optimizing user journeys.",
+    "math_intuition": "Step conversion = users_at_step_i / users_at_step_(i-1); overall conversion is the product of every step conversion, prod_i(step_conversion_i), which is why a single weak step dominates the end-to-end rate multiplicatively, not additively.",
+    "pitfalls": [
+      "Treating this dataset's nested service-tier adoption as if it were a true session/event browse-to-purchase funnel when no event log exists."
+    ],
+    "input_schema": {
+      "required": [
+        "Event log data with at minimum: user_id, event_name, timestamp",
+        "Ordered list of funnel steps (event names in sequence)",
+        "Time window for funnel completion",
+        "Segmentation columns if a comparative analysis is needed (channel, device, plan)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/funnel_analyzer.py` \u2014 builds user-level funnel from an event log, computes step conversions, drop-offs, and time-to-convert",
+        "`references/funnel_design_guide.md` \u2014 how to define funnels, choose time windows, and avoid common measurement mistakes",
+        "`assets/funnel_report_template.md` \u2014 report template: funnel overview table, drop-off analysis, segment comparison, time-to-convert, recommendations"
+      ]
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Built a 5-step nested service-adoption funnel (phone -> internet -> add-on -> 3+ add-ons -> TechSupport) with churn rate computed per stage across 5,634 training customers.",
+    "doc_link": "crisp_dm/03_data_preparation/funnel-analysis.md"
+  },
+  {
+    "id": "hyperparameter-tuning",
+    "name": "Hyperparameter Tuning",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when optimizing model hyperparameters. Covers search strategy (random vs Bayesian/Optuna), leakage-safe tuning inside CV, search-space design, early stopping, and budget management.",
+    "math_intuition": "Bayesian/TPE search (Optuna) models p(hyperparameters | good score) vs p(hyperparameters | bad score) and picks the next trial by maximizing Expected Improvement EI(x) = E[max(f(x) - f_best, 0)], which is far more sample-efficient than grid search's exhaustive O(k^d).",
+    "pitfalls": [
+      "**Nested leakage:** preprocessing fit outside CV, then tuned \u2014 inflates scores. Tune the pipeline.",
+      "**Tuning on the test set** \u2014 only ever touch train/validation; report final number on the holdout once.",
+      "**Over-tuning** to a tiny validation set \u2192 great CV, worse production. Prefer simpler models + regularization.",
+      "**Comparing tuned-vs-untuned across different CV splits** \u2014 keep the split fixed."
+    ],
+    "input_schema": {
+      "estimator": "sklearn.BaseEstimator",
+      "search_space": "dict",
+      "cv": "int"
+    },
+    "output_schema": {
+      "best_params": "dict",
+      "trials": "list[dict]"
+    },
+    "example_dataset": "Ames Housing (2,930 rows, 82 cols, official De Cock source)",
+    "benchmark_link": "house",
+    "result": "Ran Optuna searches for both logistic regression and XGBoost (optuna_trials_logreg.csv, optuna_trials_xgboost.csv) inside proper CV, avoiding tuning on the held-out test fold.",
+    "doc_link": "crisp_dm/04_modeling/hyperparameter-tuning.md"
+  },
+  {
+    "id": "imbalanced-data",
+    "name": "Imbalanced Data",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when the target is rare (fraud, churn, disease, anomalies). Covers correct metrics, resampling (SMOTE/undersampling), class weights, threshold tuning, and avoiding the accuracy trap and resampling leakage.",
+    "math_intuition": "PR-AUC (area under precision P=TP/(TP+FP) vs recall R=TP/(TP+FN)) is the right metric under skew because it ignores the large true-negative count that inflates accuracy and ROC-AUC; class_weight='balanced' reweights the loss by scale_pos_weight = n_negative / n_positive.",
+    "pitfalls": [
+      "**Accuracy as the metric** \u2014 the central trap.",
+      "**SMOTE before train/test split** \u2014 leaks synthetic points; scores look great, production fails.",
+      "**Resampling the test set** \u2014 evaluate on the real (imbalanced) distribution.",
+      "**Oversampling then ignoring the threshold** \u2014 probabilities shift; recalibrate/tune the cut.",
+      "**Synthetic samples on categorical/high-dim data** \u2014 SMOTE assumes meaningful interpolation; use SMOTENC or class weights instead."
+    ],
+    "input_schema": {
+      "X": "array",
+      "y": "array (rare positive class)"
+    },
+    "output_schema": {
+      "metrics": "dict (PR-AUC, recall@precision)",
+      "chosen_threshold": "float"
+    },
+    "example_dataset": "ULB Credit Card Fraud (284,807 rows, 0.173% fraud)",
+    "benchmark_link": "fraud",
+    "result": "Compared baseline vs. class_weight='balanced' logistic regression on the real Telco churn class ratio, documented in imbalanced_data_comparison.json.",
+    "doc_link": "crisp_dm/04_modeling/imbalanced-data.md"
+  },
+  {
+    "id": "impact-quantification",
+    "name": "Impact Quantification",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Estimate and communicate business impact of insights. Use when sizing opportunities discovered in analysis, calculating ROI of recommended actions, or prioritizing initiatives by potential impact.",
+    "math_intuition": "Expected value EV = sum_i P(outcome_i) * value(outcome_i) - cost drives the sizing math -- exactly the campaign-capacity table logic (precision_at_k * n_contacted * value_of_save - campaign_cost) used to rank retention-campaign capacity levels by net EV.",
+    "pitfalls": [
+      "Recomputing a sizing model from scratch instead of building on the already-validated expected-value output from the evaluation phase \u2014 duplicated numbers can silently drift apart."
+    ],
+    "input_schema": {
+      "required": [
+        "Baseline metric value (current state)",
+        "Affected population or volume",
+        "Expected change (lift %, absolute, or rate change)",
+        "Time horizon (monthly / annual)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Impact estimate with low/base/high range",
+        "Assumption log (source and sensitivity for each input)",
+        "Completed `impact_estimate_template.md` or `business_case_template.md`"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Built the campaign EV table on top of (not duplicating) business_expected_value.json, ranging net value from $10,553 (5% capacity) to higher at wider capacity.",
+    "doc_link": "crisp_dm/06_deployment/impact-quantification.md"
+  },
+  {
+    "id": "insight-synthesis",
+    "name": "Insight Synthesis",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Transform data findings into compelling insights. Use when converting analysis results into actionable insights, connecting findings to business impact, or preparing insights for stakeholder communication.",
+    "math_intuition": "Explicitly separates correlation r = Cov(X,Y)/(sigma_X sigma_Y) from a causal effect beta, which requires controlling confounders (e.g. via regression adjustment or a real experiment) -- billing data alone gives you r, never beta, for competing explanations like price vs. quality.",
+    "pitfalls": [
+      "Claiming a causal driver (e.g. price vs. quality) when billing data alone cannot separate the two competing explanations."
+    ],
+    "input_schema": {
+      "required": [
+        "All analysis findings (statistics, charts, model outputs, anomalies)",
+        "Business context: current goals, OKRs, strategic priorities",
+        "Audience who will act on the insights (role and decision authority)",
+        "Confidence levels for the findings (based on sample size, method, data quality)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`references/insight_framework.md` \u2014 So What / Why / Now What pattern, insight quality rubric, prioritisation matrix",
+        "`references/prioritization_guide.md` \u2014 scoring insights by impact, confidence, and actionability; how to present trade-offs",
+        "`assets/insight_brief_template.md` \u2014 structured brief: top insights in priority order, each with impact, explanation, recommendation, and confidence level"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Synthesized that Contract type + Fiber service drive churn while gender and phone service don't, explicitly stating price-vs-quality causality can't be separated from billing data alone.",
+    "doc_link": "crisp_dm/06_deployment/insight-synthesis.md"
+  },
+  {
+    "id": "llm-finetuning",
+    "name": "Llm Finetuning",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when fine-tuning a large language model. Covers choosing full vs LoRA/QLoRA, dataset formatting, the transformers/PEFT/TRL stack, key hyperparameters, and evaluating fine-tunes without overfitting.",
+    "math_intuition": "LoRA decomposes each weight update as DeltaW = B @ A with B in R^(d x r), A in R^(r x k) and r << min(d,k), cutting trainable parameters from d*k to r*(d+k) while keeping the frozen base weights untouched.",
+    "pitfalls": [
+      "Too many epochs / LR too high \u2192 overfit, repetitive or degenerate outputs.",
+      "Wrong chat template \u2192 the model learns malformed formatting.",
+      "Tiny/dirty dataset \u2192 memorization, not generalization.",
+      "Skipping a base-model baseline \u2192 you can't prove the fine-tune helped."
+    ],
+    "input_schema": {
+      "base_model": "str",
+      "training_examples": "list[dict]"
+    },
+    "output_schema": {
+      "lora_config": "dict",
+      "dataset_stats": "dict"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Built a real LoRA fine-tuning dataset (finetune_dataset.jsonl, 7.76MB) with documented config (finetune_lora_config.json) from the Telco churn explanations.",
+    "doc_link": "crisp_dm/06_deployment/llm-finetuning.md"
+  },
+  {
+    "id": "methodology-explainer",
+    "name": "Methodology Explainer",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Explain analysis methodology to diverse audiences. Use when documenting 'how we did this' sections, building trust through transparency, or teaching analytical approaches to stakeholders.",
+    "math_intuition": "Restates the underlying model's real math (e.g. a calibrated probability p_hat, PR-AUC, or a chosen decision threshold) in plain language without changing its value -- the translation must be numerically faithful, only the vocabulary changes.",
+    "pitfalls": [
+      "Skipping the mandatory 'at least one honest limitation' paragraph when explaining methodology to a non-technical tier."
+    ],
+    "input_schema": {
+      "required": [
+        "Description of the analytical method used (technique, data, steps)",
+        "Audience type (executive / business / technical)",
+        "Any assumptions or known limitations"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Plain-language methodology write-up",
+        "Limitations section",
+        "Completed `methodology_writeup_template.md` or `methodology_slide_template.md`"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Explained the calibrated-probability + chosen-threshold methodology in plain language for a non-technical audience, with a mandatory limitations paragraph included.",
+    "doc_link": "crisp_dm/06_deployment/methodology-explainer.md"
+  },
+  {
+    "id": "metric-reconciliation",
+    "name": "Metric Reconciliation",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Cross-source metric validation and discrepancy investigation. Use when metrics from different sources don't match, investigating data quality issues between systems, or validating data migration accuracy.",
+    "math_intuition": "Frames a cross-source mismatch as an additive decomposition: discrepancy = metric_A - metric_B = (definitional_difference) + (data_difference), so the fix is isolating which term is non-zero rather than averaging the two numbers together.",
+    "pitfalls": [
+      "Excluding brand-new (tenure==0) rows from a churn-rate denominator without stating why \u2014 they cannot yet have churned by construction, so removing them shifts the rate rather than just cleaning it."
+    ],
+    "input_schema": {
+      "dataset_or_context": "varies by skill (see doc_link)"
+    },
+    "output_schema": {
+      "markdown_or_json_report": "varies by skill (see doc_link)"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Reconciled churn-rate discrepancies caused by including vs excluding the 11 tenure==0 rows, which by construction cannot have churned yet.",
+    "doc_link": "crisp_dm/02_data_understanding/metric-reconciliation.md"
+  },
+  {
+    "id": "metric-reconciliation-tracing",
+    "name": "Metric Reconciliation Tracing",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Trace and resolve discrepancies when the same metric shows different values in two or more sources. Use before reporting, after pipeline changes, or when stakeholders question a number.",
+    "math_intuition": "Traces a discrepancy through a pipeline as a chain of transformations f_1, f_2, ..., f_n and attributes the total gap to whichever f_i's output first diverges from its expected intermediate value -- the same idea as root-cause-investigation's decomposition, applied to a computation graph instead of a business metric.",
+    "pitfalls": [
+      "Trusting the shipped `reconcile_metrics.py` CLI at face value \u2014 its `main()` is defined but never called from `__main__`, so it silently no-ops unless functions are imported directly."
+    ],
+    "input_schema": {
+      "required": [
+        "The metric name and business definition (numerator, denominator, any known variants)",
+        "Access to both sources (queries, dashboard SQL, or raw data)",
+        "The time period showing the discrepancy",
+        "Row counts or record-level data to enable line-by-line comparison if needed"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/reconciliation_report_template.md` \u2014 completed report showing source A vs. source B, the gap, root cause, and resolution status",
+        "A corrected query or pipeline change (if a bug was found)",
+        "A documented tolerance agreement (if the gap is acceptable)"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Traced a metric mismatch back to reconcile_metrics.py's main() never being invoked from __main__ \u2014 the same silent-CLI-noop bug found independently in 2 other skill scripts.",
+    "doc_link": "crisp_dm/02_data_understanding/metric-reconciliation-tracing.md"
+  },
+  {
+    "id": "ml-debugging",
+    "name": "Ml Debugging",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when a model won't learn, loss is NaN, metrics look too good/bad, or training is unstable. Provides a systematic decision tree for diagnosing data, optimization, and generalization failures.",
+    "math_intuition": "Diagnoses training pathology from the loss curve and gradient norm ||grad L(theta)||: a NaN loss usually traces to an exploding gradient or divide-by-zero, a flat loss to a vanishing gradient or too-small learning rate eta in theta_{t+1} = theta_t - eta * grad L(theta_t).",
+    "pitfalls": [
+      "Changing five things at once \u2014 change one variable per experiment.",
+      "Debugging on the full dataset \u2014 shrink to fail fast.",
+      "Trusting metrics without inspecting predictions/confusion matrix."
+    ],
+    "input_schema": {
+      "training_logs": "dict",
+      "loss_curve": "list[float]"
+    },
+    "output_schema": {
+      "diagnosis": "str",
+      "recommended_fix": "str"
+    },
+    "example_dataset": "ULB Credit Card Fraud (284,807 rows, 0.173% fraud)",
+    "benchmark_link": "fraud",
+    "result": "Diagnosed 2+ real training pathologies (documented in ml_debugging_cases.json) using the decision-tree approach rather than guessing at fixes.",
+    "doc_link": "crisp_dm/04_modeling/ml-debugging.md"
+  },
+  {
+    "id": "model-evaluation",
+    "name": "Model Evaluation",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when choosing metrics, validating models, or interpreting results. Covers metric selection by problem type, cross-validation strategy, calibration, confusion-matrix analysis, and avoiding misleading scores.",
+    "math_intuition": "ROC-AUC equals the probability a randomly chosen positive scores higher than a randomly chosen negative (the Mann-Whitney U statistic in disguise); calibration is measured by the Brier score = mean((p_hat - y)^2), which a merely well-ranked (high-AUC) model can still fail badly.",
+    "pitfalls": [
+      "**Accuracy on imbalanced data** \u2014 99% accuracy by predicting the majority class. Use PR-AUC/recall.",
+      "**Tuning the threshold on the test set** \u2014 do it on validation.",
+      "**Shuffling time-series CV** \u2014 leaks the future, inflates scores, collapses in production.",
+      "**Reporting a point estimate** with no variance \u2014 a 0.2% gain inside \u00b11.5% noise is not a gain.",
+      "**Evaluating on the data you tuned on** \u2014 keep a final untouched test set."
+    ],
+    "input_schema": {
+      "y_true": "array",
+      "y_pred_proba": "array"
+    },
+    "output_schema": {
+      "roc_auc": "float",
+      "pr_auc": "float",
+      "confusion_matrix": "array"
+    },
+    "example_dataset": "Titanic passengers (891 rows, seaborn-data mirror)",
+    "benchmark_link": "titanic",
+    "result": "Reported real ROC-AUC 0.8482, PR-AUC 0.6681, and rejected the hazard-based LTV ($7,899.96, implies 122mo lifetime) as survivorship-biased vs. the tenure-based anchor ($2,283.30).",
+    "doc_link": "crisp_dm/05_evaluation/model-evaluation.md"
+  },
+  {
+    "id": "model-serving",
+    "name": "Model Serving",
+    "category": "Workflow & Governance",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when deploying a trained model behind an API. Covers FastAPI inference services, loading artifacts safely, request validation, batching, ONNX/quantization for speed, health checks, and monitoring.",
+    "math_intuition": "Service latency is summarized by order statistics of the response-time distribution (p50/p95/p99, not the mean, since tails matter for SLAs); batching amortizes a fixed per-call overhead c so total time for n rows in batches of size b is roughly n*(c/b + t_row), which is why large batches beat one-row-at-a-time calls.",
+    "pitfalls": [
+      "**Training/serving skew** \u2014 different preprocessing in prod than training. Ship the pipeline, not just the estimator.",
+      "**Loading the model per request** \u2014 kills latency.",
+      "**No input validation** \u2014 one bad payload takes down the worker.",
+      "**`pickle`/`joblib` from untrusted sources** \u2014 only load artifacts you produced.",
+      "**No monitoring** \u2014 you won't notice drift until users do."
+    ],
+    "input_schema": {
+      "customer_record": "dict (raw schema columns)"
+    },
+    "output_schema": {
+      "probability": "float",
+      "risk_band": "str",
+      "latency_ms": "float"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Served the real model behind FastAPI at p50=50.48ms per-request latency; found batch-of-50 calls are ~48x cheaper than 7,000 single-record calls for the monthly scoring workflow.",
+    "doc_link": "crisp_dm/06_deployment/model-serving.md"
+  },
+  {
+    "id": "pandas-patterns",
+    "name": "Pandas Patterns",
+    "category": "Data Prep & Feature Engineering",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when writing or reviewing pandas code. Covers idiomatic, vectorized, memory-efficient patterns; avoiding SettingWithCopyWarning, chained indexing, and slow apply loops.",
+    "math_intuition": "Vectorized operations replace an O(n) Python-level loop with the same O(n) work executed in compiled C, shrinking the per-element constant factor by 1-2 orders of magnitude rather than changing algorithmic complexity.",
+    "pitfalls": [
+      "**`inplace=True`** rarely saves memory and breaks chaining \u2014 avoid it.",
+      "**Iterating with `iterrows`** \u2014 almost always replaceable with vectorization or `itertuples`.",
+      "**Floating-point group keys** \u2014 round or use integer/category keys.",
+      "**Silent dtype upcasts** (int \u2192 float when NaN appears) \u2014 use nullable `Int64` if you must keep integers."
+    ],
+    "input_schema": {
+      "dataframe": "pandas.DataFrame"
+    },
+    "output_schema": {
+      "transformed_dataframe": "pandas.DataFrame"
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Demonstrated vectorized transforms over the real 7,043-row extract, avoiding SettingWithCopyWarning and chained-indexing traps documented in pandas_patterns/.",
+    "doc_link": "crisp_dm/02_data_understanding/pandas-patterns.md"
+  },
+  {
+    "id": "peer-review-template",
+    "name": "Peer Review Template",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Structured peer review for analytical work. Use when reviewing teammates' analysis, providing constructive feedback, or establishing analysis quality standards.",
+    "math_intuition": "Elevates a review finding to a standing caveat when it is load-bearing for a downstream number -- practically, when perturbing the disputed assumption changes the sign or order of magnitude of the final recommendation, not just its precision.",
+    "pitfalls": [
+      "Treating a load-bearing claim (e.g. which LTV figure to use) as resolved without a stated, checkable mechanism for why the conflicting number was rejected."
+    ],
+    "input_schema": {
+      "required": [
+        "Analysis output to review (notebook, report, dashboard spec, or SQL)",
+        "Review scope agreed with author",
+        "Reviewer name and role"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Completed review with categorised feedback (`peer_review_template.md`)",
+        "Author response log (`review_response_template.md`)",
+        "Sign-off confirmation"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Reviewed the model-evaluation deliverable and elevated the LTV methodology conflict to a standing caveat rather than a one-off review comment.",
+    "doc_link": "crisp_dm/06_deployment/peer-review-template.md"
+  },
+  {
+    "id": "programmatic-eda",
+    "name": "Programmatic Eda",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Systematic exploratory data analysis. Activate when a dataset needs profiling \u2014 structure check, nulls, outliers, distributions, correlations \u2014 before deeper analysis begins.",
+    "math_intuition": "Outlier detection combines the IQR rule (flag x if x < Q1 - 1.5*IQR or x > Q3 + 1.5*IQR) with the z-score rule (flag if |x - mean|/std > 3), both of which produce known false positives on binary/low-cardinality columns since IQR collapses to a degenerate range.",
+    "pitfalls": [
+      "Flagging IQR outliers on a 0/1 binary column (e.g. SeniorCitizen) as real anomalies \u2014 a known false-positive pattern of naive IQR/z-score detectors."
+    ],
+    "input_schema": {
+      "required": [
+        "Required: dataset path (CSV / Parquet / Excel) or a DataFrame already in scope",
+        "Required: business context \u2014 what does one row represent?",
+        "Optional: quality threshold overrides (defaults in `references/quality_thresholds.md`)",
+        "Optional: columns to skip (PII, binary blobs, high-cardinality IDs)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/eda_report_template.md` (filled) \u2014 full profiling report with per-column stats",
+        "`assets/findings_summary.md` (filled) \u2014 top 3\u20135 quality issues and recommended next steps",
+        "Console output / plots from scripts for interactive inspection"
+      ]
+    },
+    "example_dataset": "Ames Housing (2,930 rows, 82 cols, official De Cock source)",
+    "benchmark_link": "house",
+    "result": "Ran all 5 profiling scripts on the real Telco extract; flagged SeniorCitizen's 16.21% IQR 'outlier' rate as a documented false positive of IQR on a binary column.",
+    "doc_link": "crisp_dm/02_data_understanding/programmatic-eda.md"
+  },
+  {
+    "id": "pytorch-training-loop",
+    "name": "Pytorch Training Loop",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when writing or reviewing a PyTorch training loop. Covers correct train/eval modes, gradient handling, mixed precision, checkpointing, reproducibility, and device management.",
+    "math_intuition": "Each step applies gradient descent theta_{t+1} = theta_t - eta * grad L(theta_t), with grad L computed by backpropagation's reverse-mode application of the chain rule through the computation graph.",
+    "pitfalls": [
+      "**Forgetting `zero_grad`** \u2192 gradients pile up, training diverges.",
+      "**`eval()` never called** \u2192 dropout/batchnorm corrupt validation metrics.",
+      "**Accumulating `total_loss += loss`** (tensor, not `.item()`) \u2192 memory explosion.",
+      "**DataLoader with `num_workers=0`** on large data \u2192 CPU-bound; raise workers + `pin_memory=True`.",
+      "**LR too high** \u2192 NaN loss; see the `ml-debugging` skill."
+    ],
+    "input_schema": {
+      "model": "torch.nn.Module",
+      "train_loader": "DataLoader"
+    },
+    "output_schema": {
+      "checkpoint": "path",
+      "training_history": "dict"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Trained a real MLP in PyTorch (mlp_best.pt) and logged its training history (mlp_training_history.json), comparing it against the sklearn baseline (mlp_vs_sklearn_comparison.json).",
+    "doc_link": "crisp_dm/04_modeling/pytorch-training-loop.md"
+  },
+  {
+    "id": "query-validation",
+    "name": "Query Validation",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "SQL query review for correctness, performance, and best practices. Activate when a query needs review before production use, shows unexpected results, or runs too slowly.",
+    "math_intuition": "Estimates query cost via cardinality arithmetic: estimated_rows = selectivity * table_rows, and join fan-out = rows_A * avg_matches_per_key_in_B, which is what makes an unindexed join trigger a full-table-scan plan instead of an index seek.",
+    "pitfalls": [
+      "Assuming the shipped `explain_plan_parser.py` covers every engine \u2014 it only supports Postgres `EXPLAIN ANALYZE` and Snowflake JSON, not SQLite's plan format, a real coverage gap."
+    ],
+    "input_schema": {
+      "required": [
+        "Required: the SQL query text",
+        "Required: target database engine (Snowflake / BigQuery / Postgres / Redshift / other)",
+        "Optional: relevant table schemas (column names, types, approximate row counts)",
+        "Optional: EXPLAIN / query profile output"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/query_review_template.md` (filled) \u2014 categorised findings: correctness, performance, style",
+        "`assets/optimization_recommendations.md` (filled, if issues found) \u2014 ranked rewrite suggestions with expected impact"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Reviewed 2 real SQLite EXPLAIN plans against artifacts/telco.db, finding revenue_at_risk_by_contract.sql triggers two separate full-table scans.",
+    "doc_link": "crisp_dm/02_data_understanding/query-validation.md"
+  },
+  {
+    "id": "rag-pipeline",
+    "name": "Rag Pipeline",
+    "category": "Modeling & Evaluation",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when building retrieval-augmented generation. Covers chunking strategy, embedding choice, vector stores, hybrid + reranking retrieval, prompt assembly, and evaluating retrieval and answer quality.",
+    "math_intuition": "Retrieval ranks chunks by cosine similarity cos(theta) = (A . B) / (||A|| * ||B||) between the query embedding and each chunk embedding, so ranking depends only on vector direction, not magnitude.",
+    "pitfalls": [
+      "**Dense-only retrieval** misses exact keywords/IDs \u2014 add BM25.",
+      "**Chunks too large** dilute relevance; **too small** lose context.",
+      "**Mismatched embedding models** at index vs query time.",
+      "**No reranker** \u2192 low precision context \u2192 confident wrong answers.",
+      "**No retrieval eval** \u2192 you tune blind."
+    ],
+    "input_schema": {
+      "query": "str",
+      "corpus": "list[document]"
+    },
+    "output_schema": {
+      "retrieved_chunks": "list[dict]",
+      "eval_scores": "dict"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Built a real retrieval index (rag_index/) over the project's own documentation and evaluated it (rag_eval.json) rather than asserting retrieval quality.",
+    "doc_link": "crisp_dm/06_deployment/rag-pipeline.md"
+  },
+  {
+    "id": "reproducible-ml",
+    "name": "Reproducible Ml",
+    "category": "Workflow & Governance",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when an ML result must be reproducible \u2014 fixing seeds, pinning environments, versioning data, and structuring projects so runs can be exactly recreated. Covers determinism gotchas across NumPy, PyTorch, and CUDA.",
+    "math_intuition": "A fixed PRNG seed s makes a deterministic generator produce the exact same pseudorandom sequence every run, so identical (seed, data, code, environment) inputs are the necessary and sufficient condition for byte-identical downstream metrics.",
+    "pitfalls": [
+      "Seeding only NumPy but using PyTorch/CUDA RNGs.",
+      "\"Works on my machine\" \u2014 unpinned env + unversioned data.",
+      "Doing real computation in notebooks with hidden execution order \u2014 move logic to `src/`."
+    ],
+    "input_schema": {
+      "seed": "int",
+      "env_snapshot": "dict"
+    },
+    "output_schema": {
+      "determinism_proof": "dict"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Proved determinism across reruns with fixed seeds (repro_determinism_proof.json) \u2014 same inputs, byte-identical downstream metrics.",
+    "doc_link": "crisp_dm/04_modeling/reproducible-ml.md"
+  },
+  {
+    "id": "root-cause-investigation",
+    "name": "Root Cause Investigation",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Systematic investigation of metric changes and anomalies. Use when a metric unexpectedly changes, investigating business metric drops, explaining performance variations, or drilling into aggregated metric drivers.",
+    "math_intuition": "Validates an anomaly with a z-test (z = (p1-p2)/SE, flagging anything beyond +/-1.5-3 sigma as real) then applies a Kitagawa/Oaxaca-style decomposition: rate_gap = sum_k(share_diff_k * base_rate_k) [mix effect] + sum_k(share_k * rate_diff_k) [within-segment rate effect], separating 'the segments changed size' from 'the segments got worse'.",
+    "pitfalls": [
+      "Attributing a rate gap entirely to mix shift (which segment is larger) without decomposing mix effect vs. within-segment rate effect \u2014 here mix explained only 22% of the gap, rate effect 78%."
+    ],
+    "input_schema": {
+      "required": [
+        "Metric name and historical values (at least 30 days before the change)",
+        "Granular data with dimensional breakdowns (geography, platform, segment, etc.)",
+        "The date or date range when the change was noticed",
+        "A change log or incident log for the same period (product releases, campaigns, outages)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/drilldown_analyzer.py` \u2014 validates the change, computes dimensional drill-downs, and ranks contributors by impact",
+        "`references/rca_framework.md` \u2014 structured five-step RCA method with decision rules",
+        "`references/hypothesis_testing_guide.md` \u2014 checklist of common root causes and how to test each",
+        "`assets/rca_report_template.md` \u2014 report template: what changed, when, primary driver, supporting evidence, timeline, recommendations"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Decomposed the Fiber-vs-non-Fiber churn gap (+27.81pp) into a 22% mix effect and a 78% within-segment rate effect via z=23.47, p=8.66e-122.",
+    "doc_link": "crisp_dm/03_data_preparation/root-cause-investigation.md"
+  },
+  {
+    "id": "schema-mapper",
+    "name": "Schema Mapper",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Database schema understanding and relationship mapping. Use when exploring unfamiliar databases, documenting table relationships, identifying join paths, or generating ERD documentation for existing schemas.",
+    "math_intuition": "Verifies a candidate primary key K by the injective-mapping test |unique(K)| = |rows| -- if every row maps to a distinct K value, K is a valid key; this is checked directly against the data rather than assumed from a column name.",
+    "pitfalls": [
+      "Presenting an inferred normalized schema (reverse-engineered from a flat extract) as if it were the actual source OLTP schema rather than explicitly labeling it as inferred."
+    ],
+    "input_schema": {
+      "dataset_or_context": "varies by skill (see doc_link)"
+    },
+    "output_schema": {
+      "markdown_or_json_report": "varies by skill (see doc_link)"
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Reverse-engineered a 5-table normalized schema from the flat extract, verifying customerID uniqueness (0 duplicates across 7,043 rows) rather than assuming it.",
+    "doc_link": "crisp_dm/02_data_understanding/schema-mapper.md"
+  },
+  {
+    "id": "schema-mapper-mapping",
+    "name": "Schema Mapper Mapping",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Document column-level mappings between source and target schemas. Use when integrating data from multiple systems, designing ETL transformations, or documenting how raw fields become analytical assets.",
+    "math_intuition": "Column mapping is a function f: dtype_source -> dtype_target that must exist and be lossless (or explicitly lossy) for every source column, e.g. f(string) = float64 via a documented CAST -- the schema_compare.py tool enumerates exactly which columns lack a valid f.",
+    "pitfalls": [
+      "Trusting the shipped `schema_compare.py` CLI \u2014 like `reconcile_metrics.py` and `sql_explainer.py`, its `main()` is defined but never invoked from `__main__`, so CLI args are silently ignored and a hardcoded demo runs instead."
+    ],
+    "input_schema": {
+      "required": [
+        "Source schema: table name, column names, data types, and descriptions",
+        "Target schema: same, or the analytical requirements that define it",
+        "Any existing transformation logic (SQL, dbt models, Python code)",
+        "Business rules that govern how values should be transformed or defaulted"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/schema_compare.py` \u2014 compares two schemas and finds direct-name matches and type mismatches",
+        "`assets/schema_mapping_template.md` \u2014 completed column-by-column mapping with transformation rules, gaps, and decisions",
+        "Optional: transformation SQL or dbt YAML generated from the mapping"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Found exactly 2 direct column matches and 19 type mismatches requiring a CAST between the raw CSV schema and the analytics-ready target schema.",
+    "doc_link": "crisp_dm/02_data_understanding/schema-mapper-mapping.md"
+  },
+  {
+    "id": "segmentation-analysis",
+    "name": "Segmentation Analysis",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Customer/user segmentation with actionable insights. Use when identifying distinct customer groups, analyzing segment-specific behavior, profiling high-value segments, or testing segmentation hypotheses.",
+    "math_intuition": "K-means minimizes within-cluster sum of squares, argmin_S sum_k sum_{x in S_k} ||x - mu_k||^2, and is validated by the silhouette score s(i) = (b(i)-a(i)) / max(a(i),b(i)) in [-1,1], with s > 0.3 treated as the minimum bar for a real, non-arbitrary split.",
+    "pitfalls": [
+      "Accepting a clustering solution with silhouette <= 0.3 as validated \u2014 the skill's own threshold for a usable clustering."
+    ],
+    "input_schema": {
+      "required": [
+        "User-level data with attributes (demographics, plan type) and behavioural metrics (sessions, revenue, feature usage, recency)",
+        "Business goal the segmentation will serve",
+        "Any existing segmentation to validate or replace",
+        "Minimum of ~100 users per expected segment for clustering to be meaningful"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/segmentation_runner.py` \u2014 runs k-means clustering, produces elbow and silhouette plots, assigns segment labels",
+        "`references/segmentation_approaches.md` \u2014 when to use k-means vs. RFM vs. rule-based; interpretation guide",
+        "`assets/segment_profile_template.md` \u2014 filled segment profiles with size, key characteristics, recommended strategy, and tracking plan"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "K-means swept k=2..8; k=2 gave the best silhouette (0.3369), and the rule-based grid found $109,353/mo total MRR at risk across 9 value x risk segments.",
+    "doc_link": "crisp_dm/03_data_preparation/segmentation-analysis.md"
+  },
+  {
+    "id": "semantic-model-builder",
+    "name": "Semantic Model Builder",
+    "category": "Data Quality & Validation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Build structured semantic layer documentation for metrics, dimensions, and entities. Activate when you need to define a business metric, document a data model, or create YAML definitions compatible with dbt Semantic Layer or similar frameworks.",
+    "math_intuition": "Enforces an additivity/consistency constraint: a derived metric's value must equal its defining expression evaluated over the declared dimensions, metric = f(dimensions), so two consumers computing the same named metric from the same semantic model cannot silently diverge.",
+    "pitfalls": [
+      "Relying on `model_yaml_validator.py` for full coverage when metrics/dimensions/entities are nested under `semantic_models:` (the correct dbt shape) \u2014 the validator only inspects flat top-level lists, so a second independent check is needed for full coverage."
+    ],
+    "input_schema": {
+      "required": [
+        "Required: the metric name or model name to document",
+        "Required: calculation logic \u2014 SQL snippet, formula, or plain-English steps",
+        "Required: business context \u2014 who uses it, what decision it informs, what a \"good\" value looks like",
+        "Optional: data source table(s) and column names"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`assets/metric_definition.yaml` \u2014 filled metric YAML definition(s)",
+        "`assets/dimension_definition.yaml` \u2014 filled dimension YAML definition(s)",
+        "`assets/entity_definition.yaml` \u2014 filled entity YAML definition(s)",
+        "Validation report from `scripts/model_yaml_validator.py` (inline output)"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Defined the Telco semantic layer in dbt-compatible YAML (semantic_model_telco.yml), catching a validator coverage gap on nested semantic_models: blocks.",
+    "doc_link": "crisp_dm/01_business_understanding/semantic-model-builder.md"
+  },
+  {
+    "id": "sklearn-pipelines",
+    "name": "Sklearn Pipelines",
+    "category": "Data Prep & Feature Engineering",
+    "origin": "param087/agent-ml-skills",
+    "purpose": "Use when building scikit-learn models that must not leak preprocessing. Covers Pipeline, ColumnTransformer, custom transformers, and combining preprocessing with cross-validation correctly.",
+    "math_intuition": "A Pipeline enforces that any statistic used in a transform (e.g. mean_train, std_train in z = (x - mean_train) / std_train) is fit only on the training fold and then applied unchanged to validation/test data, which is exactly what prevents preprocessing leakage under cross-validation.",
+    "pitfalls": [
+      "**`scaler.fit_transform(X)` before `train_test_split`** \u2014 the #1 leakage bug. Fit inside the pipeline instead.",
+      "**`OneHotEncoder` without `handle_unknown=\"ignore\"`** crashes on unseen test categories.",
+      "**Imputing the target** \u2014 pipelines transform `X`, never `y`; impute/clean targets separately and deliberately.",
+      "**Tuning preprocessing outside CV** \u2014 keep it in the pipeline so search respects fold boundaries."
+    ],
+    "input_schema": {
+      "X": "pandas.DataFrame",
+      "y": "array"
+    },
+    "output_schema": {
+      "fitted_pipeline": "sklearn.Pipeline (joblib)"
+    },
+    "example_dataset": "Titanic passengers (891 rows, seaborn-data mirror)",
+    "benchmark_link": "titanic",
+    "result": "Built a single leakage-free Pipeline (FeatureEngineer -> ColumnTransformer) serialized to model.joblib and proven not to leak via pipeline_leakage_proof.md.",
+    "doc_link": "crisp_dm/03_data_preparation/sklearn-pipelines.md"
+  },
+  {
+    "id": "sql-to-business-logic",
+    "name": "SQL to Business Logic",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Translate SQL queries into plain language business logic. Use when documenting queries, explaining analysis to non-technical stakeholders, code reviewing for correctness, or building a query catalog.",
+    "math_intuition": "Maps each relational-algebra operator in the query plan (selection sigma, projection pi, join bowtie, aggregation) to its plain-language business meaning one-for-one, so the translation is exact wherever the parser correctly recognizes the operator and approximate only where its coverage gap forces a manual read.",
+    "pitfalls": [
+      "Trusting the parser's auto-generated plain-language output on complex SELECT lists/WHERE clauses verbatim \u2014 it has a documented, real coverage limitation requiring manual translation."
+    ],
+    "input_schema": {
+      "required": [
+        "The complete SQL query (SELECT through ORDER BY)",
+        "The business question the query is intended to answer",
+        "Table and column descriptions (or a data catalog entry)",
+        "Any business rules for key status values, date handling, or currency"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/sql_explainer.py` \u2014 parses a SQL query and generates a structured plain-language explanation",
+        "`assets/query_documentation_template.md` \u2014 completed translation covering purpose, step-by-step logic, output columns, business rules, and validation questions",
+        "Optionally: a flowchart representation of the query logic"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Translated 2 real SQL queries (churn rate by contract, revenue at risk by contract) into plain business logic, documenting a parser coverage limitation on complex SELECTs.",
+    "doc_link": "crisp_dm/02_data_understanding/sql-to-business-logic.md"
+  },
+  {
+    "id": "stakeholder-requirements-gathering",
+    "name": "Stakeholder Requirements Gathering",
+    "category": "Workflow & Governance",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Structured requirements elicitation for analysis requests. Use when scoping new analysis projects, clarifying ambiguous business questions, or documenting analysis acceptance criteria with stakeholders.",
+    "math_intuition": "No formal math -- but flags any requested 'monthly' metric computed from a single cross-sectional snapshot as a biased point estimate of the true recurring-ledger quantity, since a snapshot has no time dimension to average over.",
+    "pitfalls": [
+      "Reporting a cross-sectional snapshot's derived 'monthly' metrics to a stakeholder without labeling them as approximations, not directly observed figures."
+    ],
+    "input_schema": {
+      "required": [
+        "Stakeholder's initial request (however vague)",
+        "Name and role of primary requestor and any other stakeholders",
+        "Proposed deadline or urgency level"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Completed requirements doc (`requirements_doc_template.md`)",
+        "Analysis brief ready to hand to the analyst (`analysis_brief_template.md`)",
+        "Interview notes (optional, for complex projects)"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Captured the VP of Retention's requirements, explicitly scoping out LTV:CAC (no CAC field) and labeling 'monthly' metrics as approximations up front.",
+    "doc_link": "crisp_dm/01_business_understanding/stakeholder-requirements-gathering.md"
+  },
+  {
+    "id": "technical-to-business-translator",
+    "name": "Technical To Business Translator",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Translate technical analysis into business language. Use when explaining statistical concepts to non-analysts, simplifying technical findings, or bridging communication between data teams and business stakeholders.",
+    "math_intuition": "Translates specific statistical objects into business terms without changing their value: a p-value (P(data this extreme | null hypothesis true)) becomes 'how surprising this result would be by chance', and a 95% CI becomes a stated range of plausible true effect sizes.",
+    "pitfalls": [
+      "Relying on the term-detector's fixed technical-noun list for dense technical text \u2014 it doesn't cover every case and needs manual translation on top."
+    ],
+    "input_schema": {
+      "required": [
+        "Draft technical text or findings",
+        "Target audience role (VP, product manager, operations, finance, etc.)"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "Jargon detection report",
+        "Readability score before/after",
+        "Translated text with original in appendix (`translation_template.md`)"
+      ]
+    },
+    "example_dataset": "Kaggle Telco Customer Churn (7,043 customers, CRISP-DM lab)",
+    "benchmark_link": "telco",
+    "result": "Translated calibrated probability / PR-AUC / threshold language into plain business terms, flagging the term-detector's real coverage gap on dense technical text.",
+    "doc_link": "crisp_dm/06_deployment/technical-to-business-translator.md"
+  },
+  {
+    "id": "time-series-analysis",
+    "name": "Time Series Analysis",
+    "category": "Analytics & Investigation",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Temporal pattern detection and forecasting. Use when analyzing trends over time, detecting seasonality, identifying anomalies in time series, or building simple forecasting models for planning.",
+    "math_intuition": "Runs an ADF unit-root test for stationarity, decomposes the series additively as Y_t = Trend_t + Seasonal_t + Residual_t (or multiplicatively), flags anomalies at |x - rolling_median| > 3*sigma, and validates any ARIMA forecast on a held-out 20% split via MAPE = mean(|actual - forecast| / actual).",
+    "pitfalls": [
+      "Building a derived time series from a back-calculated join date without stating the same reconstruction-assumption caveat used in cohort-analysis."
+    ],
+    "input_schema": {
+      "required": [
+        "Time series data: date column + one numeric metric column, minimum 2 full seasonal cycles",
+        "Granularity of the data (daily, weekly, monthly)",
+        "Forecast horizon required (days, weeks, months ahead)",
+        "Event log or change log for anomaly investigation"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/ts_analyzer.py` \u2014 decomposes, detects anomalies, and fits an ARIMA forecast; outputs charts and CSV",
+        "`references/ts_patterns_guide.md` \u2014 stationarity, seasonality types, model selection guide, and common pitfalls",
+        "`assets/ts_report_template.md` \u2014 report template: characteristics, decomposition summary, anomaly list, forecast table, insights"
+      ]
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Built 2 derived series (active customers by month, hazard by tenure month) and forecast churn hazard (ts_forecast.json) using the same reconstruction caveat as cohort-analysis.",
+    "doc_link": "crisp_dm/03_data_preparation/time-series-analysis.md"
+  },
+  {
+    "id": "visualization-builder",
+    "name": "Visualization Builder",
+    "category": "Storytelling & Communication",
+    "origin": "nimrodfisher/data-analytics-skills",
+    "purpose": "Create effective, publication-ready data visualizations. Use when choosing chart types, designing presentation visuals, building dashboard charts, or applying visual design best practices to data output.",
+    "math_intuition": "Chart choice follows message type (comparison/trend/composition/distribution/relationship) to encoding channel, aggregating to the right grain before plotting to avoid Simpson's-paradox-style reversals where a trend visible in aggregate disappears or flips within subgroups.",
+    "pitfalls": [
+      "Plotting a number that wasn't recomputed directly from source data/verified artifacts \u2014 the skill's rule here is nothing plotted is invented."
+    ],
+    "input_schema": {
+      "required": [
+        "The data to be visualised (at the correct aggregation grain)",
+        "The single key message the chart must communicate",
+        "The audience (technical or executive) and the display context (presentation slide, report, dashboard, email)",
+        "Brand colors or style guidelines if applicable"
+      ]
+    },
+    "output_schema": {
+      "deliverables": [
+        "`scripts/chart_builder.py` \u2014 creates professional matplotlib/seaborn charts with pre-set styling, annotation helpers, and export settings",
+        "`references/chart_selection_guide.md` \u2014 which chart type for which message; common chart mistakes and how to fix them",
+        "`references/visual_design_principles.md` \u2014 color, typography, hierarchy, annotation, and accessibility principles",
+        "`assets/viz_spec_template.md` \u2014 spec template for a chart: message, data source, chart type, annotations, export requirements"
+      ]
+    },
+    "example_dataset": "UCI Online Retail (541,909 rows, UK e-commerce transactions)",
+    "benchmark_link": "ecommerce",
+    "result": "Rendered every chart (funnel, segmentation, hazard curve) by recomputing directly from source data and verified artifacts \u2014 nothing plotted was invented.",
+    "doc_link": "crisp_dm/06_deployment/visualization-builder.md"
+  }
+]

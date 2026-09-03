@@ -1,0 +1,1 @@
+[WARN] No WHERE or LIMIT clause — full table scan likely

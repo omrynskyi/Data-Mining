@@ -1,0 +1,29 @@
+/Users/oleg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+=== 1. single-customer predict ===
+200 {'model_version': 'telco-churn-classifier-v1', 'threshold': 0.28554028272628784, 'request_id': 'e5be5aee-8df7-491d-801e-1e9224c9763d', 'latency_ms': 62.75, 'predictions': [{'customerID': '7590-VHVEG', 'probability': 0.6783, 'risk_band': 'high', 'flagged': True}]}
+
+=== 2. batch predict (50 customers) ===
+200 n_preds= 50 latency_ms= 54.81
+sample: {'customerID': '5575-GNVDE', 'probability': 0.0527, 'risk_band': 'low', 'flagged': False}
+
+=== 3. malformed payload: bad Contract enum value ===
+422 {'detail': [{'type': 'literal_error', 'loc': ['body', 'customers', 0, 'Contract'], 'msg': "Input should be 'Month-to-month', 'One year' or 'Two year'", 'input': 'Lifetime', 'ctx': {'expected': "'Month-to-month', 'One year' or 'Two year'"}}]}
+
+=== 4. malformed payload: missing required field ===
+422 {'detail': [{'type': 'missing', 'loc': ['body', 'customers', 0, 'MonthlyCharges'], 'msg': 'Field required', 'input': {'customerID': '7795-CFOCW', 'gender': 'Male', 'SeniorCitizen': 0, 'Partner': 'No', 'Dependents': 'No', 'tenure': 45, 'PhoneService': 'No', 'MultipleLines': 'No phone service', 'InternetService': 'DSL', 'OnlineSecurity': 'Yes', 'OnlineBackup': 'No', 'DeviceProtection': 'Yes', 'TechSupport': 'Yes', 'StreamingTV': 'No', 'StreamingMovies': 'No', 'Contract': 'One year', 'PaperlessBilling': 'No', 'PaymentMethod': 'Bank transfer (automatic)', 'TotalCharges': '1840.75', 'Churn': 'No'}}]}
+
+=== 5. malformed payload: empty customers list ===
+422 {'detail': 'customers list must not be empty'}
+
+=== 6. malformed payload: TotalCharges non-numeric garbage ===
+422 {'detail': [{'type': 'value_error', 'loc': ['body', 'customers', 0, 'TotalCharges'], 'msg': "Value error, TotalCharges must be numeric or blank, got 'not-a-number'", 'input': 'not-a-number', 'ctx': {'error': {}}}]}
+
+=== 7. valid blank TotalCharges (tenure==0 new customer) ===
+200 {'model_version': 'telco-churn-classifier-v1', 'threshold': 0.28554028272628784, 'request_id': 'ef6c2abd-9adf-45cc-9c11-73737fc23050', 'latency_ms': 52.08, 'predictions': [{'customerID': '4472-LVYGI', 'probability': 0.0648, 'risk_band': 'low', 'flagged': False}]}
+
+=== 8. load test: 220 sequential single-record requests, p50/p95/p99 ===
+n=220 errors=0 p50=50.48ms p95=55.74ms p99=61.42ms mean=50.95ms
+
+=== 9. load test: 20 batch requests of 50 customers each ===
+batch(50) n=20 p50=53.29ms p95=81.70ms mean=54.41ms

@@ -1,0 +1,26 @@
+{
+  "dataset": "data/Telco-Customer-Churn.csv",
+  "rows_assessed": 7043,
+  "dimension_scores_0_10": {
+    "Completeness": 10.0,
+    "Accuracy": 10.0,
+    "Consistency": 10.0,
+    "Timeliness": null,
+    "Uniqueness": 10.0,
+    "Validity": 10.0
+  },
+  "dimension_weights": {
+    "Completeness": 0.2,
+    "Accuracy": 0.2,
+    "Consistency": 0.2,
+    "Timeliness": 0.15,
+    "Uniqueness": 0.15,
+    "Validity": 0.1
+  },
+  "overall_score_0_10": 10.0,
+  "verdict": "PASS",
+  "checks_total": 21,
+  "checks_pass": 19,
+  "checks_fail": 0,
+  "checks_na": 2
+}

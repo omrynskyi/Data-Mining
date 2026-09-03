@@ -1,0 +1,28 @@
+{
+  "mlp": {
+    "checkpoint_epoch": 1,
+    "best_val_loss": 0.728581473055179,
+    "test_roc_auc": 0.8435195949262445,
+    "test_pr_auc": 0.6532403975421369,
+    "test_accuracy_at_0.5": 0.7409510290986515,
+    "test_recall_at_0.5": 0.786096256684492,
+    "test_brier": 0.16977450961337587,
+    "n_epochs_trained": 12,
+    "device": "mps"
+  },
+  "sklearn_logreg_baseline": {
+    "model": "LogisticRegression(class_weight=balanced), refit on full train",
+    "test_roc_auc": 0.8460125552197163,
+    "test_pr_auc": 0.6589867455806915,
+    "test_accuracy_at_0.5": 0.7345635202271115,
+    "test_recall_at_0.5": 0.7914438502673797
+  },
+  "xgboost_tuned": {
+    "model": "XGBoost (Optuna-tuned), refit on full train",
+    "test_roc_auc": 0.8464982303856985,
+    "test_pr_auc": 0.6621330018733003,
+    "test_accuracy_at_0.5": 0.7799858055358411,
+    "test_recall_at_0.5": 0.7352941176470589
+  },
+  "verdict": "By held-out test PR-AUC: xgboost wins (mlp=0.6532, logreg=0.6590, xgboost=0.6621). The MLP does NOT beat the sklearn baselines on this small tabular dataset (5,634 train rows, 57 features) -- expected and consistent with the well-known result that gradient-boosted trees and even plain logistic regression tend to match or beat deep nets on small/medium tabular data."
+}

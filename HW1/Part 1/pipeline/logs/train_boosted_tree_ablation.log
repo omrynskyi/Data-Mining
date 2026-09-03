@@ -1,0 +1,50 @@
+=== Stratified 5-fold CV: feature-family ablation (CatBoost, LightGBM) ===
+-- step 1_core_tabular (include_text=False) --
+  [1_core_tabular] fold 0: n_features=19 catboost_s=14.9 lightgbm_s=5.3
+  [1_core_tabular] fold 1: n_features=19 catboost_s=13.3 lightgbm_s=5.2
+  [1_core_tabular] fold 2: n_features=19 catboost_s=12.7 lightgbm_s=5.1
+  [1_core_tabular] fold 3: n_features=19 catboost_s=13.1 lightgbm_s=5.2
+  [1_core_tabular] fold 4: n_features=19 catboost_s=13.1 lightgbm_s=5.3
+  catboost={'qwk': 0.3430959375563005, 'mae': 0.9474421396651771, 'accuracy': 0.4025211765490562, 'macro_f1': 0.30301234040228364}
+  lightgbm={'qwk': 0.3473530033462289, 'mae': 0.9385713332888681, 'accuracy': 0.4025878743413593, 'macro_f1': 0.3286708717908286}
+-- step 2_plus_text_shape (include_text=False) --
+  [2_plus_text_shape] fold 0: n_features=24 catboost_s=13.6 lightgbm_s=5.2
+  [2_plus_text_shape] fold 1: n_features=24 catboost_s=13.2 lightgbm_s=5.1
+  [2_plus_text_shape] fold 2: n_features=24 catboost_s=13.1 lightgbm_s=5.0
+  [2_plus_text_shape] fold 3: n_features=24 catboost_s=13.0 lightgbm_s=5.0
+  [2_plus_text_shape] fold 4: n_features=24 catboost_s=13.3 lightgbm_s=5.4
+  catboost={'qwk': 0.34619570792314625, 'mae': 0.938437937704262, 'accuracy': 0.4078569999333022, 'macro_f1': 0.3058924604397887}
+  lightgbm={'qwk': 0.36011114664435273, 'mae': 0.9192289735209764, 'accuracy': 0.41245914760221436, 'macro_f1': 0.340624741326515}
+-- step 3_plus_sentiment (include_text=False) --
+  [3_plus_sentiment] fold 0: n_features=30 catboost_s=13.7 lightgbm_s=5.2
+  [3_plus_sentiment] fold 1: n_features=30 catboost_s=13.5 lightgbm_s=5.1
+  [3_plus_sentiment] fold 2: n_features=30 catboost_s=13.7 lightgbm_s=5.3
+  [3_plus_sentiment] fold 3: n_features=30 catboost_s=14.0 lightgbm_s=5.3
+  [3_plus_sentiment] fold 4: n_features=30 catboost_s=13.5 lightgbm_s=5.3
+  catboost={'qwk': 0.3459547634836331, 'mae': 0.9397051957580204, 'accuracy': 0.4065897418795438, 'macro_f1': 0.3060010628033334}
+  lightgbm={'qwk': 0.36104924776504477, 'mae': 0.917094644167278, 'accuracy': 0.41566064163276195, 'macro_f1': 0.3396433429724505}
+-- step 4_plus_metadata_image (include_text=False) --
+  [4_plus_metadata_image] fold 0: n_features=55 catboost_s=13.4 lightgbm_s=5.9
+  [4_plus_metadata_image] fold 1: n_features=55 catboost_s=13.3 lightgbm_s=5.7
+  [4_plus_metadata_image] fold 2: n_features=55 catboost_s=13.2 lightgbm_s=5.8
+  [4_plus_metadata_image] fold 3: n_features=55 catboost_s=13.6 lightgbm_s=5.8
+  [4_plus_metadata_image] fold 4: n_features=55 catboost_s=13.7 lightgbm_s=5.9
+  catboost={'qwk': 0.3659573169956656, 'mae': 0.9194290668978857, 'accuracy': 0.4139931968251851, 'macro_f1': 0.3132110918652649}
+  lightgbm={'qwk': 0.38283910559296574, 'mae': 0.8948175815380511, 'accuracy': 0.42112986060161406, 'macro_f1': 0.3404339327626345}
+-- step 5_plus_tfidf_text (include_text=True) --
+  [5_plus_tfidf_text] fold 0: n_features=155 catboost_s=14.5 lightgbm_s=7.8
+  [5_plus_tfidf_text] fold 1: n_features=155 catboost_s=14.5 lightgbm_s=8.7
+  [5_plus_tfidf_text] fold 2: n_features=155 catboost_s=15.6 lightgbm_s=8.1
+  [5_plus_tfidf_text] fold 3: n_features=155 catboost_s=14.8 lightgbm_s=9.7
+  [5_plus_tfidf_text] fold 4: n_features=155 catboost_s=15.2 lightgbm_s=8.4
+  catboost={'qwk': 0.36984432010553947, 'mae': 0.9089575135063029, 'accuracy': 0.4252651237244047, 'macro_f1': 0.327346220051368}
+  lightgbm={'qwk': 0.39561748776180183, 'mae': 0.8714066564396719, 'accuracy': 0.43973854465417195, 'macro_f1': 0.36195048738462166}
+=== Rescuer-grouped 5-fold CV: full-feature robustness check ===
+  [grouped_5_plus_tfidf_text] fold 0: n_features=155 catboost_s=14.7 lightgbm_s=8.3
+  [grouped_5_plus_tfidf_text] fold 1: n_features=155 catboost_s=14.7 lightgbm_s=8.1
+  [grouped_5_plus_tfidf_text] fold 2: n_features=155 catboost_s=14.8 lightgbm_s=8.1
+  [grouped_5_plus_tfidf_text] fold 3: n_features=155 catboost_s=14.8 lightgbm_s=8.2
+  [grouped_5_plus_tfidf_text] fold 4: n_features=155 catboost_s=15.7 lightgbm_s=8.3
+  catboost={'qwk': 0.34729056916843914, 'mae': 0.9637830987794304, 'accuracy': 0.3888481291269259, 'macro_f1': 0.28601887522675906}
+  lightgbm={'qwk': 0.330417439910729, 'mae': 0.9815914093243514, 'accuracy': 0.3765090375508571, 'macro_f1': 0.2838945147937816}
+Saved full results to /Users/oleg/Documents/Coding/SJSU/Data Mining/analysis_outputs/boosted_tree_ablation_results.json

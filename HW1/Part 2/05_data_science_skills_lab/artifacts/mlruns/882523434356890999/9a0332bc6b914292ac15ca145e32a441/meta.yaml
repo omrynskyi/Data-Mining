@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 2/05_data_science_skills_lab/artifacts/mlruns/882523434356890999/9a0332bc6b914292ac15ca145e32a441/artifacts
+end_time: 1788410469175
+entry_point_name: ''
+experiment_id: '882523434356890999'
+lifecycle_stage: active
+run_id: 9a0332bc6b914292ac15ca145e32a441
+run_name: smote_honest_logreg
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1788410469142
+status: 3
+tags: []
+user_id: oleg

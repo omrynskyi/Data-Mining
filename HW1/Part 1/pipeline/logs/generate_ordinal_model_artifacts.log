@@ -1,0 +1,29 @@
+=== Grouped 5-fold CV (with OOF capture) ===
+  fold 0: best_iter=235 thresholds=[0.52, 1.719, 2.609, 2.771]
+  fold 1: best_iter=303 thresholds=[0.455, 1.905, 2.519, 2.895]
+  fold 2: best_iter=268 thresholds=[0.516, 1.914, 2.53, 2.725]
+  fold 3: best_iter=360 thresholds=[0.53, 1.646, 2.523, 2.812]
+  fold 4: best_iter=478 thresholds=[0.536, 1.756, 2.562, 2.869]
+  naive_rounding qwk=0.2886
+  optimized_thresholds qwk=0.3793
+  (should match Chunk 18: 0.2886 naive, 0.3793 optimized)
+Saved OOF predictions to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/results/ordinal_model_oof_predictions.csv
+=== Reference regressor fit on 100% of labeled data (interpretability only) ===
+reference_model_iterations=329
+Saved feature importances to /Users/oleg/Documents/Coding/SJSU/Data Mining/HW1/Part 1/pipeline/results/ordinal_model_feature_importance.csv
+                feature  importance
+                    Age    9.775581
+                 Breed1    6.963935
+          img_emb_pca_2    3.337107
+             Sterilized    3.206386
+ vision_label_score_max    2.971064
+          img_emb_pca_4    2.612266
+               Quantity    2.205950
+vision_label_score_mean    2.187597
+                  State    2.020681
+       image_height_max    1.758591
+            text_svd_58    1.325520
+            text_svd_14    1.217264
+                    Fee    1.209026
+          img_emb_pca_0    1.094544
+         img_emb_pca_17    1.071319

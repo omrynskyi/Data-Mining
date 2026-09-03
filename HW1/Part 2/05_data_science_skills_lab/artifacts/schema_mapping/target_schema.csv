@@ -1,0 +1,22 @@
+column_name,data_type,nullable,description
+customerID,object,False,"Kept as-is, unique key, unchanged"
+gender,category,False,Downcast object->category (2 levels)
+SeniorCitizen,int8,False,Downcast int64->int8 (0/1 only)
+Partner,int8,False,Recoded Yes/No -> 1/0
+Dependents,int8,False,Recoded Yes/No -> 1/0
+tenure,int16,False,Downcast int64->int16
+PhoneService,int8,False,Recoded Yes/No -> 1/0
+MultipleLines,category,False,Downcast object->category (3 levels incl. 'No phone service')
+InternetService,category,False,Downcast object->category (3 levels)
+OnlineSecurity,category,False,Downcast object->category (3 levels incl. 'No internet service')
+OnlineBackup,category,False,Downcast object->category (3 levels)
+DeviceProtection,category,False,Downcast object->category (3 levels)
+TechSupport,category,False,Downcast object->category (3 levels)
+StreamingTV,category,False,Downcast object->category (3 levels)
+StreamingMovies,category,False,Downcast object->category (3 levels)
+Contract,category,False,Downcast object->category (3 levels)
+PaperlessBilling,int8,False,Recoded Yes/No -> 1/0
+PaymentMethod,category,False,Downcast object->category (4 levels)
+MonthlyCharges,float64,False,Unchanged
+TotalCharges,float64,True,"Coerced object->float64; 11 NULLs remain, all where tenure==0"
+Churn,int8,False,Recoded Yes/No -> 1/0 (this is the modeling target)

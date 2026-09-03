@@ -1,0 +1,69 @@
+{
+  "population": {
+    "n_customers": 7043,
+    "n_churned": 1869,
+    "n_active": 5174
+  },
+  "revenue": {
+    "mrr_all_customers": 456116.6,
+    "mrr_active_customers_only": 316985.75,
+    "arr_all_customers": 5473399.2,
+    "arpu_all_customers": 64.76,
+    "arpu_active_customers_only": 61.27,
+    "arpu_by_contract": {
+      "Month-to-month": 66.4,
+      "One year": 65.05,
+      "Two year": 60.77
+    },
+    "mrr_by_contract": {
+      "Month-to-month": 257294.15,
+      "One year": 95816.6,
+      "Two year": 103005.85
+    }
+  },
+  "churn": {
+    "logo_churn_rate_base": 0.26537,
+    "logo_churn_rate_base_pct": 26.537,
+    "revenue_churn_rate_base": 0.305034,
+    "revenue_churn_rate_base_pct": 30.503,
+    "monthly_churn_rate_hazard": 0.008198,
+    "monthly_churn_rate_hazard_pct": 0.82,
+    "total_customer_months_observed": 227990.0,
+    "logo_churn_rate_by_contract": {
+      "Month-to-month": 0.4271,
+      "One year": 0.1127,
+      "Two year": 0.0283
+    }
+  },
+  "ltv": {
+    "ltv_churn_rate_based": 7899.96,
+    "ltv_churn_rate_based_formula": "ARPU / monthly_churn_rate_hazard (no gross-margin factor: COGS not in dataset)",
+    "ltv_tenure_based_empirical": 2283.3,
+    "ltv_tenure_based_formula": "mean(TotalCharges) - actual revenue collected per customer over observed lifetime",
+    "avg_tenure_months": 32.37
+  },
+  "revenue_at_risk": {
+    "realized_churned_mrr": 139130.85,
+    "realized_churned_mrr_pct_of_total_mrr": 30.5,
+    "forward_looking_active_month_to_month_mrr": 136447.05,
+    "forward_looking_active_month_to_month_mrr_pct_of_active_mrr": 43.05,
+    "forward_looking_active_month_to_month_customers": 2220,
+    "note": "'Realized' = MRR already lost to customers who churned. 'Forward-looking' = MRR still held by active Month-to-month customers (the segment with the highest observed churn rate), i.e. revenue most exposed if no retention action is taken. Phase 4 modeling will replace this segment proxy with a per-customer risk score."
+  },
+  "benchmarks": {
+    "logo_churn_rate_monthly_benchmark": {
+      "value": 0.008198,
+      "value_pct": 0.82,
+      "benchmark_note": "SaaS 'good' monthly logo churn is often cited as <2-3%/month; telecom subscription churn tends to run higher. This value is the empirical customer-month hazard rate derived from `tenure`."
+    },
+    "ltv_cac_ratio": {
+      "value": null,
+      "note": "CAC not present in this dataset (no acquisition-cost field) - cannot compute LTV:CAC. Flagged as an open data gap for Phase 1 stakeholder doc."
+    }
+  },
+  "data_gaps": [
+    "No CAC / acquisition spend field -> LTV:CAC and payback period cannot be computed.",
+    "No gross-margin / COGS field -> LTV uses revenue, not gross-profit, basis.",
+    "Single cross-sectional snapshot (no monthly ledger) -> MRR waterfall (new/expansion/contraction) and NRR cannot be computed as defined for a recurring SaaS ledger; monthly churn is approximated via customer-months."
+  ]
+}

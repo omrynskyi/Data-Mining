@@ -1,0 +1,7 @@
+
+File: artifacts/context_bundle_telco.txt
+  Type: prose
+  Characters: 6,826
+  Estimated tokens: ~1,706
+  Token budget: 200,000 (1% used)
+  ✓ Within budget

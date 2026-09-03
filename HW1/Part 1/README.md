@@ -13,6 +13,10 @@ baseline tried. See [Results at a glance](#results-at-a-glance) for the full
 model-progression table, and [Limitations](#limitations) for what this model
 still cannot do (it never predicts the rarest class).
 
+## Video walkthrough
+
+[Loom: PetFinder Adoption Speed Prediction walkthrough](https://www.loom.com/share/9ab3f379f15247b4975387d027acdd68)
+
 ## Contents
 
 - [Repository map](#repository-map)
